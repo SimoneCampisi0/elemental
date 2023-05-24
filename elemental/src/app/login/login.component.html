@@ -1,11 +1,10 @@
-<div class="container all">
-  <div class="row justify-content-center align-self-center" *ngIf="clicked==false; else loginForm">
+<div class="container all" *ngIf="clicked==false; else loginForm">
+  <div class="row justify-content-center align-self-center">
     <div class="col-12 align-self-center text-center"><img src="../../assets/el2-nosf.png" alt="logo_Elemental" class="imgLogo"></div>
     <div class="col-12 text-center"><button (click)="showLoginForm()"class="bLogin">LOGIN</button></div>
   </div>
-
-  <ng-template #loginForm>
-    <app-login-form></app-login-form>
-  </ng-template>
-
 </div>
+
+<ng-template #loginForm>
+  <app-login-form></app-login-form>
+</ng-template>
