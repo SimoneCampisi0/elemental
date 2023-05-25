@@ -27,7 +27,7 @@
             <div class="col-md-6 col-lg-7 d-flex align-items-center">
               <div class="card-body p-4 p-lg-5 text-black">
 
-                <form>
+                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
 <!--                  <div class="d-flex align-items-center mb-3 pb-1">-->
                   <div class="d-flex align-items-center mb-3 pb-1">
@@ -37,17 +37,17 @@
                   <h2 class="fw-normal mb-1 pb-1" style="letter-spacing: 1px;">Accedi al tuo account</h2>
 
                   <div class="form-outline">
-                    <label class="form-label" for="form2Example17">Indirizzo email</label>
-                    <input type="email" id="form2Example17" class="form-control" />
+                    <label class="form-label" for="email">Indirizzo email</label>
+                    <input type="email" id="email" class="form-control" formControlName="email"/>
                   </div>
 
                   <div class="form-outline mt-3 mb-4">
-                    <label class="form-label" for="form2Example27">Password</label>
-                    <input type="password" id="form2Example27" class="form-control" />
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" id="password" class="form-control"  formControlName="password"/>
                   </div>
 
                   <div class="pt-1 mb-4">
-                    <button class="btn btn-dark btn-lg btn-block" type="button">Login</button>
+                    <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                   </div>
 
                   <a class="small text-muted" href="#!">Password dimenticata?</a>
