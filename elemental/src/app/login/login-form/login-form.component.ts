@@ -34,12 +34,13 @@ export class LoginFormComponent {
     console.log("PASSWORD: ",password)
 
     let loginDTO = new LoginDTO(email, password)
+    console.log("loginDTO: "+loginDTO.email+ " " + loginDTO.password);
 
     this.userService.login(loginDTO).subscribe(userGet => {
-      if(userGet != null) {
+      // if(userGet != null) {
         let user: UserDTO = new UserDTO(userGet.id, userGet.email, userGet.password)
         localStorage.setItem("currentUser", JSON.stringify(user))
-      }
+      // }
     })
   }
 }

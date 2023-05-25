@@ -17,7 +17,7 @@ export class UserService extends AbstractService<UserDTO>{
   }
 
   login(loginDTO: LoginDTO): Observable<UserDTO> {
-    return this.http.post<any>(environment.APIEndpoint + this.type + '/login', LoginDTO)
+    return this.http.post<any>(environment.APIEndpoint + this.type + '/login', loginDTO)
   }
 
 }
