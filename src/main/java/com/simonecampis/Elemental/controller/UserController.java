@@ -15,5 +15,5 @@ public class UserController extends AbstractController<UserDTO> {
     @PostMapping(value = "/login")
     public UserDTO login (@RequestBody LoginDTO loginDTO) {
         return service.login(loginDTO);
-    } //realizzare LoginDTO
+    }
 }
