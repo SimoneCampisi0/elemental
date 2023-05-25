@@ -1,0 +1,80 @@
+<section class="vh-100">
+  <div class="container py-3 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+                  <img src="../../../assets/vangogh-3.jpg"
+                   alt="register form" class="imgLogin" style="border-radius: 1rem 0 0 1rem;" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+<!--                  <div class="d-flex align-items-center mb-3 pb-1">-->
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <img class="imgLogo" src="../../../assets/es3_nosf.png" alt="">
+                  </div>
+
+                  <h2 class="fw-normal mb-1 pb-1" style="letter-spacing: 1px;">Registrati</h2>
+
+
+                  <div class="form-outline">
+                    <label class="form-label" for="nome">Nome</label>
+                    <input type="text" id="nome" class="form-control" formControlName="nome" required/>
+                  </div>
+
+                  <div class="form-outline pt-2">
+                    <label class="form-label" for="cognome">Cognome</label>
+                    <input type="text" id="cognome" class="form-control" formControlName="cognome" />
+                  </div>
+
+<!--                  <div class="form-outline pt-2">-->
+<!--                    <label class="form-label" for="email">Età</label>-->
+<!--                    <input type="number" id="eta" class="form-control" formControlName="eta"/>-->
+<!--                  </div>-->
+
+
+                  <div class="form-outline pt-2">
+                    <label class="form-label" for="email">Data di nascita</label>
+                    <input type="date" id="dataNascita" class="form-control" formControlName="dataNascita"/>
+                  </div>
+
+                  <div class="form-outline pt-2">
+                    <label class="form-label" for="cittaResidenza">Citta di residenza</label>
+                    <input type="text" id="cittaResidenza" class="form-control" formControlName="cittaResidenza"/>
+                  </div>
+
+                  <div class="form-outline mt-3 mb-4 pt-2">
+                    <label class="form-label" for="email">Indirizzo email</label>
+                    <input type="email" id="email" class="form-control"  formControlName="email"/>
+                  </div>
+
+                  <div class="form-outline mt-3 mb-4 pt-2">
+                    <label class="form-label" for="password">Password</label>
+                    <input type="password" id="password" class="form-control"  formControlName="password"/>
+                  </div>
+
+                  <div class="pt-1 mb-4">
+                    <button class="btn btn-dark btn-lg btn-block" type="submit">Registrati</button>
+                  </div>
+
+<!--                  <a class="small text-muted" href="#!">Password dimenticata?</a>-->
+<!--                  <p class="mb-5 pb-lg-2" style="color: #393f81;">Non hai un account?<a href="#!"-->
+<!--                                                                                            style="color: #393f81; position: relative; left: 4%">Registrati qui</a></p>-->
+
+                  <a (click)="terminiAlert()" class="small text-muted" style="cursor: pointer;">Termini e Condizioni</a>
+                  <a (click)="policyAlert()" class="small text-muted" style="position: relative; left: 5%; cursor: pointer;">Privacy policy</a>
+
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

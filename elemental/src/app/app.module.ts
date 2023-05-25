@@ -8,12 +8,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
+import { RegisterComponent } from './register/register.component';
+import {RegisterFormComponent} from "./register/register-form/register-form.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    RegisterComponent,
+    RegisterFormComponent
   ],
   imports: [
     BrowserModule,
