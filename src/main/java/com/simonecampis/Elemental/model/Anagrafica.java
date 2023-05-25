@@ -21,8 +21,6 @@ public class Anagrafica {
 
     private String cognome;
 
-    private Long eta;
-
     private Date dataNascita;
 
     private String cittaResidenza;

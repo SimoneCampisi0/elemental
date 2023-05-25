@@ -17,7 +17,6 @@ public class AnagConverter extends AbstractConverter<Anagrafica, AnagraficaDTO> 
                     dto.getIdAnag(),
                     dto.getNome(),
                     dto.getCognome(),
-                    dto.getEta(),
                     dto.getDataNascita(),
                     dto.getCittaResidenza(),
                     dto.getUser()
@@ -34,7 +33,6 @@ public class AnagConverter extends AbstractConverter<Anagrafica, AnagraficaDTO> 
                     a.getIdAnag(),
                     a.getNome(),
                     a.getCognome(),
-                    a.getEta(),
                     a.getDataNascita(),
                     a.getCittaResidenza(),
                     a.getUser()
