@@ -42,6 +42,7 @@ export class RecuperaPasswordComponent {
           text: 'Password modificata con successo.'
         });
 
+        this.router.navigate(['/login'])
       })
     } else {
       Swal.fire({
