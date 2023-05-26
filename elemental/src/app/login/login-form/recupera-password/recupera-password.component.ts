@@ -25,12 +25,24 @@ export class RecuperaPasswordComponent {
   }
 
   onSubmit() {
-    let email = this.recuperaForm.get('nome')?.value
+    let email = this.recuperaForm.get('email')?.value
     let password1 = this.recuperaForm.get('password1')?.value
     let password2 = this.recuperaForm.get('password2')?.value
 
-    if (password1 === password2 && password1 !== '' && email === '') {
+    console.log("EMAIL: "+email)
 
+    if (password1 === password2 && password1 !== '' && email !== '') {
+      this.userService.findUserByEmail(email).subscribe(user => {
+        user.password = password1
+        this.userService.update(user).subscribe()
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Password modificata',
+          text: 'Password modificata con successo.'
+        });
+
+      })
     } else {
       Swal.fire({
         icon: 'error',
