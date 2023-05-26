@@ -4,6 +4,7 @@ import {UserService} from "../../../service/user.service";
 import {LoginDTO} from "../../../dto/logindto";
 import {UserDTO} from "../../../dto/userdto";
 import Swal from 'sweetalert2';
+import {Router} from "@angular/router";
 
  @Component({
   selector: 'app-login-form',
@@ -14,7 +15,7 @@ export class LoginFormComponent {
   loginForm: FormGroup;
   // loginDTO: LoginDTO;
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
     this.loginForm = new FormGroup({
       email: new FormControl(''),
       password: new FormControl('')
@@ -39,7 +40,7 @@ export class LoginFormComponent {
 
     this.userService.login(loginDTO).subscribe(userGet => {
       // if(userGet != null) {
-        let user: UserDTO = new UserDTO(userGet.id_user, userGet.email, userGet.password)
+        let user: UserDTO = new UserDTO(userGet.id, userGet.email, userGet.password)
         localStorage.setItem("currentUser", JSON.stringify(user))
       // }
 
@@ -61,5 +62,10 @@ export class LoginFormComponent {
        text: 'Privacy Policy.'
      });
    }
+
+   redirectRegister() {
+      this.router.navigate(['/register'])
+   }
+
 
 }

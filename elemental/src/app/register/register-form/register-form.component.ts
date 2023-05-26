@@ -43,22 +43,23 @@ export class RegisterFormComponent {
     let password = this.registerForm.get('password')?.value;
 
     let userDTO: UserDTO = new UserDTO(0, email, password)
-    // let anagDTO: AnagDTO = new AnagDTO(0, nome, cognome, dataNascita, cittaResidenza, userDTO)
 
-    this.userService.insert(userDTO).subscribe(user => {
-      localStorage.setItem('currentUser', JSON.stringify(user))
-        this.userService.login(userDTO).subscribe(user => {
-          localStorage.setItem('currentUser', JSON.stringify(user))
+    this.userService.insert(userDTO).subscribe(insertedUser => {
+      localStorage.setItem('currentUser', JSON.stringify(insertedUser));
+
+      this.userService.login(userDTO).subscribe(loggedInUser => {
+        localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+
+        // @ts-ignore
+        let userDef: UserDTO = JSON.parse(localStorage.getItem('currentUser'));
+
+        let anag: AnagDTO = new AnagDTO(0, nome, cognome, dataNascita, cittaResidenza, userDef)
+        this.anagService.insert(anag).subscribe(anagDef => {
+          localStorage.setItem('currentAnag', JSON.stringify(anagDef))
         })
-    })
+      });
+    });
 
-    // @ts-ignore
-    let userDef: UserDTO = JSON.parse(localStorage.getItem('currentUser')) //CHECK
-    let anagDTO: AnagDTO = new AnagDTO(0, nome, cognome, dataNascita, cittaResidenza, userDef)
-
-    this.anagService.insert(anagDTO).subscribe(anag => {
-      localStorage.setItem('anag', JSON.stringify(anag))
-    })
 
   }
 
