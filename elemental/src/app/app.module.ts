@@ -11,6 +11,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './register/register.component';
 import {RegisterFormComponent} from "./register/register-form/register-form.component";
 import { RecuperaPasswordComponent } from './login/login-form/recupera-password/recupera-password.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { RecuperaPasswordComponent } from './login/login-form/recupera-password/
     LoginFormComponent,
     RegisterComponent,
     RegisterFormComponent,
-    RecuperaPasswordComponent
+    RecuperaPasswordComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

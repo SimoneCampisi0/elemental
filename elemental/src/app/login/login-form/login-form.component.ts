@@ -27,24 +27,38 @@ export class LoginFormComponent {
   }
 
   onSubmit() {
-/*     const nome = this.loginForm.get('nome')?.value;
-
- */
     let email = this.loginForm.get('email')?.value;
     let password = this.loginForm.get('password')?.value;
-    console.log("EMAIL: ",email)
-    console.log("PASSWORD: ",password)
+    if (email !== '' && password !== '') {
+      let loginDTO = new LoginDTO(email, password)
+      console.log("loginDTO: "+loginDTO.email+ " " + loginDTO.password);
 
-    let loginDTO = new LoginDTO(email, password)
-    console.log("loginDTO: "+loginDTO.email+ " " + loginDTO.password);
+      this.userService.login(loginDTO).subscribe(userGet => {
+         if(userGet != null) {
+            let user: UserDTO = new UserDTO(userGet.id, userGet.email, userGet.password)
+            localStorage.setItem("currentUser", JSON.stringify(user))
 
-    this.userService.login(loginDTO).subscribe(userGet => {
-      // if(userGet != null) {
-        let user: UserDTO = new UserDTO(userGet.id, userGet.email, userGet.password)
-        localStorage.setItem("currentUser", JSON.stringify(user))
-      // }
+            this.router.navigate(['/home'])
+         } else {
+             Swal.fire({
+               icon: 'error',
+               title: 'Dati non corretti.',
+               text: 'I dati inseriti non sono corretti.'
+             });
+         }
 
-    })
+      })
+    } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Dati non corretti.',
+          text: 'I dati inseriti non sono corretti.'
+        });
+    }
+
+
+
+
   }
 
    terminiAlert() {

@@ -55,6 +55,7 @@ export class RegisterFormComponent {
         this.anagService.insert(anag).subscribe(anagDef => {
           this.anagService.findAnagByEmail(userDef.email).subscribe(anagDef1 => {
             localStorage.setItem('currentAnag',JSON.stringify(anagDef1))
+            this.router.navigate(['/home'])
           })
         })
       });
