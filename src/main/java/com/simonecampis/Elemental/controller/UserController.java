@@ -16,4 +16,9 @@ public class UserController extends AbstractController<UserDTO> {
     public UserDTO login (@RequestBody LoginDTO loginDTO) {
         return service.login(loginDTO);
     }
+
+    @GetMapping(value = "/findUserByEmail")
+    public UserDTO findUserByEmail(@RequestParam String email) {
+        return service.findUserByEmail(email);
+    }
 }

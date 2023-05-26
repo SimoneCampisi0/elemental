@@ -19,5 +19,8 @@ public class UserService extends AbstractService<User, UserDTO> {
         return converter.toDTO(repo.findByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword()));
     }
 
+    public UserDTO findUserByEmail (String email) {
+        return converter.toDTO(repo.findByEmail(email));
+    }
 
 }
