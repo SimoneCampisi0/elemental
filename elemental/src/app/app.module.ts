@@ -12,6 +12,7 @@ import { RegisterComponent } from './register/register.component';
 import {RegisterFormComponent} from "./register/register-form/register-form.component";
 import { RecuperaPasswordComponent } from './login/login-form/recupera-password/recupera-password.component';
 import { HomeComponent } from './home/home.component';
+import { SideMenuComponent} from "./home/side-menu/side-menu.component";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HomeComponent } from './home/home.component';
     RegisterComponent,
     RegisterFormComponent,
     RecuperaPasswordComponent,
-    HomeComponent
+    HomeComponent,
+    SideMenuComponent
   ],
   imports: [
     BrowserModule,
