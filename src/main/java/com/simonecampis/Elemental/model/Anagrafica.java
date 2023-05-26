@@ -15,7 +15,7 @@ import java.sql.Date;
 public class Anagrafica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAnag;
+    private Long id;
 
     private String nome;
 

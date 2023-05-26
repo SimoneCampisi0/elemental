@@ -11,7 +11,7 @@ public class UserConverter extends AbstractConverter<User, UserDTO> {
         User user = null;
         if(dto != null) {
             user = new User(
-                    dto.getIdUser(),
+                    dto.getId(),
                     dto.getUsername(),
                     dto.getEmail(),
                     dto.getPassword()
@@ -25,7 +25,7 @@ public class UserConverter extends AbstractConverter<User, UserDTO> {
         UserDTO dto = null;
         if(user != null) {
             dto = new UserDTO(
-                    user.getIdUser(),
+                    user.getId(),
                     user.getUsername(),
                     user.getEmail(),
                     user.getPassword()

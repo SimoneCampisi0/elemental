@@ -11,7 +11,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AnagraficaDTO {
-    private Long idAnag;
+    private Long id;
 
     private String nome;
 

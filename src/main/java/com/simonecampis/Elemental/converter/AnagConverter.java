@@ -14,7 +14,7 @@ public class AnagConverter extends AbstractConverter<Anagrafica, AnagraficaDTO> 
         Anagrafica a = null;
         if(dto != null) {
             a = new Anagrafica(
-                    dto.getIdAnag(),
+                    dto.getId(),
                     dto.getNome(),
                     dto.getCognome(),
                     dto.getDataNascita(),
@@ -30,7 +30,7 @@ public class AnagConverter extends AbstractConverter<Anagrafica, AnagraficaDTO> 
         AnagraficaDTO dto = null;
         if(a != null) {
             dto = new AnagraficaDTO(
-                    a.getIdAnag(),
+                    a.getId(),
                     a.getNome(),
                     a.getCognome(),
                     a.getDataNascita(),
