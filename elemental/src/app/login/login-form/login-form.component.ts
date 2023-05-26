@@ -67,5 +67,9 @@ export class LoginFormComponent {
       this.router.navigate(['/register'])
    }
 
+   passwordDimenticata() {
+     this.router.navigate(['/login/recupera-password'])
+   }
+
 
 }

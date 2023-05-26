@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import {AnagDTO} from "../../../dto/anagdto";
 import {AnagService} from "../../../service/anag.service";
 import {LoginDTO} from "../../../dto/logindto";
+import {Router} from "@angular/router";
 
  @Component({
   selector: 'app-register-form',
@@ -16,7 +17,7 @@ export class RegisterFormComponent {
    registerForm: FormGroup;
   // loginDTO: LoginDTO;
 
-  constructor(private userService: UserService, private anagService: AnagService) {
+  constructor(private userService: UserService, private anagService: AnagService, private router: Router) {
     this.registerForm = new FormGroup({
       nome: new FormControl(''),
       cognome: new FormControl(''),
@@ -32,9 +33,6 @@ export class RegisterFormComponent {
   }
 
   onSubmit() {
-/*     const nome = this.loginForm.get('nome')?.value;
-
- */
     let nome = this.registerForm.get('nome')?.value
     let cognome = this.registerForm.get('cognome')?.value
     let dataNascita = this.registerForm.get('dataNascita')?.value
@@ -61,8 +59,6 @@ export class RegisterFormComponent {
         })
       });
     });
-
-
   }
 
    terminiAlert() {
@@ -79,6 +75,10 @@ export class RegisterFormComponent {
        title: 'Privacy Policy',
        text: 'Privacy Policy.'
      });
+   }
+
+   changePage() {
+     this.router.navigate(['/login'])
    }
 
 }
