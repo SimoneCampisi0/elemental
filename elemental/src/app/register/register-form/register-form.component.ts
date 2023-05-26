@@ -55,7 +55,9 @@ export class RegisterFormComponent {
 
         let anag: AnagDTO = new AnagDTO(0, nome, cognome, dataNascita, cittaResidenza, userDef)
         this.anagService.insert(anag).subscribe(anagDef => {
-          localStorage.setItem('currentAnag', JSON.stringify(anagDef))
+          this.anagService.findAnagByEmail(userDef.email).subscribe(anagDef1 => {
+            localStorage.setItem('currentAnag',JSON.stringify(anagDef1))
+          })
         })
       });
     });
