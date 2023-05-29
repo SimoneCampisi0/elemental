@@ -17,6 +17,8 @@ import {NgOptimizedImage} from "@angular/common";
 import { ContentComponent } from './home/content/content.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SearchBarComponent } from './home/content/search-bar/search-bar.component';
+import { ElencoPostComponent } from './home/content/elenco-post/elenco-post.component';
+import { PostComponent } from './home/content/elenco-post/post/post.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { SearchBarComponent } from './home/content/search-bar/search-bar.compone
     HomeComponent,
     SideMenuComponent,
     ContentComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    ElencoPostComponent,
+    PostComponent
   ],
     imports: [
         BrowserModule,

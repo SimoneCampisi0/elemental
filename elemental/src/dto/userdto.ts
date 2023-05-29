@@ -4,7 +4,7 @@ export class UserDTO {
 
   email: string;
 
-   password: string;
+  password: string;
 
   constructor(id: number, email: string, password: string) {
      this.id = id;

@@ -1,0 +1,55 @@
+.post {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-left: 15px;
+  padding: 20px;
+  max-width: 600px;
+}
+.post .author {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.post .date {
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.post .content {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+.post .actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #888;
+}
+.post .actions a {
+  text-decoration: none;
+  color: #888;
+  margin-right: 10px;
+}
+.post .actions a:hover {
+  text-decoration: underline;
+}
+.post .actions i {
+  margin-right: 5px;
+}
+.post .actions .like-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  transition: background-color 0.3s ease;
+}
+.post .actions .like-button:hover {
+  background-color: #eee;
+}
+.post .actions .like-button i {
+  margin-right: 5px;
+}
