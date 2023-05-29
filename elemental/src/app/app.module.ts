@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginFormComponent } from './login/login-form/login-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './register/register.component';
 import {RegisterFormComponent} from "./register/register-form/register-form.component";
@@ -32,7 +32,8 @@ import {NgOptimizedImage} from "@angular/common";
         BrowserAnimationsModule,
         ReactiveFormsModule,
         HttpClientModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        FormsModule
     ],
   providers: [],
   bootstrap: [AppComponent]

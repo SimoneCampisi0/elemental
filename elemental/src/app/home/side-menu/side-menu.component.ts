@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
+import {UserDTO} from "../../../dto/userdto";
+import {AnagService} from "../../../service/anag.service";
+import {AnagDTO} from "../../../dto/anagdto";
 
 @Component({
   selector: 'app-side-menu',
@@ -7,9 +10,21 @@ import {Router} from "@angular/router";
   styleUrls: ['./side-menu.component.css']
 })
 export class SideMenuComponent {
-  constructor(private router: Router) {
+  // @ts-ignore
+  nomeUser: string
+
+  //@ts-ignore
+  anag: AnagDTO
+  constructor(private router: Router, private anagService: AnagService) {
   }
 
+  ngOnInit() {
+    // @ts-ignore
+    let user: UserDTO = JSON.parse(localStorage.getItem('currentUser'))
+    // @ts-ignore
+
+    this.anag = JSON.parse(localStorage.getItem('currentAnag'));
+  }
   goHome () {
     this.router.navigate(['/home'])
   }

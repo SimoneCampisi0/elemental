@@ -5,6 +5,7 @@ import {LoginDTO} from "../../../dto/logindto";
 import {UserDTO} from "../../../dto/userdto";
 import Swal from 'sweetalert2';
 import {Router} from "@angular/router";
+import {AnagService} from "../../../service/anag.service";
 
  @Component({
   selector: 'app-login-form',
@@ -15,7 +16,7 @@ export class LoginFormComponent {
   loginForm: FormGroup;
   // loginDTO: LoginDTO;
 
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router, private anagService: AnagService) {
     this.loginForm = new FormGroup({
       email: new FormControl(''),
       password: new FormControl('')
@@ -38,8 +39,14 @@ export class LoginFormComponent {
             let user: UserDTO = new UserDTO(userGet.id, userGet.email, userGet.password)
             localStorage.setItem("currentUser", JSON.stringify(user))
 
-            this.router.navigate(['/home'])
-         } else {
+           this.anagService.findAnagByEmail(user.email).subscribe(anag => {
+             localStorage.setItem("currentAnag", JSON.stringify(anag))
+           })
+
+           this.router.navigate(['/home'])
+             .then(() => {
+               window.location.reload();
+             });         } else {
              Swal.fire({
                icon: 'error',
                title: 'Dati non corretti.',

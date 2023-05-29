@@ -26,3 +26,13 @@
   height: 30px;
   border-radius: 10px;
 }
+
+.nomeUser {
+  display: inline-block;
+  position: relative;
+  left: 10%;
+}
+
+.dropdown-toggle::after {
+  display:none;
+}
