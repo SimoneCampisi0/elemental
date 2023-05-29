@@ -8,6 +8,5 @@ import {PostService} from "../../../../../service/post.service";
   styleUrls: ['./post.component.css']
 })
 export class PostComponent {
-  constructor(private postService: PostService) {
-  }
+
 }
