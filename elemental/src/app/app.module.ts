@@ -19,6 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SearchBarComponent } from './home/content/search-bar/search-bar.component';
 import { ElencoPostComponent } from './home/content/elenco-post/elenco-post.component';
 import { PostComponent } from './home/content/elenco-post/post/post.component';
+import {ElencoPostRoutingModule} from "./home/content/elenco-post/elenco-post-routing.module";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { PostComponent } from './home/content/elenco-post/post/post.component';
         HttpClientModule,
         NgOptimizedImage,
         FormsModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        ElencoPostRoutingModule
     ],
   providers: [],
   bootstrap: [AppComponent]

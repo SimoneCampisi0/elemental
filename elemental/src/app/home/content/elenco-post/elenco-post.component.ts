@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./elenco-post.component.css']
 })
 export class ElencoPostComponent {
-
+  item = 'Ciao'
 }
