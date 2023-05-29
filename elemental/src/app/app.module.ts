@@ -15,6 +15,8 @@ import { HomeComponent } from './home/home.component';
 import { SideMenuComponent} from "./home/side-menu/side-menu.component";
 import {NgOptimizedImage} from "@angular/common";
 import { ContentComponent } from './home/content/content.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SearchBarComponent } from './home/content/search-bar/search-bar.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import { ContentComponent } from './home/content/content.component';
     RecuperaPasswordComponent,
     HomeComponent,
     SideMenuComponent,
-    ContentComponent
+    ContentComponent,
+    SearchBarComponent
   ],
     imports: [
         BrowserModule,
@@ -35,7 +38,8 @@ import { ContentComponent } from './home/content/content.component';
         ReactiveFormsModule,
         HttpClientModule,
         NgOptimizedImage,
-        FormsModule
+        FormsModule,
+        FontAwesomeModule
     ],
   providers: [],
   bootstrap: [AppComponent]
