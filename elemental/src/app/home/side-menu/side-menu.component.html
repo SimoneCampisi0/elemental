@@ -1,4 +1,4 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; height: 100vh">
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark shadow-lg" style="width: 280px; height: 100vh">
   <a (click)="goHome()" class="cursorLink d-flex align-items-center mb-0 mb-md-0 me-md-auto text-white text-decoration-none">
 <!--    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>-->
 <!--    <span class="fs-4"></span>-->
@@ -67,15 +67,14 @@
 
 
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <button class="btn btn-secondary dropdown-toggle dropBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
       <img src="./assets/menu/user.png" class="userImg" alt="" srcset="">
       <div class="nomeUser">{{anag.nome}}</div>
     </button>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Action</a></li>
-      <li><a class="dropdown-item" href="#">Another action</a></li>
-      <li><a class="dropdown-item" href="#">Another action</a></li>
-      <li><a class="dropdown-item" href="#">Something else here</a></li>
+      <li><a class="dropdown-item" href="#">Dettagli profilo</a></li>
+      <li><a class="dropdown-item" href="#">Impostazioni</a></li>
+      <li><a class="dropdown-item"  (click)="goLogin()">Logout</a></li>
     </ul>
   </div>
 

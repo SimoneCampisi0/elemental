@@ -14,6 +14,7 @@ import { RecuperaPasswordComponent } from './login/login-form/recupera-password/
 import { HomeComponent } from './home/home.component';
 import { SideMenuComponent} from "./home/side-menu/side-menu.component";
 import {NgOptimizedImage} from "@angular/common";
+import { ContentComponent } from './home/content/content.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {NgOptimizedImage} from "@angular/common";
     RegisterFormComponent,
     RecuperaPasswordComponent,
     HomeComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    ContentComponent
   ],
     imports: [
         BrowserModule,

@@ -29,4 +29,8 @@ export class SideMenuComponent {
     this.router.navigate(['/home'])
   }
 
+  goLogin () {
+    this.router.navigate([''])
+  }
+
 }
