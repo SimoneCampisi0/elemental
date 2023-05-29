@@ -12,7 +12,7 @@ export class LoginComponent {
     localStorage.clear()
   }
 
-  showLoginForm() {
-    this.clicked = true;
-  }
+  // showLoginForm() {
+  //   this.clicked = true;
+  // }
 }

@@ -6,3 +6,17 @@
 .cursorLink {
   cursor: pointer;
 }
+
+.imgMenu {
+  width: 20px;
+  height: 20px;
+  padding-top: 0px;
+}
+
+.text {
+  display: inline-block;
+  position: relative;
+  top: 2px;
+  left: 4px;
+  font-weight: 600;
+}
