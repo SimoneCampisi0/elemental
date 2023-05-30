@@ -8,9 +8,18 @@
     {{this.content}}
   </div>
   <div class="actions">
-    <div (click)="setLike()" class="like-button">
-      <i class="fas fa-thumbs-up"></i> Mi Piace
-    </div>
+
+    <ng-container *ngIf="iterazione$ | async as iterazione">
+      <ng-container *ngIf="iterazione.likes==0">
+        <div (click)="setLike()" class="like-button" style="cursor: pointer">
+          <i class="fas fa-thumbs-up"></i> Mi Piace
+        </div>
+      </ng-container>
+    </ng-container>
+
+
+
+
     <a href="#"><i class="fas fa-comment"></i> Commenta</a>
   </div>
 </div>
