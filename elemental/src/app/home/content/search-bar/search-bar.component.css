@@ -5,6 +5,7 @@
 .form{
   position: relative;
   width: 100%;
+  left: 2%;
 }
 
 .form .fa-search{
