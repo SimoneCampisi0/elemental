@@ -20,8 +20,6 @@ public class Post {
 
     private String contenuto;
 
-    private Long likes;
-
     private String imgURL;
 
     @ManyToOne

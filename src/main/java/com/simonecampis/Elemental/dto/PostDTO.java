@@ -18,8 +18,6 @@ public class PostDTO {
 
     private String contenuto;
 
-    private Long likes;
-
     private String imgURL;
 
     private User user;

@@ -13,7 +13,7 @@ public class PostConverter extends AbstractConverter<Post, PostDTO> {
     public Post toEntity(PostDTO dto) {
         Post p = null;
         if (dto != null) {
-            p = new Post(dto.getIdPost(), dto.getDataPost(), dto.getContenuto(), dto.getLikes(), dto.getImgURL(), dto.getUser());
+            p = new Post(dto.getIdPost(), dto.getDataPost(), dto.getContenuto(), dto.getImgURL(), dto.getUser());
         }
         return p;
     }
@@ -22,7 +22,7 @@ public class PostConverter extends AbstractConverter<Post, PostDTO> {
     public PostDTO toDTO(Post p) {
         PostDTO dto = null;
         if (p != null) {
-            dto = new PostDTO(p.getIdPost(), p.getDataPost(), p.getContenuto(), p.getLikes(), p.getImgURL(), p.getUser());
+            dto = new PostDTO(p.getIdPost(), p.getDataPost(), p.getContenuto(), p.getImgURL(), p.getUser());
         }
         return dto;
     }

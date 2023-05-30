@@ -11,16 +11,16 @@ import java.sql.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Commento {
+public class Iterazione {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long idCommento;
+    private Long id;
+
+    private Long likes;
 
     private Date dataCommento;
 
     private String contenuto;
-
-    private Long likes;
 
     private String imgURL;
 
