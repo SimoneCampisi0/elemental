@@ -9,13 +9,10 @@
   </div>
   <div class="actions">
 
-    <ng-container *ngIf="iterazione$ | async as iterazione">
-      <ng-container *ngIf="iterazione.likes==0">
         <div (click)="setLike()" class="like-button" style="cursor: pointer">
           <i class="fas fa-thumbs-up"></i> Mi Piace
         </div>
-      </ng-container>
-    </ng-container>
+
 
 
 

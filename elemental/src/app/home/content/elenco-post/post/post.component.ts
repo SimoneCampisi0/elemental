@@ -15,6 +15,8 @@ import {IterazioneDTO} from "../../../../../dto/iterazionedto";
   styleUrls: ['./post.component.css']
 })
 export class PostComponent {
+  // @ts-ignore
+  @Input() dto: PostDTO
   @Input() email: string = '';
   // @ts-ignore
   @Input() date: Date;
@@ -27,7 +29,7 @@ export class PostComponent {
   user: UserDTO;
 
   // @ts-ignore
-  iterazione$: Observable<IterazioneDTO>
+  iterazione: IterazioneDTO
 
   constructor(private anagService: AnagService, private itService: IterazioneService) {
   }
@@ -36,13 +38,29 @@ export class PostComponent {
     this.anagAutore$ = this.anagService.findAnagByEmail(this.email)
     // @ts-ignore
     this.user = JSON.parse(localStorage.getItem('currentUser'))
-    this.iterazione$ = this.itService.findByIdUser(this.user.id)
-
-
   }
 
   setLike() {
-    // this.likes++;
-    // this.postService.
+    this.itService.findByIdUser(this.user.id).subscribe(it => {
+      if(it != null) {
+        if(it.likes==0) { //se non è ancora stato messo mi piace
+          //metodo per mettere mi piace
+        } else {
+          //metodo per rimuovere il mi piace
+        }
+      } else { //se non esiste ancora un'interazione
+        // @ts-ignore
+        let Interazione: IterazioneDTO = new IterazioneDTO(0, 1,null,null,null,this.user, this.dto)
+
+        console.log(JSON.stringify(Interazione))
+
+
+        this.itService.insert(Interazione).subscribe()
+      }
+
+
+    })
   }
+
+
 }
