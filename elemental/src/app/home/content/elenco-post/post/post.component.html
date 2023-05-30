@@ -1,15 +1,17 @@
 <div class="post">
-  <div class="author">Nome Autore</div>
-  <div class="date">Data di pubblicazione</div>
+  <ng-container *ngIf="anagAutore$ | async as anagAutore">
+<!--    con async si esegue direttamente la subscribe nell'if, ottenendo quindi l'accesso ai dati-->
+    <div class="author">{{anagAutore.nome}} {{anagAutore.cognome}}</div>
+  </ng-container>
+  <div class="date">{{this.date}}</div>
   <div class="content">
-    lorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsumlorem ipsum
+    {{this.content}}
   </div>
   <div class="actions">
     <div class="like-button">
-      <i class="fas fa-thumbs-up"></i> Mi Piace
+      <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace
     </div>
     <a href="#"><i class="fas fa-comment"></i> Commenta</a>
   </div>
 </div>
 
-<p>item: {{item}}</p>

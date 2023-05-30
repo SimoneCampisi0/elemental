@@ -1,3 +1,5 @@
-<!--<app-post [item] = 'item'></app-post>-->
-<app-post></app-post>
-//Passare i campi dei post dentro un ciclo for al componente 'post'.
+<ng-container *ngIf="elencoPost$ | async as elencoPost">
+  <ng-template ngFor let-post [ngForOf]="elencoPost">
+    <app-post [email]="post.user.email" [date]="post.dataPost" [content]="post.contenuto" [likes]="post.likes"></app-post>
+  </ng-template>
+</ng-container>

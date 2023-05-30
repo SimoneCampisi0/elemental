@@ -2,9 +2,10 @@
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  margin-left: 15px;
-  padding: 20px;
-  max-width: 600px;
+  margin-left: 2em;
+  padding: 2em;
+  max-width: 100em;
+  margin-top: 2em;
 }
 .post .author {
   font-size: 18px;
