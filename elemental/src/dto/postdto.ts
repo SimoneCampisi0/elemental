@@ -7,8 +7,6 @@ export class PostDTO {
 
   contenuto: string
 
-  likes: number
-
   imgURL: string
 
   user: UserDTO
@@ -19,7 +17,6 @@ export class PostDTO {
 
   contenuto: string,
 
-  likes: number,
 
   imgURL: string,
 
@@ -27,7 +24,6 @@ export class PostDTO {
     this.idPost = idPost
     this.dataPost = dataPost
     this.contenuto = contenuto
-    this.likes = likes
     this.imgURL = imgURL
     this.user = user
   }

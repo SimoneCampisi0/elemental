@@ -16,17 +16,22 @@ export class PostComponent {
   // @ts-ignore
   @Input() date: Date;
   @Input() content: string = '';
-  @Input() likes: number = 0;
+  // @Input() likes: number = 0;
 
   // @ts-ignore
   anagAutore$: Observable<AnagDTO>;
 
 
-  constructor(private anagService: AnagService) {
+  constructor(private anagService: AnagService, private postService: PostService) {
   }
 
   ngOnInit() {
     this.anagAutore$ = this.anagService.findAnagByEmail(this.email)
 
+  }
+
+  setLike() {
+    // this.likes++;
+    // this.postService.
   }
 }

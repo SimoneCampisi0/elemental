@@ -8,8 +8,8 @@
     {{this.content}}
   </div>
   <div class="actions">
-    <div class="like-button">
-      <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace
+    <div (click)="setLike()" class="like-button">
+      <i class="fas fa-thumbs-up"></i> Mi Piace
     </div>
     <a href="#"><i class="fas fa-comment"></i> Commenta</a>
   </div>
