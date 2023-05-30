@@ -14,6 +14,8 @@ import java.sql.Date;
 public class PostDTO {
     private Long idPost;
 
+    private Long likes;
+
     private Date dataPost;
 
     private String contenuto;

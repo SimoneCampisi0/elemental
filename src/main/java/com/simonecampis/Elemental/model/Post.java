@@ -16,6 +16,8 @@ public class Post {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long idPost;
 
+    private Long likes;
+
     private Date dataPost;
 
     private String contenuto;
