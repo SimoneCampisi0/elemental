@@ -13,8 +13,13 @@ public class PostController extends AbstractController<PostDTO> {
     @Autowired
     private PostService service;
 
-//    @GetMapping(value = "setLike")
-//    public PostDTO setLike(@RequestParam Long idPost) {
-//        return service.setLike(idPost);
-//    }
+    @GetMapping(value = "addLike")
+    public PostDTO addLike(@RequestParam Long idPost) {
+        return service.addLike(idPost);
+    }
+
+    @GetMapping(value = "removeLike")
+    public PostDTO removeLike(@RequestParam Long idPost) {
+        return service.removeLike(idPost);
+    }
 }

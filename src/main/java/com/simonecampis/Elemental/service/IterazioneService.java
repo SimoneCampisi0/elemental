@@ -17,6 +17,21 @@ public class IterazioneService extends AbstractService<Iterazione, IterazioneDTO
         return converter.toDTO(repo.findByIdUser(id));
     }
 
+    public IterazioneDTO setLike(Long id) {
+        IterazioneDTO dto = converter.toDTO(repo.findByIdUser(id));
+        dto.setLikes(1L);
+
+        return converter.toDTO(repo.save(converter.toEntity(dto)));
+    }
+
+    public IterazioneDTO unsetLike(Long id) {
+        IterazioneDTO dto = converter.toDTO(repo.findByIdUser(id));
+        dto.setLikes(0L);
+
+        return converter.toDTO(repo.save(converter.toEntity(dto)));
+    }
+
+
 }
 
 
