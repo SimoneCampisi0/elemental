@@ -48,7 +48,7 @@ export class PostComponent {
   }
 
   setLike() {
-    this.itService.findByIdUser(this.user.id).subscribe(it => {
+    this.itService.findByUserIdAndPostIdPost(this.user.id,this.dto.idPost).subscribe(it => {
       if(it == null){ //se non esiste ancora un'interazione tra l'utente e il post
         this.postService.addLike(this.dto.idPost).subscribe()
         // @ts-ignore
@@ -58,19 +58,19 @@ export class PostComponent {
       }
       else { //se esiste un'interazione tra l'utente e il post
         let inter: IterazioneDTO
-        this.itService.findByIdUser(this.user.id).subscribe(x => {
+        this.itService.findByUserIdAndPostIdPost(this.user.id,this.dto.idPost).subscribe(x => {
           inter = x;
           // @ts-ignore
           if(inter.likes == 0) { //se esiste un'interazione ma non è stato messo mi piace
             // @ts-ignore
-            this.itService.setLike(this.user.id).subscribe(x => {
+            this.itService.setLike(this.user.id, this.dto.idPost).subscribe(x => {
               this.postService.addLike(this.dto.idPost).subscribe(x => {
                 this.likes++
               })
             })
 
           } else {
-            this.itService.unsetLike(this.user.id).subscribe(x => {
+            this.itService.unsetLike(this.user.id, this.dto.idPost).subscribe(x => {
               this.postService.removeLike(this.dto.idPost).subscribe(x => {
                 this.likes--
               })

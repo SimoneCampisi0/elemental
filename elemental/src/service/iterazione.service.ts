@@ -15,15 +15,20 @@ export class IterazioneService extends AbstractService<IterazioneDTO>{
     super(http);
     this.type = 'iterazione';
   }
-  findByIdUser(id: number): Observable<IterazioneDTO> {
-    return this.http.get<IterazioneDTO>(environment.APIEndpoint + this.type + '/findByIdUser?id='+id)
+  // findByIdUser(id: number): Observable<IterazioneDTO> {
+  //   return this.http.get<IterazioneDTO>(environment.APIEndpoint + this.type + '/findByIdUser?id='+id)
+  // }
+
+  findByUserIdAndPostIdPost(id: number, idPost: number): Observable<IterazioneDTO> {
+    return this.http.get<IterazioneDTO>(environment.APIEndpoint + this.type + '/findByUserIdAndPostIdPost?id='+id+'&idPost='+idPost)
   }
 
-  setLike(id: number): Observable<IterazioneDTO> {
-    return this.http.get<IterazioneDTO>(environment.APIEndpoint + this.type + '/setLike?id='+id)
+
+  setLike(id: number, idPost: number): Observable<IterazioneDTO> {
+    return this.http.get<IterazioneDTO>(environment.APIEndpoint + this.type + '/setLike?id='+id+'&idPost='+idPost)
   }
 
-  unsetLike(id: number): Observable<IterazioneDTO> {
-    return this.http.get<IterazioneDTO>(environment.APIEndpoint + this.type + '/unsetLike?id='+id)
+  unsetLike(id: number, idPost: number): Observable<IterazioneDTO> {
+    return this.http.get<IterazioneDTO>(environment.APIEndpoint + this.type + '/unsetLike?id='+id+'&idPost='+idPost)
   }
 }
