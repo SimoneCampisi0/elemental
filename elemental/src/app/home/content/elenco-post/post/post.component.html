@@ -9,21 +9,9 @@
   </div>
   <div class="actions">
 
-
-    <ng-container *ngIf="iterazione$ | async as iterazione; else noLike">
-      <div (click)="setLike()" class="like-button" style="cursor: pointer">
-        <i class="fas fa-thumbs-up"></i> {{iterazione.likes}} Mi Piace
-      </div>
-    </ng-container>
-
-
-    <ng-template #noLike>
-      <div (click)="setLike()" class="like-button" style="cursor: pointer">
-        <i class="fas fa-thumbs-up"></i> 0 Mi Piace
-      </div>
-    </ng-template>
-
-
+        <div (click)="setLike()" class="like-button" style="cursor: pointer">
+          <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace
+        </div>
 
 <!--    <div (click)="setLike()" class="like-button" style="cursor: pointer">-->
 <!--      <i class="fas fa-thumbs-up"></i> {{}} Mi Piace-->

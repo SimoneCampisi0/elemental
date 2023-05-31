@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {UserService} from "../../../../../service/user.service";
 import {PostService} from "../../../../../service/post.service";
 import {AnagService} from "../../../../../service/anag.service";
-import {Observable} from "rxjs";
+import {debounceTime, Observable} from "rxjs";
 import {PostDTO} from "../../../../../dto/postdto";
 import {AnagDTO} from "../../../../../dto/anagdto";
 import {IterazioneService} from "../../../../../service/iterazione.service";
@@ -21,7 +21,10 @@ export class PostComponent {
   // @ts-ignore
   @Input() date: Date;
   @Input() content: string = '';
-  // @Input() likes: number = 0;
+
+  // @ts-ignore
+  likes
+
 
   // @ts-ignore
   anagAutore$: Observable<AnagDTO>;
@@ -29,7 +32,7 @@ export class PostComponent {
   user: UserDTO;
 
   // @ts-ignore
-  iterazione$: Observable<IterazioneDTO>
+  // iterazione$: Observable<IterazioneDTO>
 
   constructor(private anagService: AnagService, private itService: IterazioneService, private postService: PostService) {
   }
@@ -39,48 +42,89 @@ export class PostComponent {
     // @ts-ignore
     this.user = JSON.parse(localStorage.getItem('currentUser'))
 
-    this.iterazione$ = this.itService.findByIdUser(this.user.id)
+    // this.iterazione$ = this.itService.findByIdUser(this.user.id)
+
+    this.likes = this.dto.likes
   }
 
   setLike() {
     this.itService.findByIdUser(this.user.id).subscribe(it => {
-      if(it != null) {
-        if(it.likes==0) { //se non è ancora stato messo mi piace
-          //metodo per incrementare mi piace
-          this.postService.addLike(this.dto.idPost).subscribe()
-
-          this.itService.setLike(it.id).subscribe()
-
-          this.iterazione$ = this.itService.findByIdUser(this.user.id)
-
-
-          this.ngOnInit();
-        } else {
-          //metodo per rimuovere il mi piace
-          this.postService.removeLike(this.dto.idPost).subscribe()
-
-
-          this.itService.unsetLike(it.id).subscribe()
-          this.iterazione$ = this.itService.findByIdUser(this.user.id)
-
-
-          this.ngOnInit();
-
-        }
-      } else { //se non esiste ancora un'interazione
-        // @ts-ignore
-        let Interazione: IterazioneDTO = new IterazioneDTO(0, 1,null,null,null,this.user, this.dto)
-
-        this.itService.insert(Interazione).subscribe()
-
+      if(it == null){ //se non esiste ancora un'interazione tra l'utente e il post
         this.postService.addLike(this.dto.idPost).subscribe()
+        // @ts-ignore
+        let inter = new IterazioneDTO(0,1, null,null,null,this.user,this.dto)
+        this.itService.insert(inter).subscribe()
+        this.likes++
+      }
+      else { //se esiste un'interazione tra l'utente e il post
+        let inter: IterazioneDTO
+        this.itService.findByIdUser(this.user.id).subscribe(x => {
+          inter = x;
+          // @ts-ignore
+          if(inter.likes == 0) { //se esiste un'interazione ma non è stato messo mi piace
+            // @ts-ignore
+            this.itService.setLike(this.user.id).subscribe(x => {
+              this.postService.addLike(this.dto.idPost).subscribe(x => {
+                this.likes++
+              })
+            })
 
-        this.iterazione$ = this.itService.findByIdUser(this.user.id)
+          } else {
+            this.itService.unsetLike(this.user.id).subscribe(x => {
+              this.postService.removeLike(this.dto.idPost).subscribe(x => {
+                this.likes--
+              })
+            })
+          }
+        })
 
 
-        this.ngOnInit();
+
+
+
+
 
       }
     })
+
+
+
+
+    // this.itService.findByIdUser(this.user.id).subscribe(it => {
+    //   if(it != null) {
+    //     if(it.likes==0) { //se non è ancora stato messo mi piace
+    //       //metodo per incrementare mi piace
+    //       this.postService.addLike(this.dto.idPost).subscribe()
+    //
+    //       this.itService.setLike(it.id).subscribe()
+    //
+    //       this.iterazione$ = this.itService.findByIdUser(this.user.id)
+    //
+    //
+    //     } else {
+    //       //metodo per rimuovere il mi piace
+    //       this.postService.removeLike(this.dto.idPost).subscribe()
+    //
+    //
+    //       this.itService.unsetLike(it.id).subscribe()
+    //       this.iterazione$ = this.itService.findByIdUser(this.user.id)
+    //
+    //
+    //
+    //     }
+    //   } else { //se non esiste ancora un'interazione
+    //     // @ts-ignore
+    //     let Interazione: IterazioneDTO = new IterazioneDTO(0, 1,null,null,null,this.user, this.dto)
+    //
+    //     this.itService.insert(Interazione).subscribe()
+    //
+    //     this.postService.addLike(this.dto.idPost).subscribe()
+    //
+    //     this.iterazione$ = this.itService.findByIdUser(this.user.id)
+    //
+    //
+    //
+    //   }
+    // })
   }
 }

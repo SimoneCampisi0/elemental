@@ -33,4 +33,9 @@ export class SideMenuComponent {
     this.router.navigate([''])
   }
 
+  logout() {
+    localStorage.clear()
+    this.router.navigate([''])
+  }
+
 }
