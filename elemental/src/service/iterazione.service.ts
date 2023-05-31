@@ -18,4 +18,12 @@ export class IterazioneService extends AbstractService<IterazioneDTO>{
   findByIdUser(id: number): Observable<IterazioneDTO> {
     return this.http.get<IterazioneDTO>(environment.APIEndpoint + this.type + '/findByIdUser?id='+id)
   }
+
+  setLike(id: number): Observable<IterazioneDTO> {
+    return this.http.get<IterazioneDTO>(environment.APIEndpoint + this.type + '/setLike?id='+id)
+  }
+
+  unsetLike(id: number): Observable<IterazioneDTO> {
+    return this.http.get<IterazioneDTO>(environment.APIEndpoint + this.type + '/unsetLike?id='+id)
+  }
 }
