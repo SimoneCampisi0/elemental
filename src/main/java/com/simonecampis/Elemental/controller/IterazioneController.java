@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
 public class IterazioneController extends AbstractController<IterazioneDTO> {
     @Autowired
     private IterazioneService service;
-    @GetMapping(value = "/findByIdUser")
-    public IterazioneDTO findByIdUser(@RequestParam Long id) {
-        return service.findByIdUser(id);
+    @GetMapping(value = "/findByUserIdAndPostIdPost")
+    public IterazioneDTO findByUserIdAndPostIdPost(@RequestParam Long id, @RequestParam Long idPost) {
+        return service.findByUserIdAndPostIdPost(id, idPost);
     }
 
     @GetMapping(value = "/setLike")
-    public IterazioneDTO setLike(@RequestParam Long id) { return service.setLike(id); }
+    public IterazioneDTO setLike(@RequestParam Long id, @RequestParam Long idPost) { return service.setLike(id, idPost); }
 
     @GetMapping(value = "/unsetLike")
-    public IterazioneDTO unsetLike(@RequestParam Long id) { return service.unsetLike(id); }
+    public IterazioneDTO unsetLike(@RequestParam Long id, @RequestParam Long idPost) { return service.unsetLike(id, idPost); }
 }

@@ -11,6 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface IterazioneRepo extends CrudRepository<Iterazione, Long> {
 
-    @Query("SELECT i FROM Iterazione i WHERE i.user.id = :id")
-    Iterazione findByIdUser(Long id);
+//    @Query("SELECT i FROM Iterazione i WHERE i.user.id = :id")
+    Iterazione findByUserIdAndPostIdPost(Long id, Long idPost);
 }
