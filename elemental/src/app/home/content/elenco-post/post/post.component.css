@@ -54,3 +54,9 @@
 .post .actions .like-button i {
   margin-right: 5px;
 }
+
+
+.hrBlack {
+  border: 0.5px solid black;
+  margin-bottom: 2vh;
+}
