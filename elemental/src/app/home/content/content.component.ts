@@ -30,7 +30,7 @@ export class ContentComponent {
       title: 'Nuovo post',
       html:
         '<h2 style="margin: 0px">Contenuto</h2>'+
-        '<input id="input-content" class="swal2-input" placeholder="" style="height: 5em;">',
+        '<textarea id="input-content" name="content" cols="40" rows="5" style="padding: 1em;"></textarea>\n',
       focusConfirm: false,
       preConfirm: () => {
 
@@ -49,9 +49,13 @@ export class ContentComponent {
         );
 
         this.postService.insert(newPost).subscribe()
-        console.log(newPost);
+        this.refreshPage()
       }
     });
+  }
+
+  refreshPage() {
+    window.location.reload();
   }
 
 }
