@@ -8,6 +8,7 @@ import {AnagDTO} from "../../../../../dto/anagdto";
 import {IterazioneService} from "../../../../../service/iterazione.service";
 import {UserDTO} from "../../../../../dto/userdto";
 import {IterazioneDTO} from "../../../../../dto/iterazionedto";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-post',
@@ -142,4 +143,8 @@ export class PostComponent {
     //   }
     // })
   }
+
+
+
+// Chiamata alla funzione per mostrare l'alert
 }
