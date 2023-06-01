@@ -29,7 +29,8 @@ export class ContentComponent {
     Swal.fire({
       title: 'Nuovo post',
       html:
-        '<input id="input-content" class="swal2-input" placeholder="Contenuto">',
+        '<h2 style="margin: 0px">Contenuto</h2>'+
+        '<input id="input-content" class="swal2-input" placeholder="" style="height: 5em;">',
       focusConfirm: false,
       preConfirm: () => {
 
