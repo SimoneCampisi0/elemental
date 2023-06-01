@@ -9,14 +9,21 @@
   </div>
 
   <hr class="hrBlack">
-  <div class="actions">
-        <div (click)="setLike()" class="like-button" style="cursor: pointer">
+<!--  <div class="actions">-->
+<!--        <div (click)="setLike()" class="like-button" style="cursor: pointer">-->
+<!--          <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace-->
+<!--        </div>-->
+
+    <div class="actions">
+      <div (click)="setLike()" class="like-button" style="cursor: pointer">
+        <div *ngIf="this.boolLike; else elseBlock" class="miPiaceSet">
           <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace
         </div>
+        <ng-template #elseBlock>
+          <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace
+        </ng-template>
+      </div>
 
-<!--    <div (click)="setLike()" class="like-button" style="cursor: pointer">-->
-<!--      <i class="fas fa-thumbs-up"></i> {{}} Mi Piace-->
-<!--    </div>-->
 
     <a href="#"><i class="fas fa-comment"></i> Commenta</a>
   </div>

@@ -22,6 +22,7 @@ export class PostComponent {
   @Input() date: Date;
   @Input() content: string = '';
 
+  boolLike: boolean = false;
   // @ts-ignore
   likes
 
@@ -45,6 +46,12 @@ export class PostComponent {
     // this.iterazione$ = this.itService.findByIdUser(this.user.id)
 
     this.likes = this.dto.likes
+
+    this.itService.findByUserIdAndPostIdPost(this.user.id, this.dto.idPost).subscribe(x => {
+      if(x !== null) {
+        this.boolLike = true;
+      }
+    })
   }
 
   setLike() {
@@ -55,6 +62,8 @@ export class PostComponent {
         let inter = new IterazioneDTO(0,1, null,null,null,this.user,this.dto)
         this.itService.insert(inter).subscribe()
         this.likes++
+
+        this.boolLike = true
       }
       else { //se esiste un'interazione tra l'utente e il post
         let inter: IterazioneDTO
@@ -66,6 +75,9 @@ export class PostComponent {
             this.itService.setLike(this.user.id, this.dto.idPost).subscribe(x => {
               this.postService.addLike(this.dto.idPost).subscribe(x => {
                 this.likes++
+
+                this.boolLike = true
+
               })
             })
 
@@ -73,6 +85,9 @@ export class PostComponent {
             this.itService.unsetLike(this.user.id, this.dto.idPost).subscribe(x => {
               this.postService.removeLike(this.dto.idPost).subscribe(x => {
                 this.likes--
+
+                this.boolLike = false
+
               })
             })
           }
