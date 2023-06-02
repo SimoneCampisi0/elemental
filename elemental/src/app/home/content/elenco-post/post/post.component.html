@@ -4,7 +4,7 @@
     <div class="author">{{anagAutore.nome}} {{anagAutore.cognome}}</div>
 
     <div *ngIf="this.boolTrash" class="trash trashDiv">
-      <i class="fa fa-trash" aria-hidden="true"></i>
+      <i class="fa fa-trash" aria-hidden="true" (click)="deletePost()"></i>
     </div>
 
   </ng-container>

@@ -30,6 +30,8 @@ export class PostComponent {
   // @ts-ignore
   likes
 
+  // @ts-ignore
+  interazione: IterazioneDTO
 
   // @ts-ignore
   anagAutore$: Observable<AnagDTO>;
@@ -53,6 +55,7 @@ export class PostComponent {
 
     this.itService.findByUserIdAndPostIdPost(this.user.id, this.dto.idPost).subscribe(x => {
       if(x !== null) {
+        this.interazione = x;
         this.boolLike = true;
       }
     })
@@ -110,46 +113,39 @@ export class PostComponent {
 
       }
     })
+  }
 
 
+  deletePost() {
+    Swal.fire({
+      title: 'Sei sicuro di voler eliminare il post?',
+      text: "Quest'azione è irreversibile.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Annulla',
+      confirmButtonText: 'Conferma'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // if(typeof this.interazione !== 'undefined') { //     ---Controllare tutte le interazioni.
+        //
+        //   console.log(JSON.stringify(this.interazione))
+        //
+        //   this.itService.delete(this.interazione.id).subscribe(x => {
+        //     this.postService.delete(this.dto.idPost).subscribe()
+        //   })
+        // } else {
+        //   this.postService.delete(this.dto.idPost).subscribe()
+        // }
 
-
-    // this.itService.findByIdUser(this.user.id).subscribe(it => {
-    //   if(it != null) {
-    //     if(it.likes==0) { //se non è ancora stato messo mi piace
-    //       //metodo per incrementare mi piace
-    //       this.postService.addLike(this.dto.idPost).subscribe()
-    //
-    //       this.itService.setLike(it.id).subscribe()
-    //
-    //       this.iterazione$ = this.itService.findByIdUser(this.user.id)
-    //
-    //
-    //     } else {
-    //       //metodo per rimuovere il mi piace
-    //       this.postService.removeLike(this.dto.idPost).subscribe()
-    //
-    //
-    //       this.itService.unsetLike(it.id).subscribe()
-    //       this.iterazione$ = this.itService.findByIdUser(this.user.id)
-    //
-    //
-    //
-    //     }
-    //   } else { //se non esiste ancora un'interazione
-    //     // @ts-ignore
-    //     let Interazione: IterazioneDTO = new IterazioneDTO(0, 1,null,null,null,this.user, this.dto)
-    //
-    //     this.itService.insert(Interazione).subscribe()
-    //
-    //     this.postService.addLike(this.dto.idPost).subscribe()
-    //
-    //     this.iterazione$ = this.itService.findByIdUser(this.user.id)
-    //
-    //
-    //
-    //   }
-    // })
+        Swal.fire(
+          'Post eliminato!',
+          'Il post è stato eliminato.',
+          'success'
+        )
+      }
+    })
   }
 
 
