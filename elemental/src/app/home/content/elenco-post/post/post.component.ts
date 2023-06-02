@@ -2,13 +2,16 @@ import {Component, Input} from '@angular/core';
 import {UserService} from "../../../../../service/user.service";
 import {PostService} from "../../../../../service/post.service";
 import {AnagService} from "../../../../../service/anag.service";
-import {debounceTime, Observable} from "rxjs";
+import {debounceTime, EMPTY, Observable} from "rxjs";
 import {PostDTO} from "../../../../../dto/postdto";
 import {AnagDTO} from "../../../../../dto/anagdto";
 import {IterazioneService} from "../../../../../service/iterazione.service";
 import {UserDTO} from "../../../../../dto/userdto";
 import {IterazioneDTO} from "../../../../../dto/iterazionedto";
 import Swal from "sweetalert2";
+
+import { of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-post',
@@ -139,13 +142,45 @@ export class PostComponent {
         //   this.postService.delete(this.dto.idPost).subscribe()
         // }
 
+        this.itService.getAll().pipe(
+          switchMap((array) => {
+            if (array.length === 0) {
+              // Array vuoto, esegui azione specifica
+              console.log("Array vuoto");
+              this.postService.removeLike(this.dto.idPost).subscribe(y => {
+                this.postService.delete(this.dto.idPost).subscribe()
+              })
+
+            } else {
+              // Array non vuoto, emetti gli elementi come osservazioni separate
+              return of(...array);
+            }
+            return EMPTY; // Aggiungiamo questa riga per assicurarci che il flusso restituisca un valore in tutti i casi
+          })
+        ).subscribe((item) => {
+          console.log("item: " + item.post.idPost)
+          if (item.post.idPost == this.dto.idPost) {
+            this.itService.delete(item.id).subscribe(x => {
+              console.log("hello")
+              this.postService.removeLike(this.dto.idPost).subscribe(y => {
+                this.postService.delete(this.dto.idPost).subscribe()
+              })
+            })
+          }
+        });
+
+
         Swal.fire(
           'Post eliminato!',
           'Il post è stato eliminato.',
           'success'
         )
+        // window.location.reload();
+
       }
     })
+
+
   }
 
 
