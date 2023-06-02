@@ -18,14 +18,14 @@ public class PostService extends AbstractService<Post, PostDTO> {
 
     @Autowired
     private PostRepo repo;
-    public PostDTO addLike(@RequestParam Long idPost) {
+    public PostDTO addLike(Long idPost) {
         PostDTO post =  converter.toDTO(repo.findById(idPost).get());
         Long likes = post.getLikes() + 1;
         post.setLikes(likes);
         return converter.toDTO(repo.save(converter.toEntity(post)));
     }
 
-    public PostDTO removeLike(@RequestParam Long idPost) {
+    public PostDTO removeLike(Long idPost) {
         PostDTO post =  converter.toDTO(repo.findById(idPost).get());
         Long likes;
         if(post.getLikes()>=1) {
@@ -33,5 +33,15 @@ public class PostService extends AbstractService<Post, PostDTO> {
             post.setLikes(likes);
         }
         return converter.toDTO(repo.save(converter.toEntity(post)));
+    }
+
+    public Boolean checkPostInsertByCurrentUser(Long idPost, Long id) {
+        PostDTO p = converter.toDTO(repo.checkPostInsertByCurrentUser(idPost, id));
+        if(p != null) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

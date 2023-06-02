@@ -22,4 +22,9 @@ public class PostController extends AbstractController<PostDTO> {
     public PostDTO removeLike(@RequestParam Long idPost) {
         return service.removeLike(idPost);
     }
+
+    @GetMapping(value = "checkPostInsertByCurrentUser")
+    public Boolean checkPostInsertByCurrentUser(@RequestParam Long idPost, Long id) {
+        return service.checkPostInsertByCurrentUser(idPost, id);
+    }
 }
