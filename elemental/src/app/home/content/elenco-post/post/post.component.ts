@@ -24,6 +24,9 @@ export class PostComponent {
   @Input() content: string = '';
 
   boolLike: boolean = false;
+
+  boolTrash: Boolean = false;
+
   // @ts-ignore
   likes
 
@@ -53,6 +56,11 @@ export class PostComponent {
         this.boolLike = true;
       }
     })
+
+    this.postService.checkPostInsertByCurrentUser(this.dto.idPost, this.user.id).subscribe(x => {
+      this.boolTrash = x
+    })
+
   }
 
   setLike() {

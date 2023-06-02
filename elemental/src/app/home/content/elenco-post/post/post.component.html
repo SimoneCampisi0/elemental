@@ -2,6 +2,11 @@
   <ng-container *ngIf="anagAutore$ | async as anagAutore">
 <!--    con async si esegue direttamente la subscribe nell'if, ottenendo quindi l'accesso ai dati-->
     <div class="author">{{anagAutore.nome}} {{anagAutore.cognome}}</div>
+
+    <div *ngIf="this.boolTrash" class="trash trashDiv">
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    </div>
+
   </ng-container>
   <div class="date">{{this.date}}</div>
   <div class="content">

@@ -12,6 +12,7 @@
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
+  display: inline-block;
 }
 .post .date {
   color: #888;
@@ -65,4 +66,10 @@
 
 .miPiaceSet {
   color: blue;
+}
+
+.trashDiv {
+  display: inline-block;
+  position: relative;
+  left: 85%;
 }

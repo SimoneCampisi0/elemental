@@ -22,4 +22,9 @@ export class PostService extends AbstractService<PostDTO>{
   removeLike(idPost: number): Observable<PostDTO> {
     return this.http.get<PostDTO>(environment.APIEndpoint + this.type + '/removeLike?idPost='+idPost)
   }
+
+  checkPostInsertByCurrentUser(idPost: number, id: number): Observable<Boolean> {
+    return this.http.get<Boolean>(environment.APIEndpoint + this.type + '/checkPostInsertByCurrentUser?idPost='+idPost+'&id='+id)
+  }
+
 }
