@@ -59,7 +59,9 @@ export class PostComponent {
     this.itService.findByUserIdAndPostIdPost(this.user.id, this.dto.idPost).subscribe(x => {
       if(x !== null) {
         this.interazione = x;
-        this.boolLike = true;
+        if(this.interazione.likes==1) {
+          this.boolLike = true;
+        }
       }
     })
 
@@ -67,6 +69,7 @@ export class PostComponent {
       this.boolTrash = x
     })
 
+    console.log("stato boolLike: "+this.boolLike)
   }
 
   setLike() {
