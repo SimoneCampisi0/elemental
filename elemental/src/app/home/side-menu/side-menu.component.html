@@ -10,18 +10,35 @@
       <a (click)="goHome()" class="nav-link active cursorLink" aria-current="page">
         <svg class="bi me-2" width="10" height="16"></svg>
         <img src="./assets/menu/home.png" class="imgMenu" alt="" srcset="">
-        <div class="text">HOME</div>
+        <div class="text" style="padding-left: 5px">HOME</div>
       </a>
     </li>
 
 
     <li class="nav-item mt-2">
       <a (click)="goHome()" class="nav-link cursorLink text-white">
-        <svg class="bi me-2" width="10" height="16"></svg>
-        <img src="./assets/menu/search.png" class="imgMenu" alt="" srcset="">
-        <div class="text">CERCA</div>
+        <svg class="bi me-2" width="12" height="16"></svg>
+        <i class="fas fa-user" style="color: #ffffff;"></i>
+        <div class="text" style="padding-left: 8px">PROFILO</div>
       </a>
     </li>
+
+
+    <li class="nav-item mt-2">
+      <a (click)="goHome()" class="nav-link cursorLink text-white">
+        <svg class="bi me-1" width="12" height="16"></svg>
+        <img src="./assets/menu/settings.png" class="imgSettings" alt="" srcset="">
+        <div class="text">IMPOSTAZIONI</div>
+      </a>
+    </li>
+
+<!--    <li class="nav-item mt-2">-->
+<!--      <a (click)="goHome()" class="nav-link cursorLink text-white">-->
+<!--        <svg class="bi me-2" width="10" height="16"></svg>-->
+<!--        <img src="./assets/menu/search.png" class="imgMenu" alt="" srcset="">-->
+<!--        <div class="text">CERCA</div>-->
+<!--      </a>-->
+<!--    </li>-->
 <!--    <li>-->
 
 <!--      <a href="#" class="nav-link text-white">-->
@@ -72,9 +89,9 @@
       <div class="nomeUser">{{anag.nome}}</div>
     </button>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Dettagli profilo</a></li>
-      <li><a class="dropdown-item" href="#">Impostazioni</a></li>
-      <li><a class="dropdown-item"  (click)="logout()">Logout</a></li>
+<!--      <li><a class="dropdown-item" href="#">Dettagli profilo</a></li>-->
+<!--      <li><a class="dropdown-item" href="#">Impostazioni</a></li>-->
+      <li><a class="dropdown-item" style="text-align: center"  (click)="logout()">Logout</a></li>
     </ul>
   </div>
 

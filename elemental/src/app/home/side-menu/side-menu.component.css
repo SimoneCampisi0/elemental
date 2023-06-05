@@ -5,6 +5,13 @@
   height: 60px;
 }
 
+.imgSettings {
+  width: 20px;
+  height: 20px;
+  padding-top: 0px;
+  padding-left: 0px;
+}
+
 .cursorLink {
   cursor: pointer;
 }
