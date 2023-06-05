@@ -8,6 +8,8 @@ import {AnagService} from "../../../service/anag.service";
 import {LoginDTO} from "../../../dto/logindto";
 import {Router} from "@angular/router";
 import { HttpClient } from '@angular/common/http';
+import {FotoRequestDTO} from "../../../dto/fotorequestdto";
+import {FotoService} from "../../../service/foto.service";
 
 
  @Component({
@@ -20,7 +22,7 @@ export class RegisterFormComponent {
    base64Image: string = ''
    // loginDTO: LoginDTO;
 
-  constructor(private userService: UserService, private anagService: AnagService, private router: Router, private http: HttpClient) {
+  constructor(private userService: UserService, private anagService: AnagService, private router: Router, private http: HttpClient, private fotoService: FotoService) {
     this.registerForm = new FormGroup({
       nome: new FormControl(''),
       cognome: new FormControl(''),
@@ -60,7 +62,7 @@ export class RegisterFormComponent {
             localStorage.setItem('currentAnag',JSON.stringify(anagDef1))
 
             //gestire upload delle immagini
-            //uploadFile()
+            this.uploadFile(userDef)
 
             this.router.navigate(['/home'])
           })
@@ -82,8 +84,9 @@ export class RegisterFormComponent {
    }
 
 
-   uploadFile() {
-
+   uploadFile(userDef: UserDTO) {
+     let dto = new FotoRequestDTO(this.base64Image, userDef)
+     this.fotoService.insertFoto(dto).subscribe()
    }
    terminiAlert() {
      Swal.fire({
