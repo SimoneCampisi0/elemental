@@ -107,13 +107,6 @@ export class PostComponent {
             })
           }
         })
-
-
-
-
-
-
-
       }
     })
   }

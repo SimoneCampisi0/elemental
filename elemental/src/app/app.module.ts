@@ -20,6 +20,7 @@ import { SearchBarComponent } from './home/content/search-bar/search-bar.compone
 import { ElencoPostComponent } from './home/content/elenco-post/elenco-post.component';
 import { PostComponent } from './home/content/elenco-post/post/post.component';
 import {ElencoPostRoutingModule} from "./home/content/elenco-post/elenco-post-routing.module";
+import { SearchFilterPipe } from './home/content/search-bar/search-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {ElencoPostRoutingModule} from "./home/content/elenco-post/elenco-post-ro
     ContentComponent,
     SearchBarComponent,
     ElencoPostComponent,
-    PostComponent
+    PostComponent,
+    SearchFilterPipe
   ],
     imports: [
         BrowserModule,
