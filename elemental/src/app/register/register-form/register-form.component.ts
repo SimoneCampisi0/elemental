@@ -7,6 +7,8 @@ import {AnagDTO} from "../../../dto/anagdto";
 import {AnagService} from "../../../service/anag.service";
 import {LoginDTO} from "../../../dto/logindto";
 import {Router} from "@angular/router";
+import { HttpClient } from '@angular/common/http';
+
 
  @Component({
   selector: 'app-register-form',
@@ -15,9 +17,10 @@ import {Router} from "@angular/router";
 })
 export class RegisterFormComponent {
    registerForm: FormGroup;
-  // loginDTO: LoginDTO;
+   base64Image: string = ''
+   // loginDTO: LoginDTO;
 
-  constructor(private userService: UserService, private anagService: AnagService, private router: Router) {
+  constructor(private userService: UserService, private anagService: AnagService, private router: Router, private http: HttpClient) {
     this.registerForm = new FormGroup({
       nome: new FormControl(''),
       cognome: new FormControl(''),
@@ -55,6 +58,10 @@ export class RegisterFormComponent {
         this.anagService.insert(anag).subscribe(anagDef => {
           this.anagService.findAnagByEmail(userDef.email).subscribe(anagDef1 => {
             localStorage.setItem('currentAnag',JSON.stringify(anagDef1))
+
+            //gestire upload delle immagini
+            //uploadFile()
+
             this.router.navigate(['/home'])
           })
         })
@@ -62,6 +69,22 @@ export class RegisterFormComponent {
     });
   }
 
+   onFileSelected(event: any) {
+     const file: File = event.target.files[0];
+
+     const reader = new FileReader()
+     reader.onload = () => {
+       this.base64Image = reader.result as string
+       console.log("base64Image: "+this.base64Image)
+     }
+
+     reader.readAsDataURL(file)
+   }
+
+
+   uploadFile() {
+
+   }
    terminiAlert() {
      Swal.fire({
        icon: 'info',
