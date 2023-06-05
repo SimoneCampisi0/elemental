@@ -28,7 +28,7 @@ export class SearchBarComponent {
 
   search(value: string): void {
     this.filterPost = this.allPost.filter((val) =>
-      val.contenuto.toLowerCase().includes(value)
+      val.contenuto.toLowerCase().includes(value.toLowerCase())
     );
 
     this.postService.ricercaAvviata = true

@@ -115,6 +115,12 @@ export class PostComponent {
   }
 
 
+
+  reloadPage() {
+    window.location.reload();
+  }
+
+
   deletePost() {
     Swal.fire({
       title: 'Sei sicuro di voler eliminare il post?',
@@ -145,6 +151,15 @@ export class PostComponent {
               console.log("Array vuoto");
               this.postService.removeLike(this.dto.idPost).subscribe(y => {
                 this.postService.delete(this.dto.idPost).subscribe()
+
+                Swal.fire(
+                  'Post eliminato!',
+                  'Il post è stato eliminato.',
+                  'success'
+                )
+
+                this.reloadPage()
+
               })
 
             } else {
@@ -157,21 +172,31 @@ export class PostComponent {
           console.log("item: " + item.post.idPost)
           if (item.post.idPost == this.dto.idPost) {
             this.itService.delete(item.id).subscribe(x => {
-              console.log("hello")
               this.postService.removeLike(this.dto.idPost).subscribe(y => {
-                this.postService.delete(this.dto.idPost).subscribe()
+                this.postService.delete(this.dto.idPost).subscribe(()=> {
+
+                  Swal.fire(
+                    'Post eliminato!',
+                    'Il post è stato eliminato.',
+                    'success'
+                  )
+
+                  this.reloadPage()
+
+                })
               })
             })
           }
+
+
+          // Swal.fire(
+          //   'Post eliminato!',
+          //   'Il post è stato eliminato.',
+          //   'success'
+          // )
         });
 
 
-        Swal.fire(
-          'Post eliminato!',
-          'Il post è stato eliminato.',
-          'success'
-        )
-        // window.location.reload();
 
       }
     })
