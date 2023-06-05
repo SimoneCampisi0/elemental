@@ -17,18 +17,12 @@ export class ElencoPostComponent implements OnInit {
 
   ngOnInit() {
     this.postService.filterPost$.subscribe(filterPost => {
-        console.log("Post filtrati: "+filterPost)
         if(filterPost.length !== 0) {
-
-        console.log("filterPost != null: "+filterPost)
-
           this.elencoPost$ = this.postService.filterPost$ // Aggiorna l'array filterPost ogni volta che viene modificato nel servizio
         } else {
-
-          console.log("filterPost == null: "+filterPost)
-
-
-          this.elencoPost$ = this.postService.getAll();
+          if(!this.postService.ricercaAvviata) {
+            this.elencoPost$ = this.postService.getAll();
+          }
         }
     });
   }

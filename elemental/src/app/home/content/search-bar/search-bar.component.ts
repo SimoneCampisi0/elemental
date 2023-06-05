@@ -30,6 +30,8 @@ export class SearchBarComponent {
     this.filterPost = this.allPost.filter((val) =>
       val.contenuto.toLowerCase().includes(value)
     );
+
+    this.postService.ricercaAvviata = true
     this.postService.setFilterPost(this.filterPost)
     console.log(this.filterPost)
   }
