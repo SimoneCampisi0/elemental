@@ -27,4 +27,5 @@ public class PostController extends AbstractController<PostDTO> {
     public Boolean checkPostInsertByCurrentUser(@RequestParam Long idPost, Long id) {
         return service.checkPostInsertByCurrentUser(idPost, id);
     }
+
 }
