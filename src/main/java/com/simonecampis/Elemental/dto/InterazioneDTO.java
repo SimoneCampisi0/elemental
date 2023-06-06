@@ -11,17 +11,11 @@ import java.sql.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class IterazioneDTO {
+public class InterazioneDTO {
 
     private Long id;
 
     private Long likes;
-
-    private Date dataCommento;
-
-    private String contenuto;
-
-    private String imgURL;
 
     private User user;
 

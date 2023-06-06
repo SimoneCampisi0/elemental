@@ -11,18 +11,12 @@ import java.sql.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Iterazione {
+public class Interazione {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
     private Long likes;
-
-    private Date dataCommento;
-
-    private String contenuto;
-
-    private String imgURL;
 
     @ManyToOne
     @JoinColumn(name = "userId")
