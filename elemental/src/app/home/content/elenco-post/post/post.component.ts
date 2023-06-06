@@ -72,7 +72,7 @@ export class PostComponent {
       this.boolTrash = x
     })
 
-    this.fotoService.readFoto(this.user.id).subscribe(x=> {
+    this.fotoService.readFoto(this.dto.user.id).subscribe(x=> {
       // @ts-ignore
       this.base64Img = 'data:image/jpeg;base64,' + x; //l'immagine non è un JSON.
     })
