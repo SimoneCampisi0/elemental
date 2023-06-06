@@ -5,9 +5,9 @@ import {AnagService} from "../../../../../service/anag.service";
 import {debounceTime, EMPTY, Observable} from "rxjs";
 import {PostDTO} from "../../../../../dto/postdto";
 import {AnagDTO} from "../../../../../dto/anagdto";
-import {IterazioneService} from "../../../../../service/iterazione.service";
+import {InterazioneService} from "../../../../../service/interazione.service";
 import {UserDTO} from "../../../../../dto/userdto";
-import {IterazioneDTO} from "../../../../../dto/iterazionedto";
+import {InterazioneDTO} from "../../../../../dto/InterazioneDTO";
 import Swal from "sweetalert2";
 
 import { of } from 'rxjs';
@@ -26,6 +26,8 @@ export class PostComponent {
   // @ts-ignore
   @Input() date: Date;
   @Input() content: string = '';
+
+  commentoString: string = ''
 
   boolLike: boolean = false;
 
@@ -49,7 +51,7 @@ export class PostComponent {
   // @ts-ignore
   // iterazione$: Observable<IterazioneDTO>
 
-  constructor(private anagService: AnagService, private itService: IterazioneService, private postService: PostService, private fotoService: FotoService) {
+  constructor(private anagService: AnagService, private itService: InterazioneService, private postService: PostService, private fotoService: FotoService) {
   }
 
   ngOnInit() {
@@ -85,14 +87,14 @@ export class PostComponent {
       if(it == null){ //se non esiste ancora un'interazione tra l'utente e il post
         this.postService.addLike(this.dto.idPost).subscribe()
         // @ts-ignore
-        let inter = new IterazioneDTO(0,1, null,null,null,this.user,this.dto)
+        let inter = new InterazioneDTO(0,1, this.user,this.dto)
         this.itService.insert(inter).subscribe()
         this.likes++
 
         this.boolLike = true
       }
       else { //se esiste un'interazione tra l'utente e il post
-        let inter: IterazioneDTO
+        let inter: InterazioneDTO
         this.itService.findByUserIdAndPostIdPost(this.user.id,this.dto.idPost).subscribe(x => {
           inter = x;
           // @ts-ignore
@@ -209,6 +211,10 @@ export class PostComponent {
       }
     })
 
+
+  }
+
+  inviaCommento() {
 
   }
 

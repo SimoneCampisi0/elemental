@@ -40,7 +40,8 @@
   <div class="comments">
     <form>
       <label for="commento">Inserisci un commento:</label><br>
-      <textarea id="commento" name="commento" rows="4" cols="50"></textarea><br><br>
+
+      <textarea id="commento" name="commento" rows="4" cols="50" [(ngModel)]="commentoString"></textarea><br><br>
       <div class="InputSubmit">
 
         <div (click)="setLike()" class="like-button" style="cursor: pointer">
@@ -52,7 +53,7 @@
           </ng-template>
         </div>
 
-        <input type="submit" value="Invia commento" class="inviaCommento">
+        <input type="submit" value="Invia commento" class="inviaCommento" (click)="inviaCommento()">
       </div>
     </form>
   </div>

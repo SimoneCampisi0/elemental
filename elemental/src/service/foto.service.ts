@@ -8,7 +8,7 @@ import {LoginDTO} from "../dto/logindto";
 import {AnagDTO} from "../dto/anagdto";
 import {FotoDTO} from "../dto/fotodto";
 import {FotoRequestDTO} from "../dto/fotorequestdto";
-import {IterazioneDTO} from "../dto/iterazionedto";
+
 
 @Injectable({
   providedIn: 'root'
