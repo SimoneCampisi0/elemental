@@ -18,6 +18,7 @@ import {FotoService} from "../../../service/foto.service";
   styleUrls: ['./register-form.component.css']
 })
 export class RegisterFormComponent {
+   selectFile: boolean = false;
    registerForm: FormGroup;
    base64Image: string = ''
    // loginDTO: LoginDTO;
@@ -38,6 +39,37 @@ export class RegisterFormComponent {
   }
 
   onSubmit() {
+    // let nome = this.registerForm.get('nome')?.value
+    // let cognome = this.registerForm.get('cognome')?.value
+    // let dataNascita = this.registerForm.get('dataNascita')?.value
+    // let cittaResidenza = this.registerForm.get('cittaResidenza')?.value
+    // let email = this.registerForm.get('email')?.value;
+    // let password = this.registerForm.get('password')?.value;
+    //
+    // let userDTO: UserDTO = new UserDTO(0, email, password)
+    //
+    // this.userService.insert(userDTO).subscribe(insertedUser => {
+    //   localStorage.setItem('currentUser', JSON.stringify(insertedUser));
+    //
+    //   this.userService.login(userDTO).subscribe(loggedInUser => {
+    //     localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+    //
+    //     // @ts-ignore
+    //     let userDef: UserDTO = JSON.parse(localStorage.getItem('currentUser'));
+    //
+    //     let anag: AnagDTO = new AnagDTO(0, nome, cognome, dataNascita, cittaResidenza, userDef)
+    //     this.anagService.insert(anag).subscribe(anagDef => {
+    //       this.anagService.findAnagByEmail(userDef.email).subscribe(anagDef1 => {
+    //         localStorage.setItem('currentAnag',JSON.stringify(anagDef1))
+    //
+    //         //gestire upload delle immagini
+    //         this.uploadFile(userDef)
+    //
+    //         this.router.navigate(['/home'])
+    //       })
+    //     })
+    //   });
+    // });
     let nome = this.registerForm.get('nome')?.value
     let cognome = this.registerForm.get('cognome')?.value
     let dataNascita = this.registerForm.get('dataNascita')?.value
@@ -47,41 +79,61 @@ export class RegisterFormComponent {
 
     let userDTO: UserDTO = new UserDTO(0, email, password)
 
-    this.userService.insert(userDTO).subscribe(insertedUser => {
-      localStorage.setItem('currentUser', JSON.stringify(insertedUser));
+    if(this.selectFile && nome !== "" && cognome !== "" && dataNascita !== "" && cittaResidenza !== "" && email !== ""  && password !== "") {
+      this.userService.insert(userDTO).subscribe(insertedUser => {
+        localStorage.setItem('currentUser', JSON.stringify(insertedUser));
 
-      this.userService.login(userDTO).subscribe(loggedInUser => {
-        localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+        this.userService.login(userDTO).subscribe(loggedInUser => {
+          localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
 
-        // @ts-ignore
-        let userDef: UserDTO = JSON.parse(localStorage.getItem('currentUser'));
+          // @ts-ignore
+          let userDef: UserDTO = JSON.parse(localStorage.getItem('currentUser'));
 
-        let anag: AnagDTO = new AnagDTO(0, nome, cognome, dataNascita, cittaResidenza, userDef)
-        this.anagService.insert(anag).subscribe(anagDef => {
-          this.anagService.findAnagByEmail(userDef.email).subscribe(anagDef1 => {
-            localStorage.setItem('currentAnag',JSON.stringify(anagDef1))
+          let anag: AnagDTO = new AnagDTO(0, nome, cognome, dataNascita, cittaResidenza, userDef)
+          this.anagService.insert(anag).subscribe(anagDef => {
+            this.anagService.findAnagByEmail(userDef.email).subscribe(anagDef1 => {
+              localStorage.setItem('currentAnag',JSON.stringify(anagDef1))
 
-            //gestire upload delle immagini
-            this.uploadFile(userDef)
+              //gestire upload delle immagini
+              this.uploadFile(userDef)
 
-            this.router.navigate(['/home'])
+              this.router.navigate(['/home'])
+            })
           })
-        })
+        });
       });
-    });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Errore nel caricamento',
+        text: 'Inserisci correttamente i dati.'
+      });
+    }
+
+
   }
 
    onFileSelected(event: any) {
-     const file: File = event.target.files[0];
+     const files: FileList = event.target.files;
 
-     const reader = new FileReader()
-     reader.onload = () => {
-       this.base64Image = reader.result as string
-       console.log("base64Image: "+this.base64Image)
+     if (files.length > 0) {
+       const file: File = files[0];
+
+       const reader = new FileReader();
+       reader.onload = () => {
+         this.base64Image = reader.result as string;
+         console.log("base64Image: " + this.base64Image);
+       };
+
+       this.selectFile = true;
+       reader.readAsDataURL(file);
+     } else {
+       // Nessun file selezionato
+       // Esegui le azioni desiderate o mostra un messaggio di errore
+       console.log("Nessun file selezionato");
      }
-
-     reader.readAsDataURL(file)
    }
+
 
 
    uploadFile(userDef: UserDTO) {

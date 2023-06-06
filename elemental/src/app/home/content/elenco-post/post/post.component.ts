@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 
 import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import {FotoService} from "../../../../../service/foto.service";
 
 @Component({
   selector: 'app-post',
@@ -41,10 +42,12 @@ export class PostComponent {
   // @ts-ignore
   user: UserDTO;
 
+  base64Img: string = ""
+
   // @ts-ignore
   // iterazione$: Observable<IterazioneDTO>
 
-  constructor(private anagService: AnagService, private itService: IterazioneService, private postService: PostService) {
+  constructor(private anagService: AnagService, private itService: IterazioneService, private postService: PostService, private fotoService: FotoService) {
   }
 
   ngOnInit() {
@@ -69,7 +72,10 @@ export class PostComponent {
       this.boolTrash = x
     })
 
-    console.log("stato boolLike: "+this.boolLike)
+    this.fotoService.readFoto(this.user.id).subscribe(x=> {
+      // @ts-ignore
+      this.base64Img = 'data:image/jpeg;base64,' + x; //l'immagine non è un JSON.
+    })
   }
 
   setLike() {

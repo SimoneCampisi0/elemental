@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {UserDTO} from "../../../dto/userdto";
 import {AnagService} from "../../../service/anag.service";
 import {AnagDTO} from "../../../dto/anagdto";
+import {FotoService} from "../../../service/foto.service";
 
 @Component({
   selector: 'app-side-menu',
@@ -15,7 +16,9 @@ export class SideMenuComponent {
 
   //@ts-ignore
   anag: AnagDTO
-  constructor(private router: Router, private anagService: AnagService) {
+
+  base64Img: string = ''
+  constructor(private router: Router, private anagService: AnagService, private fotoService: FotoService) {
   }
 
   ngOnInit() {
@@ -23,7 +26,15 @@ export class SideMenuComponent {
     let user: UserDTO = JSON.parse(localStorage.getItem('currentUser'))
     // @ts-ignore
 
+
+
+
     this.anag = JSON.parse(localStorage.getItem('currentAnag'));
+
+    this.fotoService.readFoto(user.id).subscribe(x=> {
+      // @ts-ignore
+      this.base64Img = 'data:image/jpeg;base64,' + x; //l'immagine non è un JSON. Angular non riesce a leggerlo
+    })
   }
   goHome () {
     this.router.navigate(['/home'])
