@@ -13,7 +13,7 @@
     </div>
 
   </ng-container>
-  <div class="date">{{this.date}}</div>
+  <div class="date" style="margin-top: 10px;">{{this.date}}</div>
   <div class="content">
     {{this.content}}
   </div>
@@ -24,18 +24,39 @@
 <!--          <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace-->
 <!--        </div>-->
 
-    <div class="actions">
-      <div (click)="setLike()" class="like-button" style="cursor: pointer">
-        <div *ngIf="this.boolLike; else elseBlock" class="miPiaceSet">
-          <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace
+<!--    <div class="actions">-->
+<!--      <div (click)="setLike()" class="like-button" style="cursor: pointer">-->
+<!--        <div *ngIf="this.boolLike; else elseBlock" class="miPiaceSet">-->
+<!--          <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace-->
+<!--        </div>-->
+<!--        <ng-template #elseBlock>-->
+<!--          <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace-->
+<!--        </ng-template>-->
+<!--      </div>-->
+
+
+<!--&lt;!&ndash;    <a href="#"><i class="fas fa-comment"></i> Commenta</a>&ndash;&gt;-->
+<!--  </div>-->
+  <div class="comments">
+    <form>
+      <label for="commento">Inserisci un commento:</label><br>
+      <textarea id="commento" name="commento" rows="4" cols="50"></textarea><br><br>
+      <div class="InputSubmit">
+
+        <div (click)="setLike()" class="like-button" style="cursor: pointer">
+          <div *ngIf="this.boolLike; else elseBlock" class="miPiaceSet">
+            <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace
+          </div>
+          <ng-template #elseBlock>
+            <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace
+          </ng-template>
         </div>
-        <ng-template #elseBlock>
-          <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace
-        </ng-template>
+
+        <input type="submit" value="Invia commento" class="inviaCommento">
       </div>
-
-
-    <a href="#"><i class="fas fa-comment"></i> Commenta</a>
+    </form>
   </div>
+
 </div>
+
 

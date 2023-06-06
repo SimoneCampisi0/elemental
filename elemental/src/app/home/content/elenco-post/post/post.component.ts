@@ -45,6 +45,8 @@ export class PostComponent {
   base64Img: string = ""
 
   // @ts-ignore
+  comments: string[]
+  // @ts-ignore
   // iterazione$: Observable<IterazioneDTO>
 
   constructor(private anagService: AnagService, private itService: IterazioneService, private postService: PostService, private fotoService: FotoService) {
