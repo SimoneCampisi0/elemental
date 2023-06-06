@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 import {UserService} from "../../../../../service/user.service";
 import {PostService} from "../../../../../service/post.service";
 import {AnagService} from "../../../../../service/anag.service";
-import {debounceTime, EMPTY, Observable} from "rxjs";
+import {debounceTime, EMPTY, map, Observable} from "rxjs";
 import {PostDTO} from "../../../../../dto/postdto";
 import {AnagDTO} from "../../../../../dto/anagdto";
 import {InterazioneService} from "../../../../../service/interazione.service";
@@ -13,6 +13,8 @@ import Swal from "sweetalert2";
 import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import {FotoService} from "../../../../../service/foto.service";
+import {CommentoService} from "../../../../../service/commento.service";
+import {CommentoDTO} from "../../../../../dto/commentodto";
 
 @Component({
   selector: 'app-post',
@@ -47,11 +49,14 @@ export class PostComponent {
   base64Img: string = ""
 
   // @ts-ignore
+  commenti: CommentoDTO[]
+
+  // @ts-ignore
   comments: string[]
   // @ts-ignore
   // iterazione$: Observable<IterazioneDTO>
 
-  constructor(private anagService: AnagService, private itService: InterazioneService, private postService: PostService, private fotoService: FotoService) {
+  constructor(private anagService: AnagService, private itService: InterazioneService, private postService: PostService, private fotoService: FotoService, private commentoService: CommentoService) {
   }
 
   ngOnInit() {
@@ -80,7 +85,30 @@ export class PostComponent {
       // @ts-ignore
       this.base64Img = 'data:image/jpeg;base64,' + x; //l'immagine non è un JSON.
     })
+
+
+    this.commentoService.getAllByPostIdPost(this.dto.idPost).subscribe(x => {
+      this.commenti = x
+      console.log(JSON.stringify(this.commenti))
+    })
   }
+
+  // findAutore(userInput: UserDTO): string {
+  //   let nomeAutore = ''
+  //   this.anagService.findAnagByEmail(userInput.email).subscribe(x => {
+  //     nomeAutore = x.nome + x.cognome;
+  //   })
+  //   return nomeAutore
+  // }
+
+  findAutore(userInput: UserDTO): string {
+    let nomeAutore = '';
+    this.anagService.findAnagByEmail(userInput.email).subscribe(x => {
+      nomeAutore = `${x.nome} ${x.cognome}`;
+    });
+    return nomeAutore;
+  }
+
 
   setLike() {
     this.itService.findByUserIdAndPostIdPost(this.user.id,this.dto.idPost).subscribe(it => {
@@ -215,7 +243,8 @@ export class PostComponent {
   }
 
   inviaCommento() {
-
+    let dto = new CommentoDTO(0, this.commentoString, new Date(), this.user, this.dto)
+    this.commentoService.insert(dto).subscribe()
   }
 
 
