@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Base64;
 
 @Service
 public class FotoService extends AbstractService<Foto, FotoDTO> {
@@ -56,5 +58,19 @@ public class FotoService extends AbstractService<Foto, FotoDTO> {
             System.out.println("Exception: " + e);
         }
         return fotoDTO;
+    }
+
+    public String readFoto (Long id) {
+        FotoDTO dto = converter.toDTO(repo.findFotoByUserId(id));
+        String base64Image;
+        try {
+            File imageFile = new File(dto.getUrl());
+            byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
+            base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            return base64Image;
+        } catch (Exception e) {
+            System.out.println("Exception: " + e);
+            return null;
+        }
     }
 }

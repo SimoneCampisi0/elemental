@@ -11,6 +11,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 
 public interface FotoRepo extends CrudRepository<Foto, Long> {
-
-
+    Foto findFotoByUserId (Long id);
 }
