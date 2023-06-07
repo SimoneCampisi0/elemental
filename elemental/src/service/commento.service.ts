@@ -20,4 +20,8 @@ export class CommentoService extends AbstractService<CommentoDTO>{
   getAllByPostIdPost(idPost: number): Observable<CommentoDTO[]> {
     return this.http.get<CommentoDTO[]>(environment.APIEndpoint + this.type + '/getAllByPostIdPost?idPost=' + idPost);
   }
+
+  deleteAllByPostIdPost(idPost: number): Observable<number> {
+    return this.http.delete<number>(environment.APIEndpoint + this.type + '/deleteAllByPostIdPost?idPost=' + idPost);
+  }
 }

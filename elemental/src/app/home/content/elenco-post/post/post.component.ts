@@ -193,18 +193,20 @@ export class PostComponent {
               // Array vuoto, esegui azione specifica
               console.log("Array vuoto");
               this.postService.removeLike(this.dto.idPost).subscribe(y => {
-                this.postService.delete(this.dto.idPost).subscribe(() => {
-                  //IMPLEMENTARE METODO PER ELIMINARE TUTTI I COMMENTI
+                this.commentoService.deleteAllByPostIdPost(this.dto.idPost).subscribe(z =>  {
+                  if(z===1) {
+                    this.postService.delete(this.dto.idPost).subscribe()
+
+                    Swal.fire(
+                      'Post eliminato!',
+                      'Il post è stato eliminato.',
+                      'success'
+                    )
+
+                    this.reloadPage()
+
+                  }
                 })
-
-                Swal.fire(
-                  'Post eliminato!',
-                  'Il post è stato eliminato.',
-                  'success'
-                )
-
-                this.reloadPage()
-
               })
 
             } else {
@@ -218,16 +220,19 @@ export class PostComponent {
           if (item.post.idPost == this.dto.idPost) {
             this.itService.delete(item.id).subscribe(x => {
               this.postService.removeLike(this.dto.idPost).subscribe(y => {
-                this.postService.delete(this.dto.idPost).subscribe(()=> {
+                this.commentoService.deleteAllByPostIdPost(this.dto.idPost).subscribe(z =>  {
+                  if(z===1) {
+                    this.postService.delete(this.dto.idPost).subscribe()
 
-                  Swal.fire(
-                    'Post eliminato!',
-                    'Il post è stato eliminato.',
-                    'success'
-                  )
+                    Swal.fire(
+                      'Post eliminato!',
+                      'Il post è stato eliminato.',
+                      'success'
+                    )
 
-                  this.reloadPage()
+                    this.reloadPage()
 
+                  }
                 })
               })
             })
