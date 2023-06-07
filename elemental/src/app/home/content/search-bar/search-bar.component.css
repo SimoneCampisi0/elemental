@@ -1,3 +1,7 @@
+.all {
+  position: fixed;
+}
+
 .height{
   height: 15vh;
 }
