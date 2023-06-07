@@ -16,6 +16,8 @@ public class Commento {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
+    private String nomeAutore;
+
     private String contenuto;
 
     private Date dataCommento;

@@ -15,6 +15,8 @@ public class CommentoDTO {
 
     private Long id;
 
+    private String nomeAutore;
+
     private String contenuto;
 
     private Date dataCommento;

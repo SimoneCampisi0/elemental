@@ -15,6 +15,7 @@ public class CommentoConverter extends AbstractConverter<Commento, CommentoDTO> 
         if(dto != null) {
             c = new Commento(
                     dto.getId(),
+                    dto.getNomeAutore(),
                     dto.getContenuto(),
                     dto.getDataCommento(),
                     dto.getUser(),
@@ -30,6 +31,7 @@ public class CommentoConverter extends AbstractConverter<Commento, CommentoDTO> 
         if(c != null) {
             dto = new CommentoDTO(
                     c.getId(),
+                    c.getNomeAutore(),
                     c.getContenuto(),
                     c.getDataCommento(),
                     c.getUser(),
