@@ -308,4 +308,29 @@ input[type="submit"]:hover {
   opacity: 0.8;
 }
 
+.viewCommenti {
+  display: flex;
+  flex-direction: column;
+}
 
+
+.vl {
+  border-left: 2px solid grey;
+  height: 2em;
+  margin-left: 1em;
+  margin-right: 10px; /* Puoi regolare il valore del margine a tua discrezione */
+  position: relative;
+  top: -50%;
+}
+
+.commento {
+  height: 150px; /* Rimuovi o imposta l'altezza su "auto" */
+  margin-top: 1em;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.commenti {
+  margin-left: 1em;
+  margin-bottom: 2em;
+}

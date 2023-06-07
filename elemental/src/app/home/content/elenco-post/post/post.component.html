@@ -21,8 +21,11 @@
   <hr class="hrBlack">
 
   <div class="viewCommenti">
+    <div class="vl"></div>
+
     <div class="commenti">
-      <div *ngFor="let commento of commenti">
+
+      <div class="commento" *ngFor="let commento of commenti">
         <img [src]="this.userImgMap.get(commento.user.id)" class="userImg" alt="" srcset="">
         <div class="autore">{{commento.nomeAutore}}</div>
         <div class="dateComment">{{ commento.dataCommento}}</div>
