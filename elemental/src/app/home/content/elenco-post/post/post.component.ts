@@ -95,7 +95,6 @@ export class PostComponent {
 
       for (let i = 0; i < this.commenti.length; i++) {
         this.fotoService.readFoto(this.commenti[i].user.id).subscribe(a => {
-          console.log("immagineprofiloletta: "+a)
           this.userImgMap.set(this.commenti[i].user.id, 'data:image/jpeg;base64,'+a);
 
           // Iterazione sui valori della mappa
@@ -188,20 +187,9 @@ export class PostComponent {
       confirmButtonText: 'Conferma'
     }).then((result) => {
       if (result.isConfirmed) {
-        // if(typeof this.interazione !== 'undefined') { //     ---Controllare tutte le interazioni.
-        //
-        //   console.log(JSON.stringify(this.interazione))
-        //
-        //   this.itService.delete(this.interazione.id).subscribe(x => {
-        //     this.postService.delete(this.dto.idPost).subscribe()
-        //   })
-        // } else {
-        //   this.postService.delete(this.dto.idPost).subscribe()
-        // }
-
         this.itService.getAll().pipe(
           switchMap((array) => {
-            if (array.length === 0) {
+            if (array.length === 0) { //se non esistono interazioni
               // Array vuoto, esegui azione specifica
               console.log("Array vuoto");
               this.postService.removeLike(this.dto.idPost).subscribe(y => {
@@ -228,12 +216,11 @@ export class PostComponent {
             return EMPTY; // Aggiungiamo questa riga per assicurarci che il flusso restituisca un valore in tutti i casi
           })
         ).subscribe((item) => {
-          console.log("item: " + item.post.idPost)
-          if (item.post.idPost == this.dto.idPost) {
+          console.log("item.id: " + item.post.idPost + "dto.id: "+this.dto.idPost)
+          if (item.post.idPost == this.dto.idPost) { //se esiste un'interazione in relazione con il post in questione
             this.itService.delete(item.id).subscribe(x => {
               this.postService.removeLike(this.dto.idPost).subscribe(y => {
                 this.commentoService.deleteAllByPostIdPost(this.dto.idPost).subscribe(z =>  {
-                  if(z===1) {
                     this.postService.delete(this.dto.idPost).subscribe()
 
                     Swal.fire(
@@ -243,27 +230,27 @@ export class PostComponent {
                     )
 
                     this.reloadPage()
+                  })
+              })
+            })
+          } else {
+            this.postService.removeLike(this.dto.idPost).subscribe(y => {
+              this.commentoService.deleteAllByPostIdPost(this.dto.idPost).subscribe(z =>  {
+                this.postService.delete(this.dto.idPost).subscribe()
 
-                  }
-                })
+                Swal.fire(
+                  'Post eliminato!',
+                  'Il post è stato eliminato.',
+                  'success'
+                )
+
+                this.reloadPage()
               })
             })
           }
-
-
-          // Swal.fire(
-          //   'Post eliminato!',
-          //   'Il post è stato eliminato.',
-          //   'success'
-          // )
         });
-
-
-
       }
     })
-
-
   }
 
   inviaCommento() {
