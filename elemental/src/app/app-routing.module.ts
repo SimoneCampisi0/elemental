@@ -4,6 +4,7 @@ import {RegisterComponent} from "./register/register.component";
 import {RecuperaPasswordComponent} from "./login/login-form/recupera-password/recupera-password.component";
 import {HomeComponent} from "./home/home.component";
 import {LoginComponent} from "./login/login.component";
+import {DettaglioUserComponent} from "./dettaglio-user/dettaglio-user.component";
 // import {SideMenuComponent} from "./side-menu/side-menu.component";
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'home', component: HomeComponent},
   // {path: '', component: SideMenuComponent}
+  {path: 'dettaglio-user',component: DettaglioUserComponent}
 
 ];
 

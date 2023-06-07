@@ -21,6 +21,7 @@ import { ElencoPostComponent } from './home/content/elenco-post/elenco-post.comp
 import { PostComponent } from './home/content/elenco-post/post/post.component';
 import {ElencoPostRoutingModule} from "./home/content/elenco-post/elenco-post-routing.module";
 import { SearchFilterPipe } from './home/content/search-bar/search-filter.pipe';
+import { DettaglioUserComponent } from './dettaglio-user/dettaglio-user.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SearchFilterPipe } from './home/content/search-bar/search-filter.pipe';
     SearchBarComponent,
     ElencoPostComponent,
     PostComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
+    DettaglioUserComponent
   ],
     imports: [
         BrowserModule,
