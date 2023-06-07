@@ -15,4 +15,5 @@ public interface CommentoRepo extends CrudRepository<Commento, Long> {
 
     List<Commento> getAllByPostIdPost (Long idPost);
 
+    void deleteAllByPostIdPost (Long idPost);
 }

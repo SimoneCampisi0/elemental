@@ -24,6 +24,17 @@ public class CommentoService extends AbstractService<Commento, CommentoDTO>  {
     public List<CommentoDTO> getAllByPostIdPost (Long idPost) {
         return converter.toDTOList(repo.getAllByPostIdPost(idPost));
     }
+
+    public Integer deleteAllByPostIdPost (Long idPost) {
+        Integer r = 0;
+        try {
+            repo.deleteAllByPostIdPost(idPost);
+            r = 1;
+        } catch (Exception e) {
+            r = 0;
+        }
+        return r;
+    }
 }
 
 

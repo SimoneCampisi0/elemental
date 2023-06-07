@@ -21,4 +21,9 @@ public class CommentoController extends AbstractController<CommentoDTO> {
         return service.getAllByPostIdPost(idPost);
     }
 
+    @DeleteMapping(value="deleteAllByPostIdPost")
+    Integer deleteAllByPostIdPost (@RequestParam Long idPost) {
+        return service.deleteAllByPostIdPost(idPost);
+    }
+
 }
