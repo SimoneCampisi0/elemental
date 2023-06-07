@@ -186,7 +186,7 @@
 }
 
 .content {
-  margin-top: 10px;
+  margin-top: 0;
   font-size: 18px;
   line-height: 1.5;
 }
@@ -194,7 +194,7 @@
 .hrBlack {
   border: none;
   border-top: 1px solid #000;
-  margin: 20px 0;
+  margin: 10px 0 20px;
 }
 
 .actions {
@@ -243,6 +243,10 @@
 
 .comments .dateComment {
   opacity: 0.8;
+}
+
+.testo {
+  margin-top: 5px;
 }
 
 .comments .testo {
