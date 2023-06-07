@@ -19,31 +19,13 @@
   </div>
 
   <hr class="hrBlack">
-<!--  <div class="actions">-->
-<!--        <div (click)="setLike()" class="like-button" style="cursor: pointer">-->
-<!--          <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace-->
-<!--        </div>-->
-
-<!--    <div class="actions">-->
-<!--      <div (click)="setLike()" class="like-button" style="cursor: pointer">-->
-<!--        <div *ngIf="this.boolLike; else elseBlock" class="miPiaceSet">-->
-<!--          <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace-->
-<!--        </div>-->
-<!--        <ng-template #elseBlock>-->
-<!--          <i class="fas fa-thumbs-up"></i> {{this.likes}} Mi Piace-->
-<!--        </ng-template>-->
-<!--      </div>-->
-
-
-<!--&lt;!&ndash;    <a href="#"><i class="fas fa-comment"></i> Commenta</a>&ndash;&gt;-->
-<!--  </div>-->
 
   <div class="viewCommenti">
     <div class="commenti">
       <div *ngFor="let commento of commenti">
         <img [src]="this.userImgMap.get(commento.user.id)" class="userImg" alt="" srcset="">
         <div class="autore">{{commento.nomeAutore}}</div>
-        <div class="dateComment">{{ commento.dataCommento | date }}</div>
+        <div class="dateComment">{{ commento.dataCommento}}</div>
         <div class="testo">{{ commento.contenuto }}</div>
         <hr class="hrBlack">
       </div>
