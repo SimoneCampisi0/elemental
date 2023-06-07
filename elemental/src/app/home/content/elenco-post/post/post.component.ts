@@ -23,7 +23,7 @@ import {CommentoDTO} from "../../../../../dto/commentodto";
 })
 export class PostComponent {
 
-  // nomeAutore = '';
+  userImgMap: Map<number, string> = new Map()
 
   // @ts-ignore
   @Input() dto: PostDTO
@@ -91,12 +91,24 @@ export class PostComponent {
 
 
     this.commentoService.getAllByPostIdPost(this.dto.idPost).subscribe(x => {
-      this.commenti = x
-      console.log(JSON.stringify(this.commenti))
+      this.commenti = x;
+
+      for (let i = 0; i < this.commenti.length; i++) {
+        this.fotoService.readFoto(this.commenti[i].user.id).subscribe(a => {
+          console.log("immagineprofiloletta: "+a)
+          this.userImgMap.set(this.commenti[i].user.id, 'data:image/jpeg;base64,'+a);
+
+          // Iterazione sui valori della mappa
+          // this.userImgMap.forEach((value) => {
+          //   console.log("Valore: " + value);
+          // });
+        });
+      }
+    });
 
 
-      // findAutore()
-    })
+// Iterazione sui valori della mappa
+
   }
 
   // findAutore(userInput: UserDTO): string {
@@ -265,7 +277,7 @@ export class PostComponent {
 
   }
 
+  ngOnDestroy() {
 
-
-// Chiamata alla funzione per mostrare l'alert
+  }
 }

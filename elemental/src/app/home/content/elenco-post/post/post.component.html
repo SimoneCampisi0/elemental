@@ -41,6 +41,7 @@
   <div class="viewCommenti">
     <div class="commenti">
       <div *ngFor="let commento of commenti">
+        <img [src]="this.userImgMap.get(commento.user.id)" class="userImg" alt="" srcset="">
         <div class="autore">{{commento.nomeAutore}}</div>
         <div class="dateComment">{{ commento.dataCommento | date }}</div>
         <div class="testo">{{ commento.contenuto }}</div>
@@ -53,7 +54,7 @@
 
   <div class="comments">
     <form>
-      <label for="commento">Inserisci un commento:</label><br>
+      <label for="commento">Aggiungi un commento:</label><br>
 
       <textarea id="commento" name="commento" rows="4" cols="50" [(ngModel)]="commentoString"></textarea><br><br>
       <div class="InputSubmit">

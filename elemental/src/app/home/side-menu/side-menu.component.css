@@ -1,5 +1,8 @@
-
-
+.all {
+  width: 280px;
+  height: 100vh;
+  position: fixed;
+}
 .imgLogo {
   width: 250px;
   height: 60px;
@@ -52,3 +55,11 @@
 .dropBtn {
   width: 100%;
 }
+
+
+@media only screen and (max-width: 800px) {
+  .all {
+    width: 100px;
+  }
+}
+
