@@ -38,16 +38,17 @@
 <!--&lt;!&ndash;    <a href="#"><i class="fas fa-comment"></i> Commenta</a>&ndash;&gt;-->
 <!--  </div>-->
 
-<!--  <div class="viewCommenti">--> CAUSA LOOP NON ESEGUIRE
-<!--    <div class="commenti">-->
-<!--      <div *ngFor="let commento of commenti">-->
-<!--        <div class="autore">{{ findAutore(commento.user) }}</div>-->
-<!--        <div class="testo">{{ commento.contenuto }}</div>-->
-<!--        <div class="data">{{ commento.dataCommento | date }}</div>-->
-<!--        <hr class="hrBlack">-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+  <div class="viewCommenti">
+    <div class="commenti">
+      <div *ngFor="let commento of commenti">
+        <div class="autore">{{commento.nomeAutore}}</div>
+        <div class="dateComment">{{ commento.dataCommento | date }}</div>
+        <div class="testo">{{ commento.contenuto }}</div>
+        <hr class="hrBlack">
+      </div>
+    </div>
+  </div>
+
 
 
   <div class="comments">

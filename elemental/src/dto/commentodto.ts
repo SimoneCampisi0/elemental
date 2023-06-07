@@ -4,6 +4,8 @@ import {PostDTO} from "./postdto";
 export class CommentoDTO {
   id: number
 
+  nomeAutore: string
+
   contenuto: string
 
   dataCommento: Date
@@ -14,6 +16,8 @@ export class CommentoDTO {
 
   constructor(id: number,
 
+  nomeAutore: string,
+
   contenuto: string,
 
   dataCommento: Date,
@@ -22,6 +26,7 @@ export class CommentoDTO {
 
   post: PostDTO) {
     this.id = id
+    this.nomeAutore = nomeAutore
     this.contenuto = contenuto
     this.dataCommento = dataCommento
     this.user = user

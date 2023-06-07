@@ -124,6 +124,7 @@
 
 .date {
   font-size: 14px;
+  font-style: italic;
   color: #999;
   margin-top: 10px;
 }
@@ -212,4 +213,16 @@ input[type="submit"]:hover {
 
   position: relative;
   left: 69.5%;
+}
+
+.autore {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.dateComment {
+  font-size: 14px;
+  font-style: italic;
+  color: #999;
 }

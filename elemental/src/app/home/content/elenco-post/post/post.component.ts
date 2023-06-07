@@ -22,6 +22,9 @@ import {CommentoDTO} from "../../../../../dto/commentodto";
   styleUrls: ['./post.component.css']
 })
 export class PostComponent {
+
+  // nomeAutore = '';
+
   // @ts-ignore
   @Input() dto: PostDTO
   @Input() email: string = '';
@@ -90,6 +93,9 @@ export class PostComponent {
     this.commentoService.getAllByPostIdPost(this.dto.idPost).subscribe(x => {
       this.commenti = x
       console.log(JSON.stringify(this.commenti))
+
+
+      // findAutore()
     })
   }
 
@@ -101,13 +107,12 @@ export class PostComponent {
   //   return nomeAutore
   // }
 
-  findAutore(userInput: UserDTO): string {
-    let nomeAutore = '';
-    this.anagService.findAnagByEmail(userInput.email).subscribe(x => {
-      nomeAutore = `${x.nome} ${x.cognome}`;
-    });
-    return nomeAutore;
-  }
+  // findAutore(userInput: UserDTO) {
+  //   this.anagService.findAnagByEmail(userInput.email).subscribe(x => {
+  //     this.nomeAutore = x.nome + " "+ x.cognome;
+  //     console.log("nome autore: "+this.nomeAutore)
+  //   });
+  // }
 
 
   setLike() {
@@ -188,7 +193,9 @@ export class PostComponent {
               // Array vuoto, esegui azione specifica
               console.log("Array vuoto");
               this.postService.removeLike(this.dto.idPost).subscribe(y => {
-                this.postService.delete(this.dto.idPost).subscribe()
+                this.postService.delete(this.dto.idPost).subscribe(() => {
+                  //IMPLEMENTARE METODO PER ELIMINARE TUTTI I COMMENTI
+                })
 
                 Swal.fire(
                   'Post eliminato!',
@@ -243,8 +250,14 @@ export class PostComponent {
   }
 
   inviaCommento() {
-    let dto = new CommentoDTO(0, this.commentoString, new Date(), this.user, this.dto)
-    this.commentoService.insert(dto).subscribe()
+    this.anagService.findAnagByEmail(this.user.email).subscribe(x => {
+      let nomeAutore = x.nome +" "+x.cognome
+      let dto = new CommentoDTO(0, nomeAutore,this.commentoString, new Date(), this.user, this.dto)
+      this.commentoService.insert(dto).subscribe(() => {
+        this.reloadPage()
+      })
+    })
+
   }
 
 
