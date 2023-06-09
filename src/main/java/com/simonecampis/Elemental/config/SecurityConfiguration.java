@@ -26,6 +26,7 @@ public class SecurityConfiguration {
                 .authorizeRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/auth/register").permitAll()
                         .requestMatchers("/auth/authenticate").permitAll()
+                        .requestMatchers("/anag/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement -> sessionManagement
