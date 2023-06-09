@@ -1,21 +1,15 @@
-package com.simonecampis.Elemental.dto;
+package com.simonecampis.Elemental.config;
 
-import com.simonecampis.Elemental.model.Role;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO {
-    private Long id;
-
-    private String username;
-
+public class AuthenticationRequest {
     private String email;
-
     private String password;
-
-    private Role role;
 }

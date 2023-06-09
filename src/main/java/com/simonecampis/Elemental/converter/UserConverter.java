@@ -14,7 +14,8 @@ public class UserConverter extends AbstractConverter<User, UserDTO> {
                     dto.getId(),
                     dto.getUsername(),
                     dto.getEmail(),
-                    dto.getPassword()
+                    dto.getPassword(),
+                    dto.getRole()
             );
         }
         return user;
@@ -28,7 +29,8 @@ public class UserConverter extends AbstractConverter<User, UserDTO> {
                     user.getId(),
                     user.getUsername(),
                     user.getEmail(),
-                    user.getPassword()
+                    user.getPassword(),
+                    user.getRole()
             );
         }
         return dto;
