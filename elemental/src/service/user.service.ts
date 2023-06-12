@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractService } from './abstractservice';
 import { UserDTO} from "../dto/userdto";
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from './../environments/environment';
 import {LoginDTO} from "../dto/logindto";
@@ -25,7 +25,10 @@ export class UserService extends AbstractService<UserDTO>{
   // }
 
   login(loginDTO: LoginDTO): Observable<RegisterResponseDTO> {
-    return this.http.post<any>(environment.APIEndpoint + 'auth/authenticate', loginDTO)
+    let headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*'});
+    let options = { headers: headers };
+    return this.http.post<any>(environment.APIEndpoint + 'auth/authenticate', loginDTO, options)
   }
 
   recuperaPassword(user: UserDTO): Observable<UserDTO> {

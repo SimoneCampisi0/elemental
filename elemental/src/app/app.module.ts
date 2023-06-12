@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginFormComponent } from './login/login-form/login-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { RegisterComponent } from './register/register.component';
 import {RegisterFormComponent} from "./register/register-form/register-form.component";
 import { RecuperaPasswordComponent } from './login/login-form/recupera-password/recupera-password.component';
@@ -22,6 +22,7 @@ import { PostComponent } from './home/content/elenco-post/post/post.component';
 import {ElencoPostRoutingModule} from "./home/content/elenco-post/elenco-post-routing.module";
 import { SearchFilterPipe } from './home/content/search-bar/search-filter.pipe';
 import { DettaglioUserComponent } from './dettaglio-user/dettaglio-user.component';
+import {JwtInterceptor} from "./jwt.interceptor";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,13 @@ import { DettaglioUserComponent } from './dettaglio-user/dettaglio-user.componen
         FontAwesomeModule,
         ElencoPostRoutingModule
     ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

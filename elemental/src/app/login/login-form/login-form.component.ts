@@ -40,12 +40,18 @@ export class LoginFormComponent {
 
            this.userService.findUserByEmail(loginDTO.email).subscribe(userResponse => {
              localStorage.setItem('currentUser', JSON.stringify(userResponse))
+             this.anagService.findAnagByEmail(userResponse.email).subscribe(x => {
+               localStorage.setItem('currentAnag',JSON.stringify(x))
+
+               this.router.navigate(['/home'])
+                 .then(() => {
+                   window.location.reload();
+                 });
+             })
+
            })
 
-           this.router.navigate(['/home'])
-             .then(() => {
-               window.location.reload();
-             });
+
          }
 
       },
