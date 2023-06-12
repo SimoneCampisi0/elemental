@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from './../environments/environment';
 import {LoginDTO} from "../dto/logindto";
+import {RegisterRequestDTO} from "../dto/registerrequestdto";
+import {RegisterResponseDTO} from "../dto/registeresponsedto";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +17,9 @@ export class UserService extends AbstractService<UserDTO>{
     super(http);
     this.type = 'user';
   }
-
+  register (registerRequestDTO: RegisterRequestDTO): Observable<RegisterResponseDTO> {
+    return this.http.post<any>(environment.APIEndpoint + 'auth/register', registerRequestDTO)
+  }
   login(loginDTO: LoginDTO): Observable<UserDTO> {
     return this.http.post<any>(environment.APIEndpoint + this.type + '/login', loginDTO)
   }

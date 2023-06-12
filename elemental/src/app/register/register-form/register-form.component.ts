@@ -10,6 +10,7 @@ import {Router} from "@angular/router";
 import { HttpClient } from '@angular/common/http';
 import {FotoRequestDTO} from "../../../dto/fotorequestdto";
 import {FotoService} from "../../../service/foto.service";
+import {RegisterRequestDTO} from "../../../dto/registerrequestdto";
 
 
  @Component({
@@ -39,37 +40,6 @@ export class RegisterFormComponent {
   }
 
   onSubmit() {
-    // let nome = this.registerForm.get('nome')?.value
-    // let cognome = this.registerForm.get('cognome')?.value
-    // let dataNascita = this.registerForm.get('dataNascita')?.value
-    // let cittaResidenza = this.registerForm.get('cittaResidenza')?.value
-    // let email = this.registerForm.get('email')?.value;
-    // let password = this.registerForm.get('password')?.value;
-    //
-    // let userDTO: UserDTO = new UserDTO(0, email, password)
-    //
-    // this.userService.insert(userDTO).subscribe(insertedUser => {
-    //   localStorage.setItem('currentUser', JSON.stringify(insertedUser));
-    //
-    //   this.userService.login(userDTO).subscribe(loggedInUser => {
-    //     localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
-    //
-    //     // @ts-ignore
-    //     let userDef: UserDTO = JSON.parse(localStorage.getItem('currentUser'));
-    //
-    //     let anag: AnagDTO = new AnagDTO(0, nome, cognome, dataNascita, cittaResidenza, userDef)
-    //     this.anagService.insert(anag).subscribe(anagDef => {
-    //       this.anagService.findAnagByEmail(userDef.email).subscribe(anagDef1 => {
-    //         localStorage.setItem('currentAnag',JSON.stringify(anagDef1))
-    //
-    //         //gestire upload delle immagini
-    //         this.uploadFile(userDef)
-    //
-    //         this.router.navigate(['/home'])
-    //       })
-    //     })
-    //   });
-    // });
     let nome = this.registerForm.get('nome')?.value
     let cognome = this.registerForm.get('cognome')?.value
     let dataNascita = this.registerForm.get('dataNascita')?.value
@@ -77,31 +47,22 @@ export class RegisterFormComponent {
     let email = this.registerForm.get('email')?.value;
     let password = this.registerForm.get('password')?.value;
 
-    let userDTO: UserDTO = new UserDTO(0, email, password)
-
+    let registerRequestDTO = new RegisterRequestDTO(email, password)
     if(this.selectFile && nome !== "" && cognome !== "" && dataNascita !== "" && cittaResidenza !== "" && email !== ""  && password !== "") {
-      this.userService.insert(userDTO).subscribe(insertedUser => {
-        localStorage.setItem('currentUser', JSON.stringify(insertedUser));
+      this.userService.register(registerRequestDTO).subscribe(tokenDTO => {
+        localStorage.setItem('token', tokenDTO.token)
+        this.userService.findUserByEmail(email).subscribe(userInsert => {
+          localStorage.setItem("currentUser",JSON.stringify(userInsert))
 
-        this.userService.login(userDTO).subscribe(loggedInUser => {
-          localStorage.setItem('currentUser', JSON.stringify(loggedInUser));
+          let anag = new AnagDTO(0, nome, cognome, dataNascita, cittaResidenza, userInsert)
+          this.anagService.insert(anag).subscribe(x => {
+            localStorage.setItem("currentAnag", JSON.stringify(x))
+            this.uploadFile(userInsert)
 
-          // @ts-ignore
-          let userDef: UserDTO = JSON.parse(localStorage.getItem('currentUser'));
-
-          let anag: AnagDTO = new AnagDTO(0, nome, cognome, dataNascita, cittaResidenza, userDef)
-          this.anagService.insert(anag).subscribe(anagDef => {
-            this.anagService.findAnagByEmail(userDef.email).subscribe(anagDef1 => {
-              localStorage.setItem('currentAnag',JSON.stringify(anagDef1))
-
-              //gestire upload delle immagini
-              this.uploadFile(userDef)
-
-              this.router.navigate(['/home'])
-            })
+            this.router.navigate(['/home'])
           })
-        });
-      });
+        })
+      })
     } else {
       Swal.fire({
         icon: 'error',
