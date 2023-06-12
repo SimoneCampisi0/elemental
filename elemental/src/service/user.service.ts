@@ -20,8 +20,12 @@ export class UserService extends AbstractService<UserDTO>{
   register (registerRequestDTO: RegisterRequestDTO): Observable<RegisterResponseDTO> {
     return this.http.post<any>(environment.APIEndpoint + 'auth/register', registerRequestDTO)
   }
-  login(loginDTO: LoginDTO): Observable<UserDTO> {
-    return this.http.post<any>(environment.APIEndpoint + this.type + '/login', loginDTO)
+  // login(loginDTO: LoginDTO): Observable<UserDTO> {
+  //   return this.http.post<any>(environment.APIEndpoint + this.type + '/login', loginDTO)
+  // }
+
+  login(loginDTO: LoginDTO): Observable<RegisterResponseDTO> {
+    return this.http.post<any>(environment.APIEndpoint + 'auth/authenticate', loginDTO)
   }
 
   findUserByEmail(email: string): Observable<UserDTO> {

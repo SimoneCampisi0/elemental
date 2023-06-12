@@ -34,27 +34,28 @@ export class LoginFormComponent {
       let loginDTO = new LoginDTO(email, password)
       console.log("loginDTO: "+loginDTO.email+ " " + loginDTO.password);
 
-      this.userService.login(loginDTO).subscribe(userGet => {
-         if(userGet != null) {
-            let user: UserDTO = new UserDTO(userGet.id, userGet.email, userGet.password)
-            localStorage.setItem("currentUser", JSON.stringify(user))
+      this.userService.login(loginDTO).subscribe((response) => {
+         if(response != null) {
+            localStorage.setItem('token', response.token)
 
-           this.anagService.findAnagByEmail(user.email).subscribe(anag => {
-             localStorage.setItem("currentAnag", JSON.stringify(anag))
+           this.userService.findUserByEmail(loginDTO.email).subscribe(userResponse => {
+             localStorage.setItem('currentUser', JSON.stringify(userResponse))
            })
 
            this.router.navigate(['/home'])
              .then(() => {
                window.location.reload();
-             });         } else {
-             Swal.fire({
-               icon: 'error',
-               title: 'Dati non corretti.',
-               text: 'I dati inseriti non sono corretti.'
              });
          }
 
-      })
+      },
+        (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Dati non corretti.',
+            text: 'I dati inseriti non sono corretti.'
+          });
+        })
     } else {
         Swal.fire({
           icon: 'error',
