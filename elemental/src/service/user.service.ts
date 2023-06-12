@@ -28,6 +28,10 @@ export class UserService extends AbstractService<UserDTO>{
     return this.http.post<any>(environment.APIEndpoint + 'auth/authenticate', loginDTO)
   }
 
+  recuperaPassword(user: UserDTO): Observable<UserDTO> {
+    return this.http.post<any>(environment.APIEndpoint + 'user/recuperaPassword', user)
+  }
+
   findUserByEmail(email: string): Observable<UserDTO> {
     return this.http.get<UserDTO>(environment.APIEndpoint + this.type + '/findUserByEmail?email='+email)
   }

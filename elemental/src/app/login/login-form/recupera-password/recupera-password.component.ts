@@ -34,7 +34,7 @@ export class RecuperaPasswordComponent {
     if (password1 === password2 && password1 !== '' && email !== '') {
       this.userService.findUserByEmail(email).subscribe(user => {
         user.password = password1
-        this.userService.update(user).subscribe()
+        this.userService.recuperaPassword(user).subscribe()
 
         Swal.fire({
           icon: 'success',
