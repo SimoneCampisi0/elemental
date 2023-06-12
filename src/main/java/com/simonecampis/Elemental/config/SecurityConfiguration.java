@@ -27,6 +27,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/auth/register").permitAll()
                         .requestMatchers("/auth/authenticate").permitAll()
                         .requestMatchers("/anag/**").permitAll()
+                        .requestMatchers("/user/findUserByEmail").permitAll()
+                        .requestMatchers("/foto/insertFoto").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement -> sessionManagement
