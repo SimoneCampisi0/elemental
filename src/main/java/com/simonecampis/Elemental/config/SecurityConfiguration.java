@@ -28,6 +28,8 @@ public class SecurityConfiguration {
                         .requestMatchers("/auth/authenticate").permitAll()
                         .requestMatchers("/anag/**").permitAll()
                         .requestMatchers("/user/findUserByEmail").permitAll()
+                        .requestMatchers("/user/update").permitAll()
+                        .requestMatchers("/user/recuperaPassword").permitAll()
                         .requestMatchers("/foto/insertFoto").permitAll()
                         .anyRequest().authenticated()
                 )

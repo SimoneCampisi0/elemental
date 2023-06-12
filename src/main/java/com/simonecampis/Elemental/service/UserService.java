@@ -6,7 +6,10 @@ import com.simonecampis.Elemental.dto.LoginDTO;
 import com.simonecampis.Elemental.dto.UserDTO;
 import com.simonecampis.Elemental.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService extends AbstractService<User, UserDTO> {
@@ -15,6 +18,10 @@ public class UserService extends AbstractService<User, UserDTO> {
 
     @Autowired
     UserRepo repo;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     public UserDTO login(LoginDTO loginDTO) {
         return converter.toDTO(repo.findByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword()));
     }
@@ -23,4 +30,8 @@ public class UserService extends AbstractService<User, UserDTO> {
         return converter.toDTO(repo.findByEmail(email));
     }
 
+    public UserDTO recuperaPassword (UserDTO user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return converter.toDTO(repo.save(converter.toEntity(user)));
+    }
 }

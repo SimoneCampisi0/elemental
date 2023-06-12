@@ -21,4 +21,9 @@ public class UserController extends AbstractController<UserDTO> {
     public UserDTO findUserByEmail(@RequestParam String email) {
         return service.findUserByEmail(email);
     }
+
+    @PostMapping(value = "/recuperaPassword")
+    public UserDTO recuperaPassword(@RequestBody UserDTO user) {
+        return service.recuperaPassword(user);
+    }
 }
