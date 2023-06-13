@@ -52,7 +52,7 @@ export class PostComponent {
   base64Img: string = ""
 
   // @ts-ignore
-  commenti: CommentoDTO[]
+  commenti: CommentoDTO[] = {}
 
   // @ts-ignore
   comments: string[]

@@ -1,5 +1,8 @@
+<!--<ng-container *ngIf="elencoPost$ | async as elencoPost">-->
+<!--  <ng-template ngFor let-post [ngForOf]="elencoPost">-->
+<!--    <app-post [dto]="post" [email]="post.user.email" [date]="post.dataPost" [content]="post.contenuto" ></app-post>-->
+<!--  </ng-template>-->
+<!--</ng-container>-->
 <ng-container *ngIf="elencoPost$ | async as elencoPost">
-  <ng-template ngFor let-post [ngForOf]="elencoPost">
-    <app-post [dto]="post" [email]="post.user.email" [date]="post.dataPost" [content]="post.contenuto" ></app-post>
-  </ng-template>
+  <app-post *ngFor="let post of elencoPost" [dto]="post" [email]="post.user.email" [date]="post.dataPost" [content]="post.contenuto"></app-post>
 </ng-container>
