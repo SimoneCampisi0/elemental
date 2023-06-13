@@ -37,4 +37,8 @@ export class PostService extends AbstractService<PostDTO>{
     return this.http.get<Boolean>(environment.APIEndpoint + this.type + '/checkPostInsertByCurrentUser?idPost='+idPost+'&id='+id)
   }
 
+  calcoloNumeroPostByUser(id: number): Observable<number> {
+    return this.http.get<number>(environment.APIEndpoint + this.type + '/calcoloNumeroPostByUser?id='+id)
+  }
+
 }

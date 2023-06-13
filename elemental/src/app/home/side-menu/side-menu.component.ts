@@ -44,6 +44,10 @@ export class SideMenuComponent {
     this.router.navigate([''])
   }
 
+  goDettaglioUser () {
+    this.router.navigate(['/dettaglio-user'])
+  }
+
   logout() {
     localStorage.clear()
     this.router.navigate([''])

@@ -54,7 +54,7 @@ export class RegisterFormComponent {
         this.userService.findUserByEmail(email).subscribe(userInsert => {
           localStorage.setItem("currentUser",JSON.stringify(userInsert))
 
-          let anag = new AnagDTO(0, nome, cognome, dataNascita, cittaResidenza, userInsert)
+          let anag = new AnagDTO(0, nome, cognome, dataNascita, cittaResidenza, '',userInsert)
           this.anagService.insert(anag).subscribe(x => {
             localStorage.setItem("currentAnag", JSON.stringify(x))
             this.uploadFile(userInsert)
