@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+import java.util.Objects;
+
 @Service
 public class PostService extends AbstractService<Post, PostDTO> {
 
@@ -43,5 +46,12 @@ public class PostService extends AbstractService<Post, PostDTO> {
         else {
             return false;
         }
+    }
+
+    public Integer calcoloNumeroPostByUser(Long id) {
+        List<PostDTO> postDTOList = converter.toDTOList(repo.findAll());
+        return (int) postDTOList.stream()
+                .filter(x -> Objects.equals(x.getUser().getId(), id))
+                .count();
     }
 }

@@ -21,6 +21,8 @@ public class AnagraficaDTO {
 
     private String cittaResidenza;
 
+    private String descrizione;
+
     private User user;
 
 }

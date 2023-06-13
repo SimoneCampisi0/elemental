@@ -25,6 +25,8 @@ public class Anagrafica {
 
     private String cittaResidenza;
 
+    private String descrizione;
+
     @OneToOne
     @JoinColumn(name="userId", nullable = true)
     private User user;

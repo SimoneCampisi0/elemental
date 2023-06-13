@@ -28,4 +28,10 @@ public class PostController extends AbstractController<PostDTO> {
         return service.checkPostInsertByCurrentUser(idPost, id);
     }
 
+    @GetMapping(value="calcoloNumeroPostByUser")
+    public Integer calcoloNumeroPostByUser (@RequestParam Long id) {
+        return service.calcoloNumeroPostByUser(id);
+    }
+
+
 }
