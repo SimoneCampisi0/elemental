@@ -26,3 +26,9 @@
 .cursorLink {
   cursor: pointer;
 }
+
+.imgProfilo {
+  z-index: 1;
+  width: 150px;
+  height: 160px;
+}
