@@ -5,6 +5,8 @@ import {UserDTO} from "../../dto/userdto";
 import {AnagDTO} from "../../dto/anagdto";
 import {FotoService} from "../../service/foto.service";
 import {PostService} from "../../service/post.service";
+import Swal from "sweetalert2";
+import {PostDTO} from "../../dto/postdto";
 
 @Component({
   selector: 'app-dettaglio-user',
@@ -12,8 +14,6 @@ import {PostService} from "../../service/post.service";
   styleUrls: ['./dettaglio-user.component.css']
 })
 export class DettaglioUserComponent {
-  descrizione: string = ''
-
   base64Img: string = ''
 
   numAmici = 0
@@ -39,12 +39,38 @@ export class DettaglioUserComponent {
     })
 
      this.calcoloNumeroPostByUser()
+
   }
 
   calcoloNumeroPostByUser() {
      this.postService.calcoloNumeroPostByUser(this.user.id).subscribe(x => {
        this.numPost = x;
      })
+  }
+
+  modificaDescr() {
+    Swal.fire({
+      title: 'Modifica la tua biografia',
+      html:
+        // '<h2 style="margin: 0px">Modifica la tua biografia</h2>'+
+        '<textarea id="input-content" name="content" cols="40" rows="5" style="padding: 1em;"></textarea>\n',
+      focusConfirm: false,
+      preConfirm: () => {
+
+        // @ts-ignore
+        const content = Swal.getPopup().querySelector('#input-content').value;
+
+
+        // Crea un oggetto PostDTO con i dati inseriti dall'utente
+        this.anag.descrizione = content
+
+        this.anagService.update(this.anag).subscribe(x => {
+          localStorage.setItem('currentAnag',JSON.stringify(x))
+        })
+
+        // this.refreshPage()
+      }
+    });
   }
 
 

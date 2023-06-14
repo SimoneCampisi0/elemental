@@ -2,5 +2,17 @@
   position: relative;
   left: 21em;
   width: 87em;
-;
+}
+.modificaDescr {
+  display: inline-block;
+  position: relative;
+  left: 90%;
+}
+
+.modificaDescr:hover {
+  color: #0b5ed7;
+}
+
+.cursorLink {
+  cursor: pointer;
 }
