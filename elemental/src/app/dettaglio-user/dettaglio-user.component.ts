@@ -7,6 +7,7 @@ import {FotoService} from "../../service/foto.service";
 import {PostService} from "../../service/post.service";
 import Swal from "sweetalert2";
 import {PostDTO} from "../../dto/postdto";
+import {Genere} from "../../dto/genere";
 
 @Component({
   selector: 'app-dettaglio-user',
@@ -14,6 +15,8 @@ import {PostDTO} from "../../dto/postdto";
   styleUrls: ['./dettaglio-user.component.css']
 })
 export class DettaglioUserComponent {
+  genere: string = ''
+
   base64Img: string = ''
 
   numAmici = 0
@@ -75,29 +78,82 @@ export class DettaglioUserComponent {
 
   modificaDati() {
     Swal.fire({
-      title: 'Login Form',
-      html: `<input type="text" id="login" class="swal2-input" placeholder="Username">
-  <input type="password" id="password" class="swal2-input" placeholder="Password">`,
-      confirmButtonText: 'Sign in',
+      title: 'Modifica i tuoi dati',
+      html: `
+                    <label class="form-label" for="nome">Nome</label>
+                    <input type="text" id="nome" class="swal2-input" placeholder="Nome">
+
+              <label class="form-label" for="cognome">Cognome</label>
+              <input type="text" id="cognome" class="swal2-input" placeholder="Cognome">
+
+              <label class="form-label" for="dataNascita">Data di nascita</label>
+              <input type="date" id="dataNascita" class="swal2-input" placeholder="">
+
+              <label class="form-label" for="genere">Genere</label>
+                      <select id="genere" name="genere" class="swal2-input" style="    margin-left: 2em;
+    margin-right: 10em;">
+                        <option value=""></option>
+                        <option value="Uomo">Uomo</option>
+                        <option value="Donna">Donna</option>
+                        <option value="Altro">Altro</option>
+                      </select>
+
+                 <label class="form-label" for="cittaResidenza">Città</label>
+                <input type="text" id="cittaResidenza" class="swal2-input" placeholder="Città">`,
+      confirmButtonText: 'Modifica',
       focusConfirm: false,
       preConfirm: () => {
         // @ts-ignore
-        const login = Swal.getPopup().querySelector('#login').value
+        const nome = Swal.getPopup().querySelector('#nome')?.value
+
         // @ts-ignore
-        const password = Swal.getPopup().querySelector('#password').value
-        if (!login || !password) {
-          Swal.showValidationMessage(`Please enter login and password`)
+        const cognome = Swal.getPopup().querySelector('#cognome')?.value
+
+        // @ts-ignore
+        const dataNascita = Swal.getPopup().querySelector('#dataNascita')?.value
+
+        // @ts-ignore
+        const genere = Swal.getPopup().querySelector('#genere')?.value
+
+        // @ts-ignore
+        const cittaResidenza = Swal.getPopup().querySelector('#cittaResidenza')?.value
+
+        if (!nome || !cognome || !dataNascita || !cittaResidenza) {
+          Swal.showValidationMessage(`Inserisci correttamente `)
         }
-        return { login: login, password: password }
+        return { nome, cognome, dataNascita, genere,cittaResidenza }
       }
     }).then((result) => {
-  //     Swal.fire(`
-  //   Login: ${result.value.login}
-  //   Password: ${result.value.password}
-  // `.trim())
-    })
+      this.anag.nome = result.value?.nome;
+      this.anag.cognome = result.value?.cognome;
+      this.anag.dataNascita = result.value?.dataNascita;
+      let genere = result.value?.genere
+      this.anag.cittaResidenza = result.value?.cittaResidenza;
 
+      let genEnum: Genere
+
+      switch (genere) {
+        case "Uomo":
+          genEnum = Genere.UOMO
+          break;
+        case "Donna":
+          genEnum = Genere.DONNA
+          break;
+        case "Altro":
+          genEnum = Genere.ALTRO
+          break;
+      }
+
+      // @ts-ignore
+      this.anag.genere = genEnum;
+      this.anagService.update(this.anag).subscribe(x=> {
+        localStorage.setItem('currentAnag',JSON.stringify(x))
+        this.refreshPage()
+      })
+    })
   }
 
-
+  refreshPage() {
+    window.location.reload();
+  }
 }

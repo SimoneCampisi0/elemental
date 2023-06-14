@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 import {UserService} from "../../../service/user.service";
 import {UserDTO} from "../../../dto/userdto";
 import Swal from 'sweetalert2';
 import {AnagDTO} from "../../../dto/anagdto";
 import {AnagService} from "../../../service/anag.service";
-import {LoginDTO} from "../../../dto/logindto";
 import {Router} from "@angular/router";
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {FotoRequestDTO} from "../../../dto/fotorequestdto";
 import {FotoService} from "../../../service/foto.service";
 import {RegisterRequestDTO} from "../../../dto/registerrequestdto";
+import {Genere} from "../../../dto/genere";
 
 
- @Component({
+@Component({
   selector: 'app-register-form',
   templateUrl: './register-form.component.html',
   styleUrls: ['./register-form.component.css']
@@ -31,7 +31,8 @@ export class RegisterFormComponent {
       dataNascita: new FormControl(''),
       cittaResidenza: new FormControl(''),
       email: new FormControl(''),
-      password: new FormControl('')
+      password: new FormControl(''),
+      genere: new FormControl('')
     });
   }
 
@@ -46,6 +47,20 @@ export class RegisterFormComponent {
     let cittaResidenza = this.registerForm.get('cittaResidenza')?.value
     let email = this.registerForm.get('email')?.value;
     let password = this.registerForm.get('password')?.value;
+    let genere = this.registerForm.get('genere')?.value;
+    let genEnum: Genere
+
+    switch (genere) {
+      case "Uomo":
+        genEnum = Genere.UOMO
+        break;
+      case "Donna":
+        genEnum = Genere.DONNA
+        break;
+      case "Altro":
+        genEnum = Genere.ALTRO
+        break;
+    }
 
     let registerRequestDTO = new RegisterRequestDTO(email, password)
     if(this.selectFile && nome !== "" && cognome !== "" && dataNascita !== "" && cittaResidenza !== "" && email !== ""  && password !== "") {
@@ -54,7 +69,7 @@ export class RegisterFormComponent {
         this.userService.findUserByEmail(email).subscribe(userInsert => {
           localStorage.setItem("currentUser",JSON.stringify(userInsert))
 
-          let anag = new AnagDTO(0, nome, cognome, dataNascita, cittaResidenza, '',userInsert)
+          let anag = new AnagDTO(0, nome, cognome, dataNascita, cittaResidenza, '', genEnum, userInsert)
           this.anagService.insert(anag).subscribe(x => {
             localStorage.setItem("currentAnag", JSON.stringify(x))
             this.uploadFile(userInsert)
