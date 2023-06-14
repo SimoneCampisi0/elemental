@@ -27,6 +27,9 @@ public class Anagrafica {
 
     private String descrizione;
 
+    @Enumerated(EnumType.STRING)
+    private Genere genere;
+
     @OneToOne
     @JoinColumn(name="userId", nullable = true)
     private User user;

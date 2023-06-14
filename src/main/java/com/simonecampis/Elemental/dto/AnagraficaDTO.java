@@ -1,5 +1,6 @@
 package com.simonecampis.Elemental.dto;
 
+import com.simonecampis.Elemental.model.Genere;
 import com.simonecampis.Elemental.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,8 @@ public class AnagraficaDTO {
     private String cittaResidenza;
 
     private String descrizione;
+
+    private Genere genere;
 
     private User user;
 
