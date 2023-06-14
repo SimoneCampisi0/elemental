@@ -8,6 +8,9 @@ import {PostService} from "../../service/post.service";
 import Swal from "sweetalert2";
 import {PostDTO} from "../../dto/postdto";
 import {Genere} from "../../dto/genere";
+import {LoginDTO} from "../../dto/logindto";
+import * as bcrypt from 'bcryptjs';
+
 
 @Component({
   selector: 'app-dettaglio-user',
@@ -152,6 +155,63 @@ export class DettaglioUserComponent {
       })
     })
   }
+
+  modificaDatiPersonali() {
+    Swal.fire({
+      title: 'Modifica i tuoi dati personali',
+      html: `
+                    <label class="form-label" for="email">Email: </label>
+                    <input type="text" id="email" class="swal2-input" placeholder="qwerty@mail.it">
+
+              <label class="form-label" for="password1">Password</label>
+              <input type="password" id="password1" class="swal2-input" placeholder="Password">
+
+              <label class="form-label" for="password2">Password</label>
+              <input type="password" id="password2" class="swal2-input" placeholder="Conferma password">`,
+      confirmButtonText: 'Modifica',
+      focusConfirm: false,
+      preConfirm: () => {
+        // @ts-ignore
+        const email: string = Swal.getPopup().querySelector('#email')?.value
+        // @ts-ignore
+        const pass1: string = Swal.getPopup().querySelector('#password1')?.value
+        // @ts-ignore
+        const pass2: string = Swal.getPopup().querySelector('#password2')?.value
+
+        if (!email || !pass1 || !pass2) {
+          Swal.showValidationMessage(`Inserisci correttamente i dati.`)
+          return false; // Blocca l'azione di conferma
+        } else {
+
+          if(pass1 !== pass2) {
+          console.log("Le password non corrispondono.")
+          Swal.showValidationMessage(`Le password non corrispondono.`)
+          return false; // Blocca l'azione di conferma
+        } else {return {email, pass1, pass2}}
+        }
+      }
+    }).then((result) => {
+      if(result.value !== false) {
+        // @ts-ignore
+        let email: string = result.value?.email;
+        // @ts-ignore
+        let passw1: string = result.value?.pass1;
+        // @ts-ignore
+        let passw2: string = result.value?.pass2;
+
+        this.user.email = email;
+        bcrypt.hash(passw1, 10).then((hashedPassword)=> {
+          this.user.password = hashedPassword;
+          console.log("hashPassword: "+hashedPassword)
+          this.userService.update(this.user).subscribe(x => {
+            localStorage.setItem('currentUser',JSON.stringify(this.user))
+          })
+
+        })
+      }
+    })
+  }
+
 
   refreshPage() {
     window.location.reload();

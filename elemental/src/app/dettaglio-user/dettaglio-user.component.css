@@ -13,6 +13,16 @@
   color: #0b5ed7;
 }
 
+.modificaMail {
+  display: inline-block;
+  position: relative;
+  left: 79%;
+}
+
+.modificaMail:hover {
+  color: #0b5ed7;
+}
+
 .cursorLink {
   cursor: pointer;
 }
