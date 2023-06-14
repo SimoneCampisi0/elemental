@@ -11,6 +11,7 @@ import {FotoService} from "../../../service/foto.service";
   styleUrls: ['./side-menu.component.css']
 })
 export class SideMenuComponent {
+  posUrl = 0
   // @ts-ignore
   nomeUser: string
 
@@ -25,16 +26,26 @@ export class SideMenuComponent {
     // @ts-ignore
     let user: UserDTO = JSON.parse(localStorage.getItem('currentUser'))
     // @ts-ignore
-
-
-
-
     this.anag = JSON.parse(localStorage.getItem('currentAnag'));
 
     this.fotoService.readFoto(user.id).subscribe(x=> {
       // @ts-ignore
       this.base64Img = 'data:image/jpeg;base64,' + x; //l'immagine non è un JSON. Angular non riesce a leggerlo
     })
+
+    let url = this.router.url
+    switch (url) {
+      case "/home":
+        console.log("home");
+        this.posUrl = 1;
+        break;
+
+      case "/dettaglio-user":
+        console.log("dettaglio-user");
+        this.posUrl = 2;
+        break;
+
+    }
   }
   goHome () {
     this.router.navigate(['/home'])

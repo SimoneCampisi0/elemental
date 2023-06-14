@@ -6,7 +6,7 @@
   </a>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
-    <li class="nav-item">
+    <li class="nav-item" *ngIf="posUrl==1; else homeNotActive">
       <a (click)="goHome()" class="nav-link active cursorLink" aria-current="page">
         <svg class="bi me-2" width="10" height="16"></svg>
         <img src="./assets/menu/home.png" class="imgMenu" alt="" srcset="">
@@ -14,14 +14,33 @@
       </a>
     </li>
 
+    <ng-template #homeNotActive>
+      <li class="nav-item">
+        <a (click)="goHome()" class="nav-link cursorLink text-white" aria-current="page">
+          <svg class="bi me-2" width="10" height="16"></svg>
+          <img src="./assets/menu/home.png" class="imgMenu" alt="" srcset="">
+          <div class="text" style="padding-left: 5px">HOME</div>
+        </a>
+      </li>
+    </ng-template>
 
-    <li class="nav-item mt-2">
-      <a (click)="goDettaglioUser()" class="nav-link cursorLink text-white">
+    <li class="nav-item mt-2" *ngIf="posUrl==2; else userNotActive">
+      <a (click)="goDettaglioUser()" class="nav-link active cursorLink ">
         <svg class="bi me-2" width="12" height="16"></svg>
         <i class="fas fa-user" style="color: #ffffff;"></i>
         <div class="text" style="padding-left: 8px">PROFILO</div>
       </a>
     </li>
+
+    <ng-template #userNotActive>
+      <li class="nav-item mt-2">
+        <a (click)="goDettaglioUser()" class="nav-link cursorLink text-white">
+          <svg class="bi me-2" width="12" height="16"></svg>
+          <i class="fas fa-user" style="color: #ffffff;"></i>
+          <div class="text" style="padding-left: 8px">PROFILO</div>
+        </a>
+      </li>
+    </ng-template>
 
 
     <li class="nav-item mt-2">
