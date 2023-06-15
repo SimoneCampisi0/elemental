@@ -6,6 +6,7 @@ import com.simonecampis.Elemental.converter.UserConverter;
 import com.simonecampis.Elemental.dao.FotoRepo;
 import com.simonecampis.Elemental.dao.PostRepo;
 import com.simonecampis.Elemental.dto.FotoDTO;
+import com.simonecampis.Elemental.dto.FotoRequestDTO;
 import com.simonecampis.Elemental.dto.PostDTO;
 import com.simonecampis.Elemental.dto.UserDTO;
 import com.simonecampis.Elemental.model.Foto;
@@ -58,6 +59,16 @@ public class FotoService extends AbstractService<Foto, FotoDTO> {
             System.out.println("Exception: " + e);
         }
         return fotoDTO;
+    }
+
+    public FotoDTO uploadFoto(FotoRequestDTO dto) throws IOException {
+        UserDTO userDTO = dto.getUser();
+        if (repo.findFotoByUserId(userDTO.getId()) != null) {
+            this.delete(repo.findFotoByUserId(userDTO.getId()).getIdFoto());
+            FotoDTO fotoDTO1 = insertFoto(dto.getImage64(), dto.getUser());
+            return fotoDTO1;
+        }
+        return null;
     }
 
     public String readFoto (Long id) {

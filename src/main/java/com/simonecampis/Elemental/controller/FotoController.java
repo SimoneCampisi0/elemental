@@ -23,6 +23,11 @@ public class FotoController extends AbstractController<FotoDTO> {
         return service.insertFoto(dto.getImage64(), dto.getUser());
     }
 
+    @PostMapping(value="uploadFoto")
+    public FotoDTO uploadFoto(@RequestBody FotoRequestDTO dto) throws IOException {
+        return service.uploadFoto(dto);
+    }
+
     @GetMapping(value="readFoto")
     public String readFoto(@RequestParam Long id) {
         return service.readFoto(id);
