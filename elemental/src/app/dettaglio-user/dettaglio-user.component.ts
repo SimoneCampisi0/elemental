@@ -226,12 +226,13 @@ export class DettaglioUserComponent {
       const reader = new FileReader();
       reader.onload = () => {
         this.base64Image = reader.result as string;
+        this.uploadFile()
         console.log("base64Image: " + this.base64Image);
       };
 
       this.selectFile = true;
       reader.readAsDataURL(file);
-      this.uploadFile()
+
     } else {
       // Nessun file selezionato
       // Esegui le azioni desiderate o mostra un messaggio di errore
@@ -240,8 +241,12 @@ export class DettaglioUserComponent {
   }
 
   uploadFile() {
+    console.log("base64Image in upload: "+this.base64Image)
     let dto = new FotoRequestDTO(this.base64Image, this.user)
-    // this.fotoService.insertFoto(dto).subscribe()
+    this.fotoService.uploadFoto(dto).subscribe(()=> {
+      this.refreshPage()
+    })
+
   }
 
 

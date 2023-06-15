@@ -23,6 +23,10 @@ export class FotoService extends AbstractService<FotoDTO>{
     return this.http.post<FotoDTO>(environment.APIEndpoint + this.type + '/insertFoto', dto);
   }
 
+  uploadFoto(dto: FotoRequestDTO): Observable<FotoDTO> {
+    return this.http.post<FotoDTO>(environment.APIEndpoint + this.type + '/uploadFoto', dto);
+  }
+
   readFoto(id: number): Observable<string> { //read foto by idUser
     return this.http.get(environment.APIEndpoint + this.type + '/readFoto?id=' + id, { responseType: 'text' });
   }
