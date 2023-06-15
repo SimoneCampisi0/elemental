@@ -10,6 +10,7 @@ import {PostDTO} from "../../dto/postdto";
 import {Genere} from "../../dto/genere";
 import {LoginDTO} from "../../dto/logindto";
 import * as bcrypt from 'bcryptjs';
+import {FotoRequestDTO} from "../../dto/fotorequestdto";
 
 
 @Component({
@@ -18,6 +19,10 @@ import * as bcrypt from 'bcryptjs';
   styleUrls: ['./dettaglio-user.component.css']
 })
 export class DettaglioUserComponent {
+  selectFile: boolean = false;
+
+  base64Image = ''
+
   genere: string = ''
 
   base64Img: string = ''
@@ -210,6 +215,33 @@ export class DettaglioUserComponent {
         })
       }
     })
+  }
+
+  modificaFoto(event: any) {
+    const files: FileList = event.target.files;
+
+    if (files.length > 0) {
+      const file: File = files[0];
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.base64Image = reader.result as string;
+        console.log("base64Image: " + this.base64Image);
+      };
+
+      this.selectFile = true;
+      reader.readAsDataURL(file);
+      this.uploadFile()
+    } else {
+      // Nessun file selezionato
+      // Esegui le azioni desiderate o mostra un messaggio di errore
+      console.log("Nessun file selezionato");
+    }
+  }
+
+  uploadFile() {
+    let dto = new FotoRequestDTO(this.base64Image, this.user)
+    // this.fotoService.insertFoto(dto).subscribe()
   }
 
 
