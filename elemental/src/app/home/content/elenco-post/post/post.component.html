@@ -24,10 +24,14 @@
     <div class="vl" ></div>
 
     <div class="commenti">
-
       <div class="commento" *ngFor="let commento of commenti">
         <img [src]="this.userImgMap.get(commento.user.id)" class="userImg" alt="" srcset="">
         <div class="autore">{{commento.nomeAutore}}</div>
+
+        <div *ngIf="this.commento.user.id == this.user.id" class="trash trashDiv">
+          <i class="fa fa-trash cursorLink" aria-hidden="true" (click)="deleteCommento(commento)"></i>
+        </div>
+
         <div class="dateComment">{{ commento.dataCommento}}</div>
         <div class="testo">{{ commento.contenuto }}</div>
         <hr class="hrBlack">

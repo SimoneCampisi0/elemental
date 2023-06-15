@@ -306,6 +306,7 @@ input[type="submit"]:hover {
   font-style: italic;
   color: #999;
   opacity: 0.8;
+  display: inline-block;
 }
 
 .viewCommenti {

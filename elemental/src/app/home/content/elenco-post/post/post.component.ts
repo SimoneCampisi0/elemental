@@ -174,6 +174,10 @@ export class PostComponent {
     window.location.reload();
   }
 
+  deleteCommento(commento: CommentoDTO) {
+    this.commentoService.delete(commento.id).subscribe()
+    this.reloadPage()
+  }
 
   deletePost() {
     Swal.fire({
