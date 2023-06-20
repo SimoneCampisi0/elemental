@@ -9,12 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UserService extends AbstractService<User, UserDTO> {
     @Autowired
     UserConverter converter;
+
+    @Autowired
+    LogService logService;
 
     @Autowired
     UserRepo repo;
@@ -23,7 +24,9 @@ public class UserService extends AbstractService<User, UserDTO> {
     PasswordEncoder passwordEncoder;
 
     public UserDTO login(LoginDTO loginDTO) {
-        return converter.toDTO(repo.findByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword()));
+        UserDTO dto = converter.toDTO(repo.findByEmailAndPassword(loginDTO.getEmail(), loginDTO.getPassword()));
+        logService.addLoggedUser(dto);
+        return dto;
     }
 
     public UserDTO findUserByEmail (String email) {
