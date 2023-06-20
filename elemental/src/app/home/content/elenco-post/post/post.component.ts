@@ -275,10 +275,18 @@ export class PostComponent {
       this.userService.findUserByEmail(this.email).subscribe(x => {
         localStorage.setItem('dettUser',JSON.stringify(x))
         this.router.navigate(['/dettaglio-user'])
-          .then(() => {
-            window.location.reload();
-          });
+          // .then(() => {
+          //   window.location.reload();
+          // });
       })
+    })
+  }
+
+  commentoDettaglioAutore(user: UserDTO) {
+    this.anagService.findAnagByEmail(user.email).subscribe(a=> {
+      localStorage.setItem('dettAnag',JSON.stringify(a))
+      localStorage.setItem('dettUser',JSON.stringify(user))
+      this.router.navigate(['/dettaglio-user'])
     })
   }
 

@@ -3,9 +3,9 @@
 <!--    con async si esegue direttamente la subscribe nell'if, ottenendo quindi l'accesso ai dati-->
 
 
-    <div class="dettaglioAutore" (click)="dettaglioAutore()">
-      <img [src]="base64Img" class="userImg" alt="" srcset="">
-      <div class="author">{{anagAutore.nome}} {{anagAutore.cognome}}</div>
+    <div (click)="dettaglioAutore()">
+      <img [src]="base64Img" class="userImg dettaglioAutore" alt="" srcset="">
+      <div class="author dettaglioAutore">{{anagAutore.nome}} {{anagAutore.cognome}}</div>
     </div>
 
     <div *ngIf="this.boolTrash" class="trash trashDiv">
@@ -25,8 +25,11 @@
 
     <div class="commenti">
       <div class="commento" *ngFor="let commento of commenti">
-        <img [src]="this.userImgMap.get(commento.user.id)" class="userImg" alt="" srcset="">
-        <div class="autore">{{commento.nomeAutore}}</div>
+
+        <div (click)="commentoDettaglioAutore(commento.user)">
+          <img [src]="this.userImgMap.get(commento.user.id)" class="userImg dettaglioAutore" alt="" srcset="">
+          <div class="autore dettaglioAutore">{{commento.nomeAutore}}</div>
+        </div>
 
         <div *ngIf="this.commento.user.id == this.user.id" class="trash trashDiv">
           <i class="fa fa-trash cursorLink" aria-hidden="true" (click)="deleteCommento(commento)"></i>
