@@ -27,9 +27,9 @@ export class ContentComponent {
   // Funzione per mostrare l'alert e ottenere i dati del nuovo post
   showNewPostAlert() {
     Swal.fire({
-      title: 'Nuovo post',
+      title: '',
       html:
-        '<h2 style="margin: 0px">Contenuto</h2>'+
+        '<h2 style="margin: 0px; margin-bottom: 1em;">Pubblica il nuovo post: </h2>'+
         '<textarea id="input-content" name="content" cols="40" rows="5" style="padding: 1em;"></textarea>\n',
       focusConfirm: false,
       preConfirm: () => {

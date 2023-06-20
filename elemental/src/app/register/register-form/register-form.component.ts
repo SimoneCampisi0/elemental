@@ -75,6 +75,9 @@ export class RegisterFormComponent {
             this.uploadFile(userInsert)
 
             this.router.navigate(['/home'])
+              .then(() => {
+                window.location.reload();
+              });
           })
         })
       })
