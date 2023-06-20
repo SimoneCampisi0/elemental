@@ -56,6 +56,8 @@ export class SideMenuComponent {
   }
 
   goDettaglioUser () {
+    localStorage.removeItem('dettUser')
+    localStorage.removeItem('dettAnag')
     this.router.navigate(['/dettaglio-user'])
   }
 

@@ -15,6 +15,7 @@ import { switchMap } from 'rxjs/operators';
 import {FotoService} from "../../../../../service/foto.service";
 import {CommentoService} from "../../../../../service/commento.service";
 import {CommentoDTO} from "../../../../../dto/commentodto";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-post',
@@ -59,7 +60,7 @@ export class PostComponent {
   // @ts-ignore
   // iterazione$: Observable<IterazioneDTO>
 
-  constructor(private anagService: AnagService, private itService: InterazioneService, private postService: PostService, private fotoService: FotoService, private commentoService: CommentoService) {
+  constructor(private router: Router, private anagService: AnagService, private itService: InterazioneService, private postService: PostService, private fotoService: FotoService, private commentoService: CommentoService, private userService: UserService) {
   }
 
   ngOnInit() {
@@ -266,6 +267,19 @@ export class PostComponent {
       })
     })
 
+  }
+
+  dettaglioAutore() {
+    this.anagAutore$.subscribe(dettAnag => {
+      localStorage.setItem('dettAnag',JSON.stringify(dettAnag))
+      this.userService.findUserByEmail(this.email).subscribe(x => {
+        localStorage.setItem('dettUser',JSON.stringify(x))
+        this.router.navigate(['/dettaglio-user'])
+          .then(() => {
+            window.location.reload();
+          });
+      })
+    })
   }
 
   ngOnDestroy() {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {UserService} from "../../service/user.service";
 import {AnagService} from "../../service/anag.service";
 import {UserDTO} from "../../dto/userdto";
@@ -19,6 +19,8 @@ import {FotoRequestDTO} from "../../dto/fotorequestdto";
   styleUrls: ['./dettaglio-user.component.css']
 })
 export class DettaglioUserComponent {
+  ifDettUser: boolean = false;
+
   selectFile: boolean = false;
 
   base64Image = ''
@@ -40,17 +42,36 @@ export class DettaglioUserComponent {
     this.user = JSON.parse(localStorage.getItem('currentUser'))
   }
   ngOnInit() {
-    this.anagService.findAnagByEmail(this.user.email).subscribe(x => {
-      this.anag = x
-    })
+    // @ts-ignore
+    if(localStorage.getItem('dettUser') === null || JSON.parse(localStorage.getItem('currentUser')).email ===  JSON.parse(localStorage.getItem('dettUser')).email ) {
+      this.anagService.findAnagByEmail(this.user.email).subscribe(x => {
+        this.anag = x
+      })
 
-    this.fotoService.readFoto(this.user.id).subscribe(x=> {
+      this.fotoService.readFoto(this.user.id).subscribe(x=> {
+        // @ts-ignore
+        this.base64Img = 'data:image/jpeg;base64,' + x; //l'immagine non è un JSON. Angular non riesce a leggerlo
+      })
+
+      this.calcoloNumeroPostByUser()
+    }
+
+    else {
+       this.ifDettUser = true;
       // @ts-ignore
-      this.base64Img = 'data:image/jpeg;base64,' + x; //l'immagine non è un JSON. Angular non riesce a leggerlo
-    })
+        this.user = JSON.parse(localStorage.getItem('dettUser'))
+        this.anagService.findAnagByEmail(this.user.email).subscribe(x => {
+          this.anag = x;
+        })
 
-     this.calcoloNumeroPostByUser()
+      this.fotoService.readFoto(this.user.id).subscribe(x=> {
+        // @ts-ignore
+        this.base64Img = 'data:image/jpeg;base64,' + x; //l'immagine non è un JSON. Angular non riesce a leggerlo
+      })
 
+      this.calcoloNumeroPostByUser()
+
+    }
   }
 
   calcoloNumeroPostByUser() {
