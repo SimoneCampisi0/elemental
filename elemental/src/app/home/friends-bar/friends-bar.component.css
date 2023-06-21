@@ -1,0 +1,39 @@
+.all {
+  position: fixed;
+  height: 100vh;
+  width: 30em;
+  margin-left: 5em;
+  background-color: #F9F9F9;
+}
+
+.titolo {
+  margin-left: 0.1em;
+  margin-top: 1em;
+}
+
+
+.hrTitolo {
+  margin-top: 0.5em;
+  width: 18em;
+}
+
+.elencoAmici {
+
+}
+
+.cardAmico {
+  margin-top: 0.5em;
+  width: 18em;
+}
+
+.cardAmico .nomeAmico {
+  font-weight: 600;
+}
+
+.cardAmico .statusAmico {
+  font-weight: 200;
+}
+
+.cardAmico .apriChat {
+  text-align: right;
+}

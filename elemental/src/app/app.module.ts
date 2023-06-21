@@ -23,6 +23,7 @@ import {ElencoPostRoutingModule} from "./home/content/elenco-post/elenco-post-ro
 import { SearchFilterPipe } from './home/content/search-bar/search-filter.pipe';
 import { DettaglioUserComponent } from './dettaglio-user/dettaglio-user.component';
 import {JwtInterceptor} from "./jwt.interceptor";
+import { FriendsBarComponent } from './home/friends-bar/friends-bar.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {JwtInterceptor} from "./jwt.interceptor";
     ElencoPostComponent,
     PostComponent,
     SearchFilterPipe,
-    DettaglioUserComponent
+    DettaglioUserComponent,
+    FriendsBarComponent
   ],
     imports: [
         BrowserModule,
