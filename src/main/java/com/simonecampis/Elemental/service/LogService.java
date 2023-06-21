@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class LogService {
-    private ArrayList<UserDTO> loggedUsers = new ArrayList<>();
+    private final ArrayList<UserDTO> loggedUsers = new ArrayList<>();
     public ArrayList<UserDTO> getLoggedUsers() {
         return loggedUsers;
     }
