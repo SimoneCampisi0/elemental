@@ -3,20 +3,21 @@ package com.simonecampis.Elemental.service;
 import com.simonecampis.Elemental.dto.UserDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 @Service
 public class LogService {
-    private LinkedList<UserDTO> loggedUser;
-    public LinkedList<UserDTO> getLoggedUser() {
-        return loggedUser;
+    private ArrayList<UserDTO> loggedUsers = new ArrayList<>();
+    public ArrayList<UserDTO> getLoggedUsers() {
+        return loggedUsers;
     }
 
     public void addLoggedUser(UserDTO dto) {
-        loggedUser.add(dto);
+        loggedUsers.add(dto);
     }
 
-    public void removeLoggedUser(UserDTO dto) {
-        loggedUser.remove(dto);
+    public void logout(UserDTO dto) {
+        loggedUsers.remove(dto);
     }
 }

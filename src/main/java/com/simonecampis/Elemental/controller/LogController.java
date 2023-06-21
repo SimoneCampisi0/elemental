@@ -5,6 +5,7 @@ import com.simonecampis.Elemental.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 @RestController
@@ -13,18 +14,18 @@ import java.util.LinkedList;
 public class LogController {
     @Autowired
     LogService service;
-    @GetMapping(value = "/getLoggedUser")
-    public LinkedList<UserDTO> getLoggedUser() {
-        return service.getLoggedUser();
+    @GetMapping(value = "/getLoggedUsers")
+    public ArrayList<UserDTO> getLoggedUsers() {
+        return service.getLoggedUsers();
     }
 
     @PostMapping(value="addLoggedUser")
-    public void addLoggedUser(UserDTO dto) {
+    public void addLoggedUser(@RequestBody UserDTO dto) {
         service.addLoggedUser(dto);
     }
 
-    @PostMapping(value="removeLoggedUser")
-    public void removeLoggedUser(UserDTO dto) {
-        service.removeLoggedUser(dto);
+    @PostMapping(value="logout")
+    public void logout(@RequestBody UserDTO dto) {
+        service.logout(dto);
     }
 }
