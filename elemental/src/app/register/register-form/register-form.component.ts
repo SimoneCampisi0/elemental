@@ -11,6 +11,7 @@ import {FotoRequestDTO} from "../../../dto/fotorequestdto";
 import {FotoService} from "../../../service/foto.service";
 import {RegisterRequestDTO} from "../../../dto/registerrequestdto";
 import {Genere} from "../../../dto/genere";
+import {LogService} from "../../../service/logservice";
 
 
 @Component({
@@ -24,7 +25,7 @@ export class RegisterFormComponent {
    base64Image: string = ''
    // loginDTO: LoginDTO;
 
-  constructor(private userService: UserService, private anagService: AnagService, private router: Router, private http: HttpClient, private fotoService: FotoService) {
+  constructor(private logService: LogService, private userService: UserService, private anagService: AnagService, private router: Router, private http: HttpClient, private fotoService: FotoService) {
     this.registerForm = new FormGroup({
       nome: new FormControl(''),
       cognome: new FormControl(''),
@@ -74,10 +75,12 @@ export class RegisterFormComponent {
             localStorage.setItem("currentAnag", JSON.stringify(x))
             this.uploadFile(userInsert)
 
-            this.router.navigate(['/home'])
-              .then(() => {
-                window.location.reload();
-              });
+            this.logService.addLoggedUser(userInsert).subscribe(()=> {
+              this.router.navigate(['/home'])
+                .then(() => {
+                  window.location.reload();
+                });
+            })
           })
         })
       })
