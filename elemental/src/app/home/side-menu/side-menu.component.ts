@@ -4,6 +4,7 @@ import {UserDTO} from "../../../dto/userdto";
 import {AnagService} from "../../../service/anag.service";
 import {AnagDTO} from "../../../dto/anagdto";
 import {FotoService} from "../../../service/foto.service";
+import {LogService} from "../../../service/logservice";
 
 @Component({
   selector: 'app-side-menu',
@@ -16,19 +17,22 @@ export class SideMenuComponent {
   nomeUser: string
 
   //@ts-ignore
+  user: UserDTO
+
+  //@ts-ignore
   anag: AnagDTO
 
   base64Img: string = ''
-  constructor(private router: Router, private anagService: AnagService, private fotoService: FotoService) {
+  constructor(private logService: LogService, private router: Router, private anagService: AnagService, private fotoService: FotoService) {
   }
 
   ngOnInit() {
     // @ts-ignore
-    let user: UserDTO = JSON.parse(localStorage.getItem('currentUser'))
+    this.user = JSON.parse(localStorage.getItem('currentUser'))
     // @ts-ignore
     this.anag = JSON.parse(localStorage.getItem('currentAnag'));
 
-    this.fotoService.readFoto(user.id).subscribe(x=> {
+    this.fotoService.readFoto(this.user.id).subscribe(x=> {
       // @ts-ignore
       this.base64Img = 'data:image/jpeg;base64,' + x; //l'immagine non è un JSON. Angular non riesce a leggerlo
     })
@@ -62,8 +66,10 @@ export class SideMenuComponent {
   }
 
   logout() {
-    localStorage.clear()
-    this.router.navigate([''])
+    this.logService.logout(this.user).subscribe(()=> {
+      localStorage.clear()
+      this.router.navigate([''])
+    })
   }
 
 }

@@ -6,6 +6,7 @@ import {UserDTO} from "../../../dto/userdto";
 import Swal from 'sweetalert2';
 import {Router} from "@angular/router";
 import {AnagService} from "../../../service/anag.service";
+import {LogService} from "../../../service/logservice";
 
  @Component({
   selector: 'app-login-form',
@@ -16,7 +17,7 @@ export class LoginFormComponent {
   loginForm: FormGroup;
   // loginDTO: LoginDTO;
 
-  constructor(private userService: UserService, private router: Router, private anagService: AnagService) {
+  constructor(private logService: LogService, private userService: UserService, private router: Router, private anagService: AnagService) {
     this.loginForm = new FormGroup({
       email: new FormControl(''),
       password: new FormControl('')
@@ -43,10 +44,14 @@ export class LoginFormComponent {
              this.anagService.findAnagByEmail(userResponse.email).subscribe(x => {
                localStorage.setItem('currentAnag',JSON.stringify(x))
 
-               this.router.navigate(['/home'])
-                 .then(() => {
-                   window.location.reload();
-                 });
+               this.logService.addLoggedUser(userResponse).subscribe(()=> {
+                 this.router.navigate(['/home'])
+                   .then(() => {
+                     window.location.reload();
+                   });
+               })
+
+
              })
 
            })

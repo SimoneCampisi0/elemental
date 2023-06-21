@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
 export class HomeComponent {
   ngOnInit() {
     console.log("JWT: "+localStorage.getItem('token'))
+    console.log("USER: "+localStorage.getItem('currentUser'))
   }
 }

@@ -12,6 +12,7 @@ import {CommentoDTO} from "../dto/commentodto";
 @Injectable({
   providedIn: 'root'
 })
+
 export class CommentoService extends AbstractService<CommentoDTO>{
   constructor(http: HttpClient) {
     super(http);
