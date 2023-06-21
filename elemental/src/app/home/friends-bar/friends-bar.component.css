@@ -30,6 +30,12 @@
   font-weight: 600;
 }
 
+.cardAmico .nomeAmico:hover {
+  color: #0d6efd;
+  cursor: pointer;
+}
+
+
 .cardAmico .statusAmico {
   font-weight: 200;
 }

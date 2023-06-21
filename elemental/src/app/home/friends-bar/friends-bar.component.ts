@@ -5,6 +5,8 @@ import { switchMap, filter } from "rxjs/operators";
 import { UserDTO } from "../../../dto/userdto";
 import {AnagService} from "../../../service/anag.service";
 import {AnagDTO} from "../../../dto/anagdto";
+import {UserService} from "../../../service/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-friends-bar',
@@ -15,10 +17,12 @@ export class FriendsBarComponent {
   //@ts-ignore
   currentUser: UserDTO
   //@ts-ignore
+  currentAnag: AnagDTO
+  //@ts-ignore
   listaAmici$: Observable<AnagDTO[]>
   amiciOnline: boolean = false
 
-  constructor(private logService: LogService, private anagService: AnagService) {}
+  constructor(private router: Router, private logService: LogService, private anagService: AnagService, private userService: UserService) {}
 
   // ngOnInit() {
   //   // @ts-ignore
@@ -32,15 +36,23 @@ export class FriendsBarComponent {
   ngOnInit() {
     // @ts-ignore
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    // @ts-ignore
+    this.currentAnag = JSON.parse(localStorage.getItem('currentAnag'))
 
     this.listaAmici$ = timer(0, 2000).pipe(
-      switchMap(() => this.logService.getLoggedUsers()),
-      switchMap((amici: UserDTO[]) => {
+      switchMap(() => this.logService.getLoggedUsers()), //prende l'observable ottenuto con getLoggedUsers
+      switchMap((amici: UserDTO[]) => { //prende l'observable generato in precedenza e applica le operazioni di seguito
         const anagraficaObservables = amici.map(amico => this.anagService.findAnagByEmail(amico.email));
-        return forkJoin(anagraficaObservables);
+        return forkJoin(anagraficaObservables); //unisce tutti gli observables generati in anagraficaObservables in un unico observable
       }),
-      map(anagrafiche => anagrafiche.filter(anagrafica => anagrafica !== null))
+      map(anagrafiche => anagrafiche.filter(anagrafica => anagrafica.nome !== this.currentAnag.nome && anagrafica.cognome !== this.currentAnag.cognome))
     );
   }
 
+  vediProfilo(anag: AnagDTO) {
+    let tempUser = anag.user
+    localStorage.setItem('dettAnag',JSON.stringify(anag))
+    localStorage.setItem('dettUser',JSON.stringify(tempUser))
+    this.router.navigate(['/dettaglio-user'])
+  }
 }
