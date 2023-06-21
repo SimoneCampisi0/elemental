@@ -1,26 +1,57 @@
+<!--<div class="d-flex flex-column flex-shrink-0 p-3 shadow-lg all">-->
+<!--  <div class="titolo">-->
+<!--    <h2 style="margin-bottom: 0px;">Amici Online</h2>-->
+<!--  </div>-->
+<!--  <hr class="hrTitolo">-->
+
+<!--&lt;!&ndash;  <div *ngIf="amiciOnline; else noAmiciOnline">&ndash;&gt;-->
+<!--  <div>-->
+
+<!--  <div class="elencoAmici" *ngFor="let amico of listaAmici$ | async" > &lt;!&ndash;  implementare ngFor &ndash;&gt;-->
+<!--          <div class="cardAmico">-->
+<!--            <div class="nomeAmico">-->
+<!--              <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">&lt;!&ndash;! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. &ndash;&gt;<style>svg{fill:#2bff00}</style><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"/></svg>-->
+<!--              {{amico.email}}</div>-->
+<!--            <div class="statusAmico">Online</div>-->
+<!--            <div class="apriChat">Apri Chat</div>-->
+<!--          </div>-->
+
+<!--      &lt;!&ndash;   <div class="cardAmico">&ndash;&gt;-->
+<!--      &lt;!&ndash;     <div class="nomeAmico">&ndash;&gt;-->
+<!--      &lt;!&ndash;       <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512">&lt;!&ndash;! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. &ndash;&gt;<style>svg{fill:#2bff00}</style><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"/></svg>&ndash;&gt;-->
+<!--      &lt;!&ndash;       Mario Rossi</div>&ndash;&gt;-->
+<!--      &lt;!&ndash;     <div class="statusAmico">Online</div>&ndash;&gt;-->
+<!--      &lt;!&ndash;     <div class="apriChat">Apri Chat</div>&ndash;&gt;-->
+<!--      &lt;!&ndash;   </div>&ndash;&gt;-->
+<!--    </div>-->
+<!--  </div>-->
+
+
+<!--  <ng-template #noAmiciOnline>-->
+<!--    <div class="noAmiciOnlineText">Nessun amico online.</div>-->
+<!--  </ng-template>  -->
+<!--</div>-->
 <div class="d-flex flex-column flex-shrink-0 p-3 shadow-lg all">
   <div class="titolo">
     <h2 style="margin-bottom: 0px;">Amici Online</h2>
   </div>
   <hr class="hrTitolo">
 
- <div class="elencoAmici" *ngIf="amiciOnline; else noAmiciOnline"> <!--  implementare ngFor -->
-    <div class="cardAmico">
-      <div class="nomeAmico">
-        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#2bff00}</style><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"/></svg>
-        Mario Rossi</div>
-      <div class="statusAmico">Online</div>
-      <div class="apriChat">Apri Chat</div>
+  <ng-container *ngIf="(listaAmici$ | async)?.length; else noAmiciOnline">
+    <div class="elencoAmici">
+      <div class="cardAmico" *ngFor="let amico of listaAmici$ | async">
+        <div class="nomeAmico">
+          <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+            <style>svg{fill:#2bff00}</style>
+            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"/>
+          </svg>
+          {{ amico.email }}
+        </div>
+        <div class="statusAmico">Online</div>
+        <div class="apriChat">Apri Chat</div>
+      </div>
     </div>
-
-   <div class="cardAmico">
-     <div class="nomeAmico">
-       <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#2bff00}</style><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"/></svg>
-       Mario Rossi</div>
-     <div class="statusAmico">Online</div>
-     <div class="apriChat">Apri Chat</div>
-   </div>
- </div>
+  </ng-container>
 
   <ng-template #noAmiciOnline>
     <div class="noAmiciOnlineText">Nessun amico online.</div>
