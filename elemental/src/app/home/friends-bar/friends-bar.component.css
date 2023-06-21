@@ -37,3 +37,9 @@
 .cardAmico .apriChat {
   text-align: right;
 }
+
+
+.noAmiciOnlineText {
+  font-weight: 200;
+  color: #616161;
+}

@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./friends-bar.component.css']
 })
 export class FriendsBarComponent {
+  amiciOnline: boolean = false
 
 }
