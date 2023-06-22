@@ -1,6 +1,8 @@
 package com.simonecampis.Elemental.config;
 
+import com.simonecampis.Elemental.service.EmailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +14,15 @@ public class AuthenticationController {
 
     private final AuthService service;
 
+    @Autowired
+    private EmailService emailService;
 
     @PostMapping("/register")
     public ResponseEntity <AuthenticationResponse> register (@RequestBody RegisterRequest request) {
+        String to = request.getEmail();
+        String subject = "Conferma registrazione";
+        String text = "Grazie per esserti registrato!";
+        emailService.inviaMailRegistrazioneConferma(to,subject, text);
         return ResponseEntity.ok(service.register(request));
     }
 
