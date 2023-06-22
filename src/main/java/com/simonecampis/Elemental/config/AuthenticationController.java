@@ -1,6 +1,7 @@
 package com.simonecampis.Elemental.config;
 
 import com.simonecampis.Elemental.service.EmailService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,12 @@ public class AuthenticationController {
     private EmailService emailService;
 
     @PostMapping("/register")
-    public ResponseEntity <AuthenticationResponse> register (@RequestBody RegisterRequest request) {
+    public ResponseEntity <AuthenticationResponse> register (@RequestBody RegisterRequest request) throws MessagingException {
         String to = request.getEmail();
         String subject = "Conferma registrazione";
-        String text = "Grazie per esserti registrato!";
-        emailService.inviaMailRegistrazioneConferma(to,subject, text);
+//        String text = "<h2>Grazie per esserti registrato!</h2>";
+//        emailService.inviaMailRegistrazioneConferma(to,subject, text);
+        emailService.sendCustomMail(to,subject);
         return ResponseEntity.ok(service.register(request));
     }
 
