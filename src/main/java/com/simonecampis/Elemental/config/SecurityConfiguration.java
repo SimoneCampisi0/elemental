@@ -40,7 +40,10 @@ public class SecurityConfiguration {
                         .requestMatchers("/user/update").permitAll()
                         .requestMatchers("/user/recuperaPassword").permitAll()
                         .requestMatchers("/foto/insertFoto").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/chat/**").permitAll()
+                        .requestMatchers("/chat/").permitAll()
+
+                        .anyRequest().permitAll()
                 )
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
