@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import {UserDTO} from "../../../../dto/userdto";
 import {ChatService} from "../../../../service/chat.service";
 import {AnagDTO} from "../../../../dto/anagdto";
-
+import * as Stomp from '@stomp/stompjs';
+import * as SockJS from 'sockjs-client'
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
