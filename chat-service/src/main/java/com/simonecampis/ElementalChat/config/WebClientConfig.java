@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
-public class WebClientConfig {
+public class WebClientConfig { //serve per comunicare tra microservizi
     @Bean
     @LoadBalanced //serve per gestire istanze multiple di un microservizio
     public WebClient.Builder webClientBuilder() {

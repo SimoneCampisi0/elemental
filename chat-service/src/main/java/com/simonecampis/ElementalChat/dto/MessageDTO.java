@@ -1,5 +1,6 @@
 package com.simonecampis.ElementalChat.dto;
 
+import com.simonecampis.ElementalChat.model.MessageType;
 import com.simonecampis.ElementalChat.model.User;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -18,6 +19,9 @@ public class MessageDTO {
     private String text;
 
     private Date date;
+
+    private MessageType type;
+
 
     private User user1;
 

@@ -20,11 +20,14 @@ public class Message {
 
     private Date date;
 
+    private MessageType type;
+
+
     @ManyToOne
-    @JoinColumn(name = "user1")
+    @JoinColumn(name = "user1") //sender
     private User user1;
 
     @ManyToOne
-    @JoinColumn(name = "user2")
+    @JoinColumn(name = "user2") //receiver
     private User user2;
 }
