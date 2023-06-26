@@ -18,6 +18,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Base64;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FotoService extends AbstractService<Foto, FotoDTO> {
@@ -35,6 +38,8 @@ public class FotoService extends AbstractService<Foto, FotoDTO> {
     @Autowired Base64ImageService imageService;
 
     private FotoDTO fotoDTO;
+
+
 
     public FotoDTO insertFoto(String image64, UserDTO dto) throws IOException {
         try {

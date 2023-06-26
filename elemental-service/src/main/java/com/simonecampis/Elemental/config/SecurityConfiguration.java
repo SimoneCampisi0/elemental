@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.http.HttpMethod;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,8 +43,15 @@ public class SecurityConfiguration {
                         .requestMatchers("/foto/insertFoto").permitAll()
                         .requestMatchers("/chat/**").permitAll()
                         .requestMatchers("/chat/").permitAll()
-                        .requestMatchers("/log/getLoggedUsers").permitAll()
-                        .anyRequest().permitAll()
+//                        .requestMatchers("/log/getLoggedUsers").permitAll()
+                        .requestMatchers(request -> {
+                            String method = request.getMethod();
+                            String path = request.getServletPath();
+                            boolean isGetLoggedUsers = HttpMethod.GET.matches(method) && "/log/getLoggedUsers".equals(path);
+                            boolean isElementalChat = "elemental-chat".equals(request.getHeader("x-service-name"));
+                            return isGetLoggedUsers && isElementalChat;
+                        }).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
