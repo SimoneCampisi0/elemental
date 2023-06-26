@@ -24,6 +24,7 @@ import { SearchFilterPipe } from './home/content/search-bar/search-filter.pipe';
 import { DettaglioUserComponent } from './dettaglio-user/dettaglio-user.component';
 import {JwtInterceptor} from "./jwt.interceptor";
 import { FriendsBarComponent } from './home/friends-bar/friends-bar.component';
+import { ChatComponent } from './home/friends-bar/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { FriendsBarComponent } from './home/friends-bar/friends-bar.component';
     PostComponent,
     SearchFilterPipe,
     DettaglioUserComponent,
-    FriendsBarComponent
+    FriendsBarComponent,
+    ChatComponent
   ],
     imports: [
         BrowserModule,

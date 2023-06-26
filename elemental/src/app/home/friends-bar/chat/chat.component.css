@@ -1,0 +1,12 @@
+.all {
+  position: fixed;
+  height: 100vh;
+  width: 30em;
+  margin-left: 5em;
+  background-color: #F9F9F9;
+}
+
+.chattaCon {
+  margin-left: 0.1em;
+  margin-top: 1em;
+}

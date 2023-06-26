@@ -7,6 +7,7 @@ import {AnagService} from "../../../service/anag.service";
 import {AnagDTO} from "../../../dto/anagdto";
 import {UserService} from "../../../service/user.service";
 import {Router} from "@angular/router";
+import {ChatService} from "../../../service/chat.service";
 
 @Component({
   selector: 'app-friends-bar',
@@ -14,6 +15,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./friends-bar.component.css']
 })
 export class FriendsBarComponent {
+
+  mostraChat: boolean = false;
+
   //@ts-ignore
   currentUser: UserDTO
   //@ts-ignore
@@ -22,7 +26,7 @@ export class FriendsBarComponent {
   listaAmici$: Observable<AnagDTO[]>
   amiciOnline: boolean = false
 
-  constructor(private router: Router, private logService: LogService, private anagService: AnagService, private userService: UserService) {}
+  constructor(public chatService: ChatService, private router: Router, private logService: LogService, private anagService: AnagService, private userService: UserService) {}
 
   // ngOnInit() {
   //   // @ts-ignore
@@ -54,5 +58,19 @@ export class FriendsBarComponent {
     localStorage.setItem('dettAnag',JSON.stringify(anag))
     localStorage.setItem('dettUser',JSON.stringify(tempUser))
     this.router.navigate(['/dettaglio-user'])
+  }
+
+  setProfiloRicevitore(anag: AnagDTO) {
+    let tempUser = anag.user
+    let tempAnag = anag
+
+    this.chatService.userRicevitore = tempUser;
+    this.chatService.anagRicevitore = tempAnag
+  }
+
+
+  cambiaSchermata(anag: AnagDTO) {
+    this.setProfiloRicevitore(anag)
+    this.chatService.mostaChat = true;
   }
 }
