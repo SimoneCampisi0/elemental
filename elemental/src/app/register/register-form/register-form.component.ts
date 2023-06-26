@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {UserService} from "../../../service/user.service";
 import {UserDTO} from "../../../dto/userdto";
 import Swal from 'sweetalert2';
@@ -25,17 +25,18 @@ export class RegisterFormComponent {
    base64Image: string = ''
    // loginDTO: LoginDTO;
 
-  constructor(private logService: LogService, private userService: UserService, private anagService: AnagService, private router: Router, private http: HttpClient, private fotoService: FotoService) {
-    this.registerForm = new FormGroup({
-      nome: new FormControl(''),
-      cognome: new FormControl(''),
-      dataNascita: new FormControl(''),
-      cittaResidenza: new FormControl(''),
-      email: new FormControl(''),
-      password: new FormControl(''),
-      genere: new FormControl('')
+  constructor(private router: Router, private fotoService: FotoService, private logService: LogService, private userService: UserService, private anagService: AnagService,  private formBuilder: FormBuilder) {
+    this.registerForm = this.formBuilder.group({
+      nome: ['', Validators.required],
+      cognome: [''],
+      dataNascita: [''],
+      cittaResidenza: [''],
+      email: ['', [Validators.required, Validators.email]],
+      password: [''],
+      genere: ['']
     });
   }
+
 
   ngOnInit() {
 
@@ -120,6 +121,7 @@ export class RegisterFormComponent {
 
    uploadFile(userDef: UserDTO) {
      let dto = new FotoRequestDTO(this.base64Image, userDef)
+     console.log("DTO Foto: "+dto)
      this.fotoService.insertFoto(dto).subscribe()
    }
    terminiAlert() {
