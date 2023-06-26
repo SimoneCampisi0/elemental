@@ -1,14 +1,12 @@
 package com.simonecampis.ElementalChat.dto;
 
-import com.simonecampis.ElementalChat.model.MessageType;
+import com.simonecampis.ElementalChat.model.Chat;
 import com.simonecampis.ElementalChat.model.User;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -20,10 +18,9 @@ public class MessageDTO {
 
     private Date date;
 
-    private MessageType type;
-
-
     private User user1;
 
     private User user2;
+
+    private Chat chat;
 }

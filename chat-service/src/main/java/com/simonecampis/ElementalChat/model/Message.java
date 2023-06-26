@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Data
@@ -20,8 +20,6 @@ public class Message {
 
     private Date date;
 
-    private MessageType type;
-
 
     @ManyToOne
     @JoinColumn(name = "user1") //sender
@@ -30,4 +28,9 @@ public class Message {
     @ManyToOne
     @JoinColumn(name = "user2") //receiver
     private User user2;
+
+    @ManyToOne
+    @JoinColumn(name = "chat") //receiver
+    private Chat chat;
+
 }
