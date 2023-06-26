@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/message")
+//@RequestMapping("/message")
 @CrossOrigin(origins = "http://localhost:4200")
 public class MessageController extends AbstractController<MessageDTO> {
     @Autowired
