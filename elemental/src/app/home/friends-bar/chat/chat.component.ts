@@ -70,18 +70,46 @@ export class ChatComponent {
         }
 
         this.chatService.findChatByNome(this.channelName).subscribe(x => {
-          this.chatService.getAllMessagesByChat(x).subscribe(y=> {
-            this.chatTemp = x
-            this.listaMessaggi = y
+          if (x!== null) {
+
+            this.chatService.getAllMessagesByChat(x).subscribe(y=> {
+              this.chatTemp = x
+              this.listaMessaggi = y
 
 
-            this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
-              // Aggiungi il nuovo messaggio alla lista dei messaggi
-              console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
-              this.listaMessaggi.push(JSON.parse(message.body));
-            });
+              this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
+                // Aggiungi il nuovo messaggio alla lista dei messaggi
+                console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
+                this.listaMessaggi.push(JSON.parse(message.body));
+              });
 
-          })
+            })
+          } else { //se la chat non esiste, la vado a creare
+              let nomeChat = ''
+              if (this.user1.id < this.user2.id) {
+                nomeChat = this.user1.id + "e" +this.user2.id
+              } else {
+                nomeChat= this.user2.id + "e" +this.user1.id
+              }
+
+
+              let c = this.chatService.checkChatExist(nomeChat).subscribe(c=> {
+                this.chatService.getAllMessagesByChat(x).subscribe(y=> {
+                  this.chatTemp = x
+                  this.listaMessaggi = y
+
+
+                  this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
+                    // Aggiungi il nuovo messaggio alla lista dei messaggi
+                    console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
+                    this.listaMessaggi.push(JSON.parse(message.body));
+                  });
+
+                })
+              })
+
+          }
+
         })
       },
       onWebSocketError: (error) => {

@@ -37,4 +37,8 @@ export class ChatService {
     return this.http.get<ChatDTO>('http://localhost:8082/message/findChatByNome?nome='+nome)
   }
 
+  checkChatExist(to: string): Observable<ChatDTO> {
+    return this.http.get<ChatDTO>('http://localhost:8082/message/checkChatExist?to='+to)
+  }
+
 }
