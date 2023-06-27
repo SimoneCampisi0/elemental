@@ -5,17 +5,30 @@
   </div>
 
 
-<!--  <div>-->
-    <div class="msgCardBody" *ngFor="let msg of this.listaMessaggi">
-      <ng-template [ngIf]="msg.user1.id == this.user1.id" [ngIfElse]="viewSecondUser">
-        <div class="msgContent1">{{msg.text}}</div>
-      </ng-template>
+<!--  <div class="allCard">-->
+<!--    <div class="msgCardBody" *ngFor="let msg of this.listaMessaggi">-->
+<!--      <ng-template [ngIf]="msg.user1.id == this.user1.id" [ngIfElse]="viewSecondUser">-->
+<!--        <div class="msgContent1">{{msg.text}}</div>-->
+<!--      </ng-template>-->
 
-      <ng-template #viewSecondUser>
-        <div class="msgContent">{{msg.text}}</div>
-      </ng-template>
-    </div>
+<!--      <ng-template #viewSecondUser>-->
+<!--        <div class="msgContent">{{msg.text}}</div>-->
+<!--      </ng-template>-->
+<!--    </div>-->
 <!--  </div>-->
+
+  <div class="allCard" *ngFor="let msg of this.listaMessaggi">
+    <div class="cardMsgSend" *ngIf="msg.user1.id == this.user1.id; else viewMsgRicevuto" >
+      {{msg.text}}
+    </div>
+
+    <ng-template #viewMsgRicevuto >
+      <div class="cardMsgSend1">
+        {{msg.text}}
+      </div>
+    </ng-template>
+  </div>
+
 
   <div class="mt-auto">
     <textarea style="display: inline-block;" class="form-control msgInput" [formControl]="this.newMessage"

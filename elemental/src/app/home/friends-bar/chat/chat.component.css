@@ -1,7 +1,7 @@
 .all {
   position: fixed;
   height: 100vh;
-  width: 30em;
+  width: max-content;
   margin-left: 5em;
   background-color: #F9F9F9;
 }
@@ -32,24 +32,61 @@
   right: 1%;
 }
 
-.msgCardBody {
+/*.allCard {*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*}*/
+
+/*.msgCardBody {*/
+/*  display: flex;*/
+/*}*/
+/*.msgContent {*/
+/*  margin-top: 1em;*/
+/*  background-color: #cccccc;*/
+/*  width: min-content;*/
+/*  height: auto;*/
+/*  padding: 5px;*/
+/*  border-radius: 5px;*/
+/*  word-wrap: break-word;*/
+/*  justify-content: flex-start;*/
+/*}*/
+/*.msgContent1 {*/
+/*  margin-top: 1em;*/
+/*  background-color: #cccccc;*/
+/*  width: min-content;*/
+/*  height: auto;*/
+/*  padding: 5px;*/
+/*  border-radius: 5px;*/
+/*  word-wrap: break-word;*/
+/*  justify-content: flex-end;*/
+/*}*/
+
+
+.allCard {
+  display: flex;
+  flex-direction: column;
 
 }
-.msgContent {
-  margin-top: 1em;
-  background-color: #cccccc;
-  width: min-content;
-  height: auto;
-  padding: 5px;
-  border-radius: 5px;
+.cardMsgSend {
+    margin-top: 1em;
+    background-color: #cccccc;
+    width: min-content;
+    height: auto;
+    padding: 5px;
+    border-radius: 5px;
+    word-wrap: break-word;
+    /*justify-content: flex-end;*/
+    align-self: flex-end;
 }
-.msgContent1 {
+
+.cardMsgSend1 {
   margin-top: 1em;
   background-color: #cccccc;
   width: min-content;
   height: auto;
   padding: 5px;
   border-radius: 5px;
-  position: relative;
-  left: 15em;
+  word-wrap: break-word;
+  /*justify-content: flex-end;*/
+  align-self: flex-start;
 }
