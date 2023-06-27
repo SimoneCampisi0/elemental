@@ -10,3 +10,16 @@
   margin-left: 0.1em;
   margin-top: 1em;
 }
+
+
+.msgInput {
+  margin-right: 0.5em;
+  width: 14em;
+}
+
+.imgSend {
+  width: 30px;
+  height: 30px; margin-bottom: 10px;
+  position: relative;
+  bottom: 25%
+}
