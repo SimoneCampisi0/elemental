@@ -56,6 +56,33 @@ export class ChatComponent {
       webSocketFactory: () => new SockJS('http://localhost:8080/message/chat'),
       onConnect: () => {
         console.log('Connected to WebSocket');
+
+        // @ts-ignore
+        this.user1 = JSON.parse(localStorage.getItem('currentUser'))
+        this.user2 = this.chatService.userRicevitore;
+        this.anagTemp = this.chatService.anagRicevitore;
+        console.log("emailUsetTemp: "+this.user2.email)
+
+        if (this.user1.id < this.user2.id) {
+          this.channelName = this.user1.id + "e" +this.user2.id
+        } else {
+          this.channelName = this.user2.id + "e" +this.user1.id
+        }
+
+        this.chatService.findChatByNome(this.channelName).subscribe(x => {
+          this.chatService.getAllMessagesByChat(x).subscribe(y=> {
+            this.chatTemp = x
+            this.listaMessaggi = y
+
+
+            this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
+              // Aggiungi il nuovo messaggio alla lista dei messaggi
+              console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
+              this.listaMessaggi.push(JSON.parse(message.body));
+            });
+
+          })
+        })
       },
       onWebSocketError: (error) => {
         console.error('WebSocket connection error:', error);
@@ -67,23 +94,11 @@ export class ChatComponent {
 
 
     // @ts-ignore
-    this.user1 = JSON.parse(localStorage.getItem('currentUser'))
-    this.user2 = this.chatService.userRicevitore;
-    this.anagTemp = this.chatService.anagRicevitore;
-    console.log("emailUsetTemp: "+this.user2.email)
 
-    if (this.user1.id < this.user2.id) {
-      this.channelName = this.user1.id + "e" +this.user2.id
-    } else {
-      this.channelName = this.user2.id + "e" +this.user1.id
-    }
 
-    this.chatService.findChatByNome(this.channelName).subscribe(x => {
-      this.chatService.getAllMessagesByChat(x).subscribe(y=> {
-        this.chatTemp = x
-        this.listaMessaggi = y
-      })
-    })
+
+
+
   }
   goBack() {
     this.chatService.mostaChat = false;
