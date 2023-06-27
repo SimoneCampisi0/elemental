@@ -8,12 +8,19 @@ import {FormControl} from "@angular/forms";
 import {Observable, of} from "rxjs";
 import {MessageDTO} from "../../../../dto/messagedto";
 import {HttpClient} from "@angular/common/http";
+import {Client} from "@stomp/stompjs";
+import {ChatDTO} from "../../../../dto/chatdto";
+import {DatePipe} from "@angular/common";
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent {
+
+  // @ts-ignore
+  chatTemp: ChatDTO
+
   // @ts-ignore
 
   channelName: string
@@ -36,7 +43,8 @@ export class ChatComponent {
 
   socket?: WebSocket;
 
-  stompClient?: Stomp.Client;
+  // @ts-ignore
+  stompClient: Stomp.Client;
 
   // @ts-ignore
   listaMessaggi: MessageDTO[]
@@ -44,6 +52,20 @@ export class ChatComponent {
   constructor(public chatService: ChatService, private http:HttpClient) {
   }
   ngOnInit(){
+    this.stompClient = new Client({
+      webSocketFactory: () => new SockJS('http://localhost:8080/message/chat'),
+      onConnect: () => {
+        console.log('Connected to WebSocket');
+      },
+      onWebSocketError: (error) => {
+        console.error('WebSocket connection error:', error);
+      }
+    });
+    this.stompClient.activate();
+
+
+
+
     // @ts-ignore
     this.user1 = JSON.parse(localStorage.getItem('currentUser'))
     this.user2 = this.chatService.userRicevitore;
@@ -58,6 +80,7 @@ export class ChatComponent {
 
     this.chatService.findChatByNome(this.channelName).subscribe(x => {
       this.chatService.getAllMessagesByChat(x).subscribe(y=> {
+        this.chatTemp = x
         this.listaMessaggi = y
       })
     })
@@ -65,6 +88,24 @@ export class ChatComponent {
   goBack() {
     this.chatService.mostaChat = false;
   }
+
+
+  sendMessage() {
+    let text = ' '
+    if (this.newMessage?.value!== null) {
+      text = this.newMessage.value;
+    }
+    const message = new MessageDTO(
+      0,
+      text,
+      new Date(),
+      this.user1,
+      this.user2,
+      this.chatTemp
+    )
+    this.stompClient.publish({ destination: '/app/chat/'+this.channelName, body: JSON.stringify(message)}); // Sostituisci "{to}" con il nome del canale corretto
+  }
+
 }
 
 
