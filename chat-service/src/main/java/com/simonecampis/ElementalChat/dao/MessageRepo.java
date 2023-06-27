@@ -12,4 +12,7 @@ import java.util.List;
 @Transactional
 public interface MessageRepo extends CrudRepository<Message, Long> {
     List<Message> findByChat(Chat chat);
+
+
+
 }

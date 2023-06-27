@@ -38,6 +38,12 @@ public class MessageController extends AbstractController<MessageDTO> {
 
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
+
+    @GetMapping(value="findChatByNome")
+    public ChatDTO findChatByNome(@RequestParam String nome) {
+        return chatService.findChatByNome(nome);
+    }
+
     @GetMapping(value="/getLogUsers")
     public ArrayList<UserDTO> getLogUsers() {
         return chatService.getUsersSession();
@@ -56,16 +62,9 @@ public class MessageController extends AbstractController<MessageDTO> {
     }
 
     //returns an empty list if the chat doesn't exist
-    @PostMapping("/getMessages")
-    public List<Message> getMessages(@RequestBody String chat) {
-        Chat ce = chatRepo.findByNomeChat(chat);
-
-        if(ce != null) {
-            return messageRepo.findByChat(ce);
-        }
-        else{
-            return new ArrayList<Message>();
-        }
+    @PostMapping("/getAllMessagesByChat")
+    public List<MessageDTO> getAllMessagesByChat(@RequestBody Chat chat) {
+        return chatService.getAllMessagesByChat(chat);
     }
 
     public Chat checkChatExist(String to) {

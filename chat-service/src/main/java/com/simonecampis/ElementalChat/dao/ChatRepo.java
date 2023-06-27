@@ -11,4 +11,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface ChatRepo extends CrudRepository<Chat, Long> {
     Chat findByNomeChat (String nomeChat);
+
 }
