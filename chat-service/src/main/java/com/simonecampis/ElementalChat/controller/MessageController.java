@@ -41,6 +41,7 @@ public class MessageController extends AbstractController<MessageDTO> {
 
     @GetMapping(value="findChatByNome")
     public ChatDTO findChatByNome(@RequestParam String nome) {
+
         return chatService.findChatByNome(nome);
     }
 
@@ -55,7 +56,7 @@ public class MessageController extends AbstractController<MessageDTO> {
         Date date = new Date();
         System.out.println("handling send message: " + message + " to: " + to);
 
-        message.setChat(checkChatExist(to));
+        message.setChat(chatConverter.toEntity(checkChatExist(to)));
         message.setDate(date);
         message = messageRepo.save(message);
         simpMessagingTemplate.convertAndSend("/topic/messages/" + to, message);
@@ -72,12 +73,15 @@ public class MessageController extends AbstractController<MessageDTO> {
         return chatService.getAllMessagesByChat(chat);
     }
 
-    public Chat checkChatExist(String to) {
-        Chat c = chatRepo.findByNomeChat(to);
+    @GetMapping(value="/checkChatExist")
+    public ChatDTO checkChatExist(@RequestParam  String to) {
+        ChatDTO c = chatConverter.toDTO(chatRepo.findByNomeChat(to));
         if(c == null) {
-            Chat chat = new Chat(0L, to);
-            return chatRepo.save(chat);
+            ChatDTO dto = new ChatDTO(0L, to);
+            return chatConverter.toDTO(chatRepo.save(chatConverter.toEntity(dto)));
         }
         return c;
     }
+
+
 }
