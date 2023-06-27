@@ -9,6 +9,7 @@
 .chattaCon {
   margin-left: 0.1em;
   margin-top: 1em;
+  font-size: 19px;
 }
 
 
@@ -22,4 +23,33 @@
   height: 30px; margin-bottom: 10px;
   position: relative;
   bottom: 25%
+}
+
+.goBack {
+  cursor: pointer;
+  position: relative;
+  bottom: 8%;
+  right: 1%;
+}
+
+.msgCardBody {
+
+}
+.msgContent {
+  margin-top: 1em;
+  background-color: #cccccc;
+  width: min-content;
+  height: auto;
+  padding: 5px;
+  border-radius: 5px;
+}
+.msgContent1 {
+  margin-top: 1em;
+  background-color: #cccccc;
+  width: min-content;
+  height: auto;
+  padding: 5px;
+  border-radius: 5px;
+  position: relative;
+  left: 15em;
 }

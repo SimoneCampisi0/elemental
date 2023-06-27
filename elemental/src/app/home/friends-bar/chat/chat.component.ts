@@ -61,64 +61,11 @@ export class ChatComponent {
         this.listaMessaggi = y
       })
     })
-
-    // this.chatService.getAllMessagesByChat()
-    // this.connectToChat()
   }
-  // loadChat() {
-  //   this.messages = this.http.post<Array<MessageDTO>>(this.url+'/getMessages' ,  this.channelName);
-  //   this.messages.subscribe(x => {
-  //     let mgs:Array<MessageDTO> = x
-  //     mgs.sort((a, b) => (a.id > b.id) ? 1 : -1)
-  //     this.messages = of(mgs);
-  //   })
-  //   console.log(this.messages);
-  // }
-  // // connectToChat() {
-  // //   this.channelName = this.user1.id + ' & '+ this.user2.id
-  // //   this.loadChat()
-  // //
-  // //   console.log('connessione alla chat...')
-  // //   this.socket = new SockJS(this.url + '/message/chat');
-  // //   this.stompClient = Stomp.Stomp.over(this.socket);
-  // //
-  // //   this.stompClient.connect({}, (frame) => {
-  // //     //func = what to do when connection is established
-  // //     console.log('connected to: ' + frame);
-  // //     this.stompClient!.subscribe(
-  // //       '/topic/messages/' + this.channelName,
-  // //       (response) => {
-  // //         //func = what to do when client receives data (messages)
-  // //         this.loadChat();
-  // //       }
-  // //     );
-  // //   });
-  // // }
-  //
-  // connectToChat() { //NON DEPRECATO
-  //   this.channelName = this.user1.id + ' & ' + this.user2.id;
-  //   this.loadChat();
-  //
-  //   console.log('connessione alla chat...');
-  //   const socket = new SockJS(this.url + '/message/chat');
-  //
-  //   this.stompClient = Stomp.Stomp.over(() => socket);
-  //   this.stompClient.configure({
-  //     onConnect: (frame) => {
-  //       console.log("connected to " + frame);
-  //       // @ts-ignore
-  //       this.stompClient.subscribe(
-  //         "/topic/messages/" + this.channelName,
-  //         (response) => {
-  //           // func = what to do when client receives data (messages)
-  //           this.loadChat();
-  //         }
-  //       );
-  //     },
-  //     debug:(str)=>{console.log(str)}
-  //   });
-  //
-  //   // utilizza activate al posto di connect
-  //   this.stompClient.activate();
-  // }
+  goBack() {
+    this.chatService.mostaChat = false;
+  }
 }
+
+
+
