@@ -59,8 +59,13 @@ public class MessageController extends AbstractController<MessageDTO> {
         message.setDate(date);
         message = messageRepo.save(message);
         simpMessagingTemplate.convertAndSend("/topic/messages/" + to, message);
+//        convertAndSend(to, message);
     }
 
+//    public Message convertAndSend(String to, Message message) {
+//        simpMessagingTemplate.convertAndSend("/topic/messages/" + to, message);
+//
+//    }
     //returns an empty list if the chat doesn't exist
     @PostMapping("/getAllMessagesByChat")
     public List<MessageDTO> getAllMessagesByChat(@RequestBody Chat chat) {
