@@ -146,6 +146,8 @@ export class ChatComponent {
       this.user2,
       this.chatTemp
     )
+
+    this.newMessage.setValue('')
     this.stompClient.publish({ destination: '/app/chat/'+this.channelName, body: JSON.stringify(message)}); // Sostituisci "{to}" con il nome del canale corretto
   }
 

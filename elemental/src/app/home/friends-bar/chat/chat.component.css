@@ -1,9 +1,12 @@
 .all {
   position: fixed;
   height: 100vh;
-  width: max-content;
+  /*width: max-content;*/
+  width: auto;
   margin-left: 5em;
   background-color: #F9F9F9;
+
+  /*right: 0;*/
 }
 
 .chattaCon {
@@ -65,28 +68,30 @@
 .allCard {
   display: flex;
   flex-direction: column;
-
 }
 .cardMsgSend {
     margin-top: 1em;
-    background-color: #cccccc;
-    width: min-content;
+    background-color: #e2eef3;
+    width: auto;
     height: auto;
     padding: 5px;
     border-radius: 5px;
-    word-wrap: break-word;
-    /*justify-content: flex-end;*/
     align-self: flex-end;
 }
 
 .cardMsgSend1 {
   margin-top: 1em;
   background-color: #cccccc;
-  width: min-content;
+  width: auto;
   height: auto;
   padding: 5px;
   border-radius: 5px;
-  word-wrap: break-word;
   /*justify-content: flex-end;*/
   align-self: flex-start;
+}
+
+
+.msg {
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }

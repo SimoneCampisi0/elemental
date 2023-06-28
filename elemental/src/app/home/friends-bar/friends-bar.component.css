@@ -1,9 +1,10 @@
 .all {
   position: fixed;
   height: 100vh;
-  width: 30em;
+  width: 22em;
   margin-left: 5em;
   background-color: #F9F9F9;
+  right:0;
 }
 
 .titolo {
