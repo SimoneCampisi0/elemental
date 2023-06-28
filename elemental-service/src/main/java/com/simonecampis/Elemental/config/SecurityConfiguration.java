@@ -41,8 +41,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/user/update").permitAll()
                         .requestMatchers("/user/recuperaPassword").permitAll()
                         .requestMatchers("/foto/insertFoto").permitAll()
-                        .requestMatchers("/chat/**").permitAll()
-                        .requestMatchers("/chat/").permitAll()
+
 //                        .requestMatchers("/log/getLoggedUsers").permitAll()
                         .requestMatchers(request -> {
                             String method = request.getMethod();
