@@ -2,6 +2,7 @@ package com.simonecampis.ElementalChat.controller;
 
 import com.netflix.discovery.converters.Auto;
 import com.simonecampis.ElementalChat.converter.ChatConverter;
+import com.simonecampis.ElementalChat.converter.MessageConverter;
 import com.simonecampis.ElementalChat.dao.ChatRepo;
 import com.simonecampis.ElementalChat.dao.MessageRepo;
 import com.simonecampis.ElementalChat.dto.ChatDTO;
@@ -10,15 +11,19 @@ import com.simonecampis.ElementalChat.dto.UserDTO;
 import com.simonecampis.ElementalChat.model.Chat;
 import com.simonecampis.ElementalChat.model.Message;
 import com.simonecampis.ElementalChat.service.ChatService;
+import org.bouncycastle.cert.ocsp.Req;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RestController
 //@RequestMapping("/message")
@@ -35,6 +40,9 @@ public class MessageController extends AbstractController<MessageDTO> {
 
     @Autowired
     private ChatConverter chatConverter;
+
+    @Autowired
+    private MessageConverter messageConverter;
 
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
@@ -81,6 +89,51 @@ public class MessageController extends AbstractController<MessageDTO> {
             return chatConverter.toDTO(chatRepo.save(chatConverter.toEntity(dto)));
         }
         return c;
+    }
+
+
+//    @GetMapping(value="findPagesByChat")
+//    public ResponseEntity<Map<String, Object>> findPagesByChat (@RequestParam Long idChat,
+//                                                                @RequestParam(defaultValue = "0") Integer page) {
+//        List<Message> messages = new ArrayList<Message>();
+//        try {
+//            Pageable pageable = PageRequest.of(page, 5);
+//
+//            Page<Message> messPages = messageRepo.findByChat_IdChat(idChat, pageable);
+//
+//            messages = messPages.getContent();
+//            Map<String, Object> response = new HashMap<>();
+//            response.put("messages", messages);
+//            response.put("currentPage", messPages.getNumber());
+//            response.put("totalPages", messPages.getTotalPages());
+//            response.put("totalMessages", messPages.getTotalElements());
+//
+//            return new ResponseEntity<>(response, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+
+    @GetMapping(value="findPagesByChat")
+    public ResponseEntity<Map<String, Object>> findPagesByChat (@RequestParam Long idChat,
+                                                                @RequestParam(defaultValue = "0") Integer page) {
+        List<MessageDTO> messages = new ArrayList<MessageDTO>();
+        try {
+            Pageable pageable = PageRequest.of(page, 5);
+
+            Page<MessageDTO> messPages = messageConverter.toDTOPages(messageRepo.findByChat_IdChat(idChat, pageable));
+
+            messages = messPages.getContent();
+            Map<String, Object> response = new HashMap<>();
+            response.put("messages", messages);
+            response.put("currentPage", messPages.getNumber());
+            response.put("totalPages", messPages.getTotalPages());
+            response.put("totalMessages", messPages.getTotalElements());
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 
