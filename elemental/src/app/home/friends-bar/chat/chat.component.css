@@ -16,8 +16,17 @@
   margin-left: 0.1em;
   margin-top: 1em;
   font-size: 19px;
+  position: fixed;
 }
 
+/*.chattaCon {*/
+/*  margin-left: 0.1em;*/
+/*  margin-top: 1em;*/
+/*  font-size: 19px;*/
+/*  position: sticky;*/
+/*  top: 0;*/
+/*  z-index: 1;*/
+/*}*/
 
 .msgInput {
   margin-right: 0.5em;

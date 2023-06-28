@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {UserDTO} from "../../../../dto/userdto";
 import {ChatService} from "../../../../service/chat.service";
 import {AnagDTO} from "../../../../dto/anagdto";
@@ -49,8 +49,21 @@ export class ChatComponent {
   // @ts-ignore
   listaMessaggi: MessageDTO[]
 
+
+
+
   constructor(public chatService: ChatService, private http:HttpClient) {
   }
+
+  @HostListener('window:scroll', ['$event']) //non funziona
+  onWindowScroll(event:Event) {
+    // Gestisci l'evento della scroll bar qui
+
+    // Esempio:
+    const posizioneScroll = window.scrollY;
+    console.log('Posizione Scroll:', posizioneScroll);
+  }
+
   ngOnInit(){
     this.stompClient = new Client({
       webSocketFactory: () => new SockJS('http://localhost:8080/message/chat'),
