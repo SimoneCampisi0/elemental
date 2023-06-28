@@ -72,6 +72,8 @@ export class ChatComponent {
         this.chatService.findChatByNome(this.channelName).subscribe(x => {
           if (x!== null) {
 
+            console.log("chatTrovata: "+x)
+
             this.chatService.getAllMessagesByChat(x).subscribe(y=> {
               this.chatTemp = x
               this.listaMessaggi = y
@@ -85,6 +87,7 @@ export class ChatComponent {
 
             })
           } else { //se la chat non esiste, la vado a creare
+
               let nomeChat = ''
               if (this.user1.id < this.user2.id) {
                 nomeChat = this.user1.id + "e" +this.user2.id
@@ -93,9 +96,9 @@ export class ChatComponent {
               }
 
 
-              let c = this.chatService.checkChatExist(nomeChat).subscribe(c=> {
-                this.chatService.getAllMessagesByChat(x).subscribe(y=> {
-                  this.chatTemp = x
+            this.chatService.checkChatExist(nomeChat).subscribe(chat=> {
+                this.chatService.getAllMessagesByChat(chat).subscribe(y=> {
+                  this.chatTemp = chat
                   this.listaMessaggi = y
 
 
