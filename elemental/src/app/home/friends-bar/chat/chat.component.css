@@ -2,11 +2,14 @@
   position: fixed;
   height: 100vh;
   /*width: max-content;*/
-  width: auto;
+  width: max-content;
   margin-left: 5em;
   background-color: #F9F9F9;
 
   /*right: 0;*/
+  overflow-y:auto;
+
+  padding-right: 20px;
 }
 
 .chattaCon {
