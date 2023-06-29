@@ -3,10 +3,10 @@
   height: 100vh;
   /*width: max-content;*/
   width: max-content;
-  margin-left: 6em;
+  margin-left: 5em;
   background-color: #F9F9F9;
 
-  /*right: 0;*/
+  right: 0;
 
 }
 
@@ -93,22 +93,30 @@
 .cardMsgSend {
     margin-top: 1em;
     background-color: #e2eef3;
-    width: auto;
+    /*width: auto;*/
     height: auto;
     padding: 5px;
     border-radius: 5px;
     align-self: flex-end;
+
+  /*white-space: pre-wrap;*/
+  /*overflow-wrap: break-word;*/
 }
 
 .cardMsgSend1 {
   margin-top: 1em;
   background-color: #cccccc;
-  width: auto;
+  /*width: auto;*/
   height: auto;
   padding: 5px;
   border-radius: 5px;
   /*justify-content: flex-end;*/
   align-self: flex-start;
+}
+
+
+.cardMsgSend, .cardMsgSend1 {
+  max-width: 200px;
 }
 
 

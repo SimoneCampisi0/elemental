@@ -9,6 +9,7 @@ import {AnagDTO} from "../dto/anagdto";
 import {ChatDTO} from "../dto/chatdto";
 import {PostDTO} from "../dto/postdto";
 import {MessageDTO} from "../dto/messagedto";
+import {MessageResponseDTO} from "../dto/messageresponsedto";
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,10 @@ export class ChatService {
 
   checkChatExist(to: string): Observable<ChatDTO> {
     return this.http.get<ChatDTO>('http://localhost:8082/message/checkChatExist?to='+to)
+  }
+
+  findPagesByChat(idChat: number, page: number): Observable<MessageResponseDTO> {
+    return this.http.get<MessageResponseDTO>('http://localhost:8082/message/findPagesByChat?idChat='+idChat+'&page='+page)
   }
 
 }
