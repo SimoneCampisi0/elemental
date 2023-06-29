@@ -55,16 +55,15 @@ export class ChatComponent {
   constructor(public chatService: ChatService, private http:HttpClient) {
   }
 
-  @HostListener('window:scroll', ['$event']) //non funziona
-  onWindowScroll(event:Event) {
-    // Gestisci l'evento della scroll bar qui
+  // @HostListener('window:scroll', ['$event'])
+  // // @ts-ignore
+  // onWindowScroll($event) {
+  //   console.log("scrolling...");
+  //   let posY = window.scrollY;
+  //     console.log("posY: "+posY);
+  // }
 
-    // Esempio:
-    const posizioneScroll = window.scrollY;
-    console.log('Posizione Scroll:', posizioneScroll);
-  }
-
-  ngOnInit(){
+    ngOnInit(){
     this.stompClient = new Client({
       webSocketFactory: () => new SockJS('http://localhost:8080/message/chat'),
       onConnect: () => {
@@ -137,10 +136,12 @@ export class ChatComponent {
 
 
 
-    // @ts-ignore
 
 
-
+      // document.addEventListener("scroll", (event) => {
+      //   let posY = document.scrollY;
+      //   console.log("posY: "+posY);
+      // });
 
 
   }

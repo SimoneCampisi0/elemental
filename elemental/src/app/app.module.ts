@@ -25,6 +25,7 @@ import { DettaglioUserComponent } from './dettaglio-user/dettaglio-user.componen
 import {JwtInterceptor} from "./jwt.interceptor";
 import { FriendsBarComponent } from './home/friends-bar/friends-bar.component';
 import { ChatComponent } from './home/friends-bar/chat/chat.component';
+import {TrackScrollDirective} from "./home/friends-bar/chat/scroll.directive";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,9 @@ import { ChatComponent } from './home/friends-bar/chat/chat.component';
     SearchFilterPipe,
     DettaglioUserComponent,
     FriendsBarComponent,
-    ChatComponent
+    ChatComponent,
+    TrackScrollDirective // Aggiungi la direttiva all'array delle dichiarazioni qui
+
   ],
     imports: [
         BrowserModule,
