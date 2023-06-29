@@ -7,16 +7,16 @@
   background-color: #F9F9F9;
 
   /*right: 0;*/
-  overflow-y:auto;
 
   padding-right: 20px;
 }
 
 .chattaCon {
+  align-self: flex-start;
   margin-left: 0.1em;
   margin-top: 1em;
   font-size: 19px;
-  position: fixed;
+  /*position: fixed;*/
 }
 
 /*.chattaCon {*/
@@ -76,8 +76,18 @@
 /*  justify-content: flex-end;*/
 /*}*/
 
-
 .allCard {
+  overflow-y: auto;
+  padding-right: 0.5em;
+}
+
+.allCard::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+.cardGen {
   display: flex;
   flex-direction: column;
 }
