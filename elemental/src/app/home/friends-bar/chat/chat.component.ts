@@ -1,4 +1,4 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
 import {UserDTO} from "../../../../dto/userdto";
 import {ChatService} from "../../../../service/chat.service";
 import {AnagDTO} from "../../../../dto/anagdto";
@@ -50,7 +50,8 @@ export class ChatComponent {
   listaMessaggi: MessageDTO[]
 
 
-
+  // @ts-ignore
+  @ViewChild('allCardDiv') private allCardDiv: ElementRef;
 
   constructor(public chatService: ChatService, private http:HttpClient) {
   }
@@ -63,10 +64,13 @@ export class ChatComponent {
   //     console.log("posY: "+posY);
   // }
 
+
+
     ngOnInit(){
     this.stompClient = new Client({
       webSocketFactory: () => new SockJS('http://localhost:8080/message/chat'),
       onConnect: () => {
+
         console.log('Connected to WebSocket');
 
         // @ts-ignore
@@ -95,6 +99,8 @@ export class ChatComponent {
                 // Aggiungi il nuovo messaggio alla lista dei messaggi
                 console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
                 this.listaMessaggi.push(JSON.parse(message.body));
+
+
               });
 
             })
@@ -118,6 +124,7 @@ export class ChatComponent {
                     // Aggiungi il nuovo messaggio alla lista dei messaggi
                     console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
                     this.listaMessaggi.push(JSON.parse(message.body));
+
                   });
 
                 })
@@ -126,13 +133,19 @@ export class ChatComponent {
           }
 
         })
+
+
       },
       onWebSocketError: (error) => {
         console.error('WebSocket connection error:', error);
       }
+
+
+
+
+
     });
     this.stompClient.activate();
-
 
 
 
@@ -144,7 +157,25 @@ export class ChatComponent {
       // });
 
 
+
   }
+
+  ngAfterViewInit() {
+    console.log("ngAfterViewInit")
+    setTimeout(() => {
+      this.allCardDiv.nativeElement.scrollTop = this.allCardDiv.nativeElement.scrollHeight;
+      console.log("setScroll")
+    }, 100);
+  }
+
+
+  // ngAfterViewChecked() {
+  //   setTimeout(() => {
+  //     this.allCardDiv.nativeElement.scrollTop = this.allCardDiv.nativeElement.scrollHeight;
+  //   }, 0);
+  // }
+
+
   goBack() {
     this.chatService.mostaChat = false;
   }
@@ -166,6 +197,11 @@ export class ChatComponent {
 
     this.newMessage.setValue('')
     this.stompClient.publish({ destination: '/app/chat/'+this.channelName, body: JSON.stringify(message)}); // Sostituisci "{to}" con il nome del canale corretto
+
+    setTimeout(() => {
+      this.allCardDiv.nativeElement.scrollTop = this.allCardDiv.nativeElement.scrollHeight;
+      console.log("setScroll")
+    }, 100);
   }
 
 }
