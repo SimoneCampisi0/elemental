@@ -119,9 +119,9 @@ public class MessageController extends AbstractController<MessageDTO> {
                                                                 @RequestParam(defaultValue = "0") Integer page) {
         List<MessageDTO> messages = new ArrayList<MessageDTO>();
         try {
-            Pageable pageable = PageRequest.of(page, 5);
+            Pageable pageable = PageRequest.of(page, 15); //primo valore è la pagina corrente, il secondo è quanti messaggi vedrà per pagina.
 
-            Page<MessageDTO> messPages = messageConverter.toDTOPages(messageRepo.findByChat_IdChat(idChat, pageable));
+            Page<MessageDTO> messPages = messageConverter.toDTOPages(messageRepo.findByChat_IdChatOrderByDateAsc(idChat, pageable));
 
             messages = messPages.getContent();
             Map<String, Object> response = new HashMap<>();
