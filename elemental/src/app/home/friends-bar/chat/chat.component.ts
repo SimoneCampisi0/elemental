@@ -19,7 +19,7 @@ import {DatePipe} from "@angular/common";
 export class ChatComponent {
   // @ts-ignore
 
-  nPage: number;
+  nPage: number = 0;
 
   // @ts-ignore
   chatTemp: ChatDTO
@@ -58,14 +58,6 @@ export class ChatComponent {
 
   constructor(public chatService: ChatService, private http:HttpClient) {
   }
-
-  // @HostListener('window:scroll', ['$event'])
-  // // @ts-ignore
-  // onWindowScroll($event) {
-  //   console.log("scrolling...");
-  //   let posY = window.scrollY;
-  //     console.log("posY: "+posY);
-  // }
 
   ngOnInit(){
     this.stompClient = new Client({
@@ -150,100 +142,6 @@ export class ChatComponent {
   }
 
 
-  //   ngOnInit(){
-  //   this.stompClient = new Client({
-  //     webSocketFactory: () => new SockJS('http://localhost:8080/message/chat'),
-  //     onConnect: () => {
-  //
-  //       console.log('Connected to WebSocket');
-  //
-  //       // @ts-ignore
-  //       this.user1 = JSON.parse(localStorage.getItem('currentUser'))
-  //       this.user2 = this.chatService.userRicevitore;
-  //       this.anagTemp = this.chatService.anagRicevitore;
-  //       console.log("emailUsetTemp: "+this.user2.email)
-  //
-  //       if (this.user1.id < this.user2.id) {
-  //         this.channelName = this.user1.id + "e" +this.user2.id
-  //       } else {
-  //         this.channelName = this.user2.id + "e" +this.user1.id
-  //       }
-  //
-  //       this.chatService.findChatByNome(this.channelName).subscribe(x => {
-  //         if (x!== null) {
-  //
-  //           console.log("chatTrovata: "+x)
-  //
-  //           this.chatService.getAllMessagesByChat(x).subscribe(y=> {
-  //             this.chatTemp = x
-  //             this.listaMessaggi = y
-  //
-  //
-  //             this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
-  //               // Aggiungi il nuovo messaggio alla lista dei messaggi
-  //               console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
-  //               this.listaMessaggi.push(JSON.parse(message.body));
-  //
-  //
-  //             });
-  //
-  //           })
-  //         } else { //se la chat non esiste, la vado a creare
-  //
-  //             let nomeChat = ''
-  //             if (this.user1.id < this.user2.id) {
-  //               nomeChat = this.user1.id + "e" +this.user2.id
-  //             } else {
-  //               nomeChat= this.user2.id + "e" +this.user1.id
-  //             }
-  //
-  //
-  //           this.chatService.checkChatExist(nomeChat).subscribe(chat=> {
-  //               this.chatService.getAllMessagesByChat(chat).subscribe(y=> {
-  //                 this.chatTemp = chat
-  //                 this.listaMessaggi = y
-  //
-  //
-  //                 this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
-  //                   // Aggiungi il nuovo messaggio alla lista dei messaggi
-  //                   console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
-  //                   this.listaMessaggi.push(JSON.parse(message.body));
-  //
-  //                 });
-  //
-  //               })
-  //             })
-  //
-  //         }
-  //
-  //       })
-  //
-  //
-  //     },
-  //     onWebSocketError: (error) => {
-  //       console.error('WebSocket connection error:', error);
-  //     }
-  //
-  //
-  //
-  //
-  //
-  //   });
-  //   this.stompClient.activate();
-  //
-  //
-  //
-  //
-  //
-  //     // document.addEventListener("scroll", (event) => {
-  //     //   let posY = document.scrollY;
-  //     //   console.log("posY: "+posY);
-  //     // });
-  //
-  //
-  //
-  // }
-
   ngAfterViewInit() {
     console.log("ngAfterViewInit")
     setTimeout(() => {
@@ -252,12 +150,6 @@ export class ChatComponent {
     }, 100);
   }
 
-
-  // ngAfterViewChecked() {
-  //   setTimeout(() => {
-  //     this.allCardDiv.nativeElement.scrollTop = this.allCardDiv.nativeElement.scrollHeight;
-  //   }, 0);
-  // }
 
 
   goBack() {
@@ -287,6 +179,33 @@ export class ChatComponent {
       console.log("setScroll")
     }, 100);
   }
+
+  onScroll(event: Event): void {
+    let target = event.target as HTMLElement
+    console.log("posizione scroll y: "+target.scrollTop)
+
+    if(target.scrollTop == 0) {
+      this.nPage++
+      this.chatService.findPagesByChat(this.chatTemp.idChat, this.nPage).subscribe(response => {
+
+
+        this.listaMessaggi = response.messages
+
+
+        this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
+          // Aggiungi il nuovo messaggio alla lista dei messaggi
+          console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
+          this.listaMessaggi.push(JSON.parse(message.body));
+
+
+        });
+      })
+
+    }
+
+
+  }
+
 
 }
 

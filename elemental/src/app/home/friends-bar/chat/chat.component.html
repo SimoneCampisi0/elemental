@@ -17,7 +17,7 @@
 <!--    </div>-->
 <!--  </div>-->
 
-  <div #allCardDiv track-scroll class="allCard ">
+  <div #allCardDiv track-scroll class="allCard" (scroll)="onScroll($event)">
     <div class="cardGen" *ngFor="let msg of this.listaMessaggi">
       <div class="cardMsgSend" *ngIf="msg.user1.id == this.user1.id; else viewMsgRicevuto" >
         <div class="msg">{{msg.text}}</div>
