@@ -17,6 +17,9 @@ import {DatePipe} from "@angular/common";
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent {
+  messRestanti = 0;
+
+  messRestantiInPage = 0;
 
   nTotPage: number = 0;
 
@@ -96,6 +99,7 @@ export class ChatComponent {
                 this.listaMessaggi = response.messages
 
                 if (this.listaMessaggi.length < 15) {
+                  this.currentPage = this.currentPage - 1
                   this.loadMoreMessages();
                 }
 
@@ -207,41 +211,47 @@ export class ChatComponent {
     }, 100);
   }
 
-  onScroll(event: Event): void { //RIVEDERE. La pagina, partendo dall'ultima posizione, dovrebbe diminuire piuttosto che aumentare
+  onScroll(event: Event): void { //RIVEDERE. La scroll bar non deve raggiungere la posizione top, ma deve rimanere dov'è
     let target = event.target as HTMLElement
     console.log("posizione scroll y: "+target.scrollTop)
 
     if(target.scrollTop == 0) {
-      this.currentPage++
-      this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
+      if (this.currentPage >= 0) {
+        if(this.messRestantiInPage != 0) { //se esistono ancora dei messaggi restanti dal primo caricamento
+          console.log("messRestantiInPage: "+this.messRestantiInPage)
 
+          let tempArray = new Array<MessageDTO>()
+          this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
+            for (let i = this.messRestantiInPage; i>= 0; i--) { //trovo i messaggi restanti e li carico
+              tempArray[i] = response.messages[i]
+            }
 
-        this.listaMessaggi = response.messages
+            this.listaMessaggi = [...tempArray, ...this.listaMessaggi]
+          })
+        } else { //caricamento dei messaggi dopo il primo caricamento. Quindi se ci sono altre pagine
 
-
-        this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
-          // Aggiungi il nuovo messaggio alla lista dei messaggi
-          console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
-          this.listaMessaggi.push(JSON.parse(message.body));
-
-
-        });
-      })
+        }
+      }
     }
   }
 
-  loadMoreMessages() {
-    this.currentPage = this.currentPage - 1
-    let messRestanti = 15 - this.listaMessaggi.length
-
+  loadMoreMessages() { //carica i primi 15 messaggi. Li prende dalla pagina precedente
+    this.messRestanti = 15 - this.listaMessaggi.length - 1//numero di messaggi da caricare
+    this.messRestantiInPage = this.listaMessaggi.length //numero di messaggi non caricati da quella pagina
 
     let tempArray: MessageDTO[] = new Array<MessageDTO>()
+    let k = 0;
     this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
-      for(let i = 0; i < messRestanti; i++) {
-        tempArray[i] = response.messages[i]
+      console.log("lunghezza dell'array response: "+response.messages.length+" lunghezza dei messaggi restanti che mancano: "+this.messRestanti)
+      for(let i = response.messages.length-1; i >= this.messRestanti; i--) {
+        tempArray[k] = response.messages[i]
+        k++
         console.log("responseMessages["+i+"]: "+response.messages[i].text)
       }
+      tempArray.reverse()
       this.listaMessaggi = [...tempArray, ...this.listaMessaggi]
+
+      this.messRestantiInPage = k
     })
   }
 }
