@@ -17,6 +17,9 @@ import {DatePipe} from "@angular/common";
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent {
+
+  nTotPage: number = 0;
+
   // @ts-ignore
 
   nPage: number = 0;
@@ -83,21 +86,41 @@ export class ChatComponent {
             this.chatTemp = x
             console.log("chatTrovata: "+x)
 
-            // let nPage = ;
-            this.chatService.findPagesByChat(x.idChat, 0).subscribe(response => {
+
+            this.chatService.findNumberPages(x.idChat).subscribe(numPagTot => {
+              this.nTotPage = numPagTot
+              this.chatService.findPagesByChat(x.idChat, this.nTotPage-1).subscribe(response => {
 
 
-              this.listaMessaggi = response.messages
+                this.listaMessaggi = response.messages
 
 
-              this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
-                // Aggiungi il nuovo messaggio alla lista dei messaggi
-                console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
-                this.listaMessaggi.push(JSON.parse(message.body));
+                this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
+                  // Aggiungi il nuovo messaggio alla lista dei messaggi
+                  console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
+                  this.listaMessaggi.push(JSON.parse(message.body));
 
 
-              });
+                });
+              })
+
             })
+
+            // let nPage = ;
+            // this.chatService.findPagesByChat(x.idChat, 0).subscribe(response => {
+            //
+            //
+            //   this.listaMessaggi = response.messages
+            //
+            //
+            //   this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
+            //     // Aggiungi il nuovo messaggio alla lista dei messaggi
+            //     console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
+            //     this.listaMessaggi.push(JSON.parse(message.body));
+            //
+            //
+            //   });
+            // })
 
 
           } else { //se la chat non esiste, la vado a creare

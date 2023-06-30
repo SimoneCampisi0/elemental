@@ -46,4 +46,7 @@ export class ChatService {
     return this.http.get<MessageResponseDTO>('http://localhost:8082/message/findPagesByChat?idChat='+idChat+'&page='+page)
   }
 
+  findNumberPages(idChat: number): Observable<number>{
+    return this.http.get<number>('http://localhost:8082/message/findNumberPages?idChat='+idChat)
+  }
 }
