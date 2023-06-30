@@ -22,7 +22,7 @@ export class ChatComponent {
 
   // @ts-ignore
 
-  nPage: number = 0;
+  currentPage: number = 0;
 
   // @ts-ignore
   chatTemp: ChatDTO
@@ -89,11 +89,15 @@ export class ChatComponent {
 
             this.chatService.findNumberPages(x.idChat).subscribe(numPagTot => {
               this.nTotPage = numPagTot
-              this.chatService.findPagesByChat(x.idChat, this.nTotPage-1).subscribe(response => {
+              this.currentPage = this.nTotPage - 1
+              this.chatService.findPagesByChat(x.idChat, this.currentPage).subscribe(response => {
 
 
                 this.listaMessaggi = response.messages
 
+                if (this.listaMessaggi.length < 15) {
+                  this.loadMoreMessages();
+                }
 
                 this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
                   // Aggiungi il nuovo messaggio alla lista dei messaggi
@@ -203,13 +207,13 @@ export class ChatComponent {
     }, 100);
   }
 
-  onScroll(event: Event): void {
+  onScroll(event: Event): void { //RIVEDERE. La pagina, partendo dall'ultima posizione, dovrebbe diminuire piuttosto che aumentare
     let target = event.target as HTMLElement
     console.log("posizione scroll y: "+target.scrollTop)
 
     if(target.scrollTop == 0) {
-      this.nPage++
-      this.chatService.findPagesByChat(this.chatTemp.idChat, this.nPage).subscribe(response => {
+      this.currentPage++
+      this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
 
 
         this.listaMessaggi = response.messages
@@ -223,13 +227,23 @@ export class ChatComponent {
 
         });
       })
-
     }
-
-
   }
 
+  loadMoreMessages() {
+    this.currentPage = this.currentPage - 1
+    let messRestanti = 15 - this.listaMessaggi.length
 
+
+    let tempArray: MessageDTO[] = new Array<MessageDTO>()
+    this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
+      for(let i = 0; i < messRestanti; i++) {
+        tempArray[i] = response.messages[i]
+        console.log("responseMessages["+i+"]: "+response.messages[i].text)
+      }
+      this.listaMessaggi = [...tempArray, ...this.listaMessaggi]
+    })
+  }
 }
 
 
