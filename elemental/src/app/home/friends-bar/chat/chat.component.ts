@@ -212,23 +212,41 @@ export class ChatComponent {
   }
 
   onScroll(event: Event): void { //RIVEDERE. La scroll bar non deve raggiungere la posizione top, ma deve rimanere dov'è
+    // let target = event.target as HTMLElement
+    // console.log("posizione scroll y: "+target.scrollTop)
+    //
+    // if(target.scrollTop == 0) {
+    //   if (this.currentPage >= 0) {
+    //     if(this.messRestantiInPage != 0) { //se esistono ancora dei messaggi restanti dal primo caricamento
+    //       console.log("messRestantiInPage: "+this.messRestantiInPage)
+    //
+    //       let tempArray = new Array<MessageDTO>()
+    //       this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
+    //         for (let i = this.messRestantiInPage; i>= 0; i--) { //trovo i messaggi restanti e li carico
+    //           tempArray[i] = response.messages[i]
+    //         }
+    //
+    //         this.listaMessaggi = [...tempArray, ...this.listaMessaggi]
+    //       })
+    //     } else { //caricamento dei messaggi dopo il primo caricamento. Quindi se ci sono altre pagine
+    //
+    //     }
+    //   }
+    // }
+
     let target = event.target as HTMLElement
     console.log("posizione scroll y: "+target.scrollTop)
 
     if(target.scrollTop == 0) {
       if (this.currentPage >= 0) {
-        if(this.messRestantiInPage != 0) { //se esistono ancora dei messaggi restanti dal primo caricamento
-          console.log("messRestantiInPage: "+this.messRestantiInPage)
-
-          let tempArray = new Array<MessageDTO>()
+        if(this.messRestantiInPage != 0) {
+          let tempArr = new Array<MessageDTO>()
           this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
-            for (let i = this.messRestantiInPage; i>= 0; i--) { //trovo i messaggi restanti e li carico
-              tempArray[i] = response.messages[i]
+            for (let i = this.messRestantiInPage - 1; i>=0; i--) {
+              tempArr[i] = response.messages[i]
             }
-
-            this.listaMessaggi = [...tempArray, ...this.listaMessaggi]
+            this.listaMessaggi = [ ...tempArr, ...this.listaMessaggi]
           })
-        } else { //caricamento dei messaggi dopo il primo caricamento. Quindi se ci sono altre pagine
 
         }
       }
@@ -241,9 +259,16 @@ export class ChatComponent {
 
     let tempArray: MessageDTO[] = new Array<MessageDTO>()
     let k = 0;
+
     this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
+
+      let differenzaMess = response.messages.length-1 - this.messRestanti
+
       console.log("lunghezza dell'array response: "+response.messages.length+" lunghezza dei messaggi restanti che mancano: "+this.messRestanti)
-      for(let i = response.messages.length-1; i >= this.messRestanti; i--) {
+
+
+      for(let i = response.messages.length-1; i >= differenzaMess; i--) {
+      // for(let i = response.messages.length-1; i >= this.messRestanti; i--) {
         tempArray[k] = response.messages[i]
         k++
         console.log("responseMessages["+i+"]: "+response.messages[i].text)
@@ -251,7 +276,8 @@ export class ChatComponent {
       tempArray.reverse()
       this.listaMessaggi = [...tempArray, ...this.listaMessaggi]
 
-      this.messRestantiInPage = k
+      this.messRestantiInPage = 15 - k
+      console.log("messRestantiInPage"+this.messRestantiInPage)
     })
   }
 }
