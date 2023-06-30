@@ -136,5 +136,21 @@ public class MessageController extends AbstractController<MessageDTO> {
         }
     }
 
+    @GetMapping(value="findNumberPages")
+    public ResponseEntity<Integer> findNumberPages (@RequestParam Long idChat) {
+        List<MessageDTO> messages = new ArrayList<MessageDTO>();
+        try {
+            Pageable pageable = PageRequest.of(0, 15); //primo valore è la pagina corrente, il secondo è quanti messaggi vedrà per pagina.
+
+            Page<MessageDTO> messPages = messageConverter.toDTOPages(messageRepo.findByChat_IdChatOrderByDateAsc(idChat, pageable));
+
+
+            Integer numPages = messPages.getTotalPages();
+
+            return new ResponseEntity<>(numPages, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
