@@ -257,6 +257,8 @@ export class ChatComponent {
             this.listaMessaggi = [ ...tempArr, ...this.listaMessaggi]
             this.messRestantiInPage = tMessRim
             console.log("currentPage: "+this.currentPage + " messRimasti: "+this.messRestantiInPage)
+
+            target.scrollTop = 2
           })
 
         } else { //caso in cui venga caricata tutta la pagina, composta da 15 messaggi
@@ -265,9 +267,13 @@ export class ChatComponent {
             this.currentPage--
             this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
               this.listaMessaggi = [...response.messages, ...this.listaMessaggi]
+
+              target.scrollTop = 2
+
             })
           }
         }
+
       }
     }
   }
