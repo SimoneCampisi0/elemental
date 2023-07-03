@@ -270,6 +270,12 @@ export class DettaglioUserComponent {
 
   }
 
+  genereLowerCase() {
+    let genere = this.anag?.genere.toLowerCase().toString()
+    genere = genere?.charAt(0).toUpperCase() + genere?.slice(1)
+    return genere
+  }
+
 
   refreshPage() {
     window.location.reload();
