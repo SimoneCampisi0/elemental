@@ -43,3 +43,17 @@
   z-index: 2;
   color: #0D6EFD;
 }
+
+.datiPersonali {
+  /*background-color: #eeeeee;*/
+  z-index: 1;
+  border-radius: 10px;
+}
+
+
+.about {
+  z-index: 1;
+
+  /*background-color: #eeeeee;*/
+  border-radius: 10px;
+}

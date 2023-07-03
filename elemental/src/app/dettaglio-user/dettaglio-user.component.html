@@ -48,11 +48,11 @@
           </div>
           <div class="card-body p-4 text-black">
 
-            <div class="mb-5">
+            <div class="mb-5 datiPersonali shadow">
               <p class="ps-2 lead fw-normal mb-1" style="display: inline-block; font-size: 2.5em;">Dati personali</p>
               <div (click)="modificaDatiPersonali()" class="lead fw-normal mb-1 modificaMail cursorLink"><i class="fas fa-edit"></i></div>
 
-              <div class="p-4" style="background-color: #f8f9fa;">
+              <div class="p-4">
                 <div class="email" style="display:inline-block;">
                   <div class="h5">Email: </div>
                   <div class="descr">{{this.user?.email}}</div>
@@ -65,11 +65,11 @@
               </div>
             </div>
 
-            <div class="mb-5">
+            <div class="mb-5 about shadow">
               <p class="ps-2 lead fw-normal mb-1" style="display: inline-block; font-size: 2.5em;">About</p>
               <div (click)="modificaDescr()" class="lead fw-normal mb-1 modificaDescr cursorLink"><i class="fas fa-edit"></i></div>
 
-              <div class="p-4" style="background-color: #f8f9fa;">
+              <div class="p-4">
                 <div class="h5">Biografia</div>
                 <div class="descr">{{this.anag?.descrizione}}</div>
               </div>

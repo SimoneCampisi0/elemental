@@ -31,6 +31,7 @@
 
 .cardAmico .nomeAmico {
   font-weight: 600;
+  font-family: Satoshi-Black, sans-serif;
 }
 
 .cardAmico .nomeAmico:hover {
