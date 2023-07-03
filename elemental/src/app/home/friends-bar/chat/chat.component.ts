@@ -87,7 +87,7 @@ export class ChatComponent {
         this.chatService.findChatByNome(this.channelName).subscribe(x => {
           if (x!== null) {
             this.chatTemp = x
-            console.log("chatTrovata: "+x)
+            console.log("chatTrovata: "+x.idChat)
 
 
             this.chatService.findNumberPages(x.idChat).subscribe(numPagTot => {
@@ -102,6 +102,9 @@ export class ChatComponent {
                   this.currentPage = this.currentPage - 1
                   this.loadMoreMessages();
                 }
+
+
+                // console.log("pagina attuale in seguito ngOnInit(): "+this.currentPage) //CANCELLARE
 
                 this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
                   // Aggiungi il nuovo messaggio alla lista dei messaggi
@@ -241,19 +244,31 @@ export class ChatComponent {
       if (this.currentPage >= 0) {
         if(this.messRestantiInPage != 0) {
           let tempArr = new Array<MessageDTO>()
+          // console.log("Messaggi restati dopo lo scroll: "+this.messRestantiInPage)
           this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
+
             for (let i = this.messRestantiInPage - 1; i>=0; i--) {
+              console.log("msg: "+response.messages[i].text)
               tempArr[i] = response.messages[i]
             }
             this.listaMessaggi = [ ...tempArr, ...this.listaMessaggi]
+            this.currentPage--
           })
 
+        } else { //caso in cui venga caricata tutta la pagina, composta da 15 messaggi
+          if (this.currentPage != 0) {
+            console.log("pagina attuale: "+this.currentPage)
+            this.currentPage--
+            this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
+              this.listaMessaggi = [...response.messages, ...this.listaMessaggi]
+            })
+          }
         }
       }
     }
   }
 
-  loadMoreMessages() { //carica i primi 15 messaggi. Li prende dalla pagina precedente
+  loadMoreMessages() { //Carica i primi 15 messaggi. Li prende dalla pagina precedente
     this.messRestanti = 15 - this.listaMessaggi.length - 1//numero di messaggi da caricare
     this.messRestantiInPage = this.listaMessaggi.length //numero di messaggi non caricati da quella pagina
 
