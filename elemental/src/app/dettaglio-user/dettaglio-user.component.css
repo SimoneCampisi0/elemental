@@ -2,6 +2,7 @@
   position: relative;
   left: 21em;
   width: 87em;
+  font-family: Satoshi-Regular, sans-serif;
 }
 .modificaDescr {
   display: inline-block;
