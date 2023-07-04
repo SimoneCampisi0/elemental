@@ -36,11 +36,20 @@
 }
 
 .userImg {
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
+  /*width: 30px;*/
+  /*height: 30px;*/
+  /*border-radius: 10px;*/
+  /*margin-right: 5%;*/
+  /*margin-bottom: 0px;*/
+
+  border: 1px solid #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: relative;
   right: 5%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .nomeUser {
