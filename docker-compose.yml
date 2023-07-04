@@ -1,0 +1,66 @@
+version: '3'
+services:
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: elemental
+    ports:
+      - "3306:3306"
+    container_name: mysql
+
+  elemental-service:
+    build:
+      context: elemental-service
+      dockerfile: ../elemental-service/Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql/elemental
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - mysql
+    ports:
+      - "8081:8081"
+    container_name: elemental-service
+
+  discovery-server:
+    build:
+      context: discovery-server
+      dockerfile: ../discovery-server/Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql/elemental
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - mysql
+    ports:
+      - "8761:8761"
+    container_name: discovery-server
+
+  chat-service:
+    build:
+      context: chat-service
+      dockerfile: ../chat-service/Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql/elemental
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - mysql
+    ports:
+      - "8082:8082"
+    container_name: chat-service
+
+  api-gateway:
+    build:
+      context: api-gateway
+      dockerfile: ../api-gateway/Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql/elemental
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    container_name: api-gateway
