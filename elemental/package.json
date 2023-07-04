@@ -23,6 +23,7 @@
     "@fortawesome/angular-fontawesome": "^0.13.0",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@ng-idle/core": "^13.0.0",
     "@stomp/stompjs": "^7.0.0",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.2.3",

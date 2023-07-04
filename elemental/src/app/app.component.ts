@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {TimeoutService} from "../service/timeout.service";
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  constructor(private timeoutService: TimeoutService) {
+  }
+
   ngOnInit() {
 
   }

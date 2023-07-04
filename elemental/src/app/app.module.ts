@@ -26,6 +26,7 @@ import {JwtInterceptor} from "./jwt.interceptor";
 import { FriendsBarComponent } from './home/friends-bar/friends-bar.component';
 import { ChatComponent } from './home/friends-bar/chat/chat.component';
 import {TrackScrollDirective} from "./home/friends-bar/chat/scroll.directive";
+import {NgIdleModule} from "@ng-idle/core";
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {TrackScrollDirective} from "./home/friends-bar/chat/scroll.directive";
         NgOptimizedImage,
         FormsModule,
         FontAwesomeModule,
-        ElencoPostRoutingModule
+        ElencoPostRoutingModule,
+        NgIdleModule.forRoot()
     ],
   providers: [
     {
