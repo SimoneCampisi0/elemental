@@ -1,5 +1,6 @@
 package com.simonecampis.ElementalChat.service;
 
+import com.simonecampis.ElementalChat.controller.ElementalServiceA;
 import com.simonecampis.ElementalChat.converter.ChatConverter;
 import com.simonecampis.ElementalChat.converter.MessageConverter;
 import com.simonecampis.ElementalChat.dao.ChatRepo;
@@ -37,16 +38,21 @@ public class ChatService {
 
     @Autowired
     private WebClient.Builder webClientBuilder;
+    private ElementalServiceA elementalServiceA;
     private ArrayList<UserDTO> loggedUsers;
-    public ArrayList<UserDTO> getUsersSession() {
-        return loggedUsers =  webClientBuilder.build().get()
-                .uri("http://elemental-app/log/getLoggedUsers")
-                .header("x-service-name", "elemental-chat")
-                .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<ArrayList<UserDTO>>() {})
-                .block();
-    }
+//    public ArrayList<UserDTO> getUsersSession() {
+//        return loggedUsers =  webClientBuilder.build().get()
+//                .uri("http://elemental-app/log/getLoggedUsers")
+//                .header("x-service-name", "elemental-chat")
+//                .retrieve()
+//                .bodyToMono(new ParameterizedTypeReference<ArrayList<UserDTO>>() {})
+//                .block();
+//    }
 
+    public ArrayList<UserDTO> getUsersSession() {
+        System.out.println("loggedUsers: "+ elementalServiceA.getLoggedUsers());
+        return loggedUsers = elementalServiceA.getLoggedUsers();
+    }
     public List<MessageDTO> getAllMessagesByChat(Chat chat) {
         return converter.toDTOList(repo.findByChat(chat));
     }
