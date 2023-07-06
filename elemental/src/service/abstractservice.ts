@@ -14,8 +14,8 @@ import { environment } from './../environments/environment';
  */
 export abstract class AbstractService<DTO> implements Service<DTO> {
 
-    type: string ='';
-    port: string = '8081';
+    type: string ='elemental';
+    port: string = '8080';
 
     constructor(protected http: HttpClient) {
     }
