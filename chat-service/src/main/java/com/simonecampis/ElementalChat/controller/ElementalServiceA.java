@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 
-@FeignClient(name = "/")
+@FeignClient(name = "elemental-app")
 public interface ElementalServiceA {
     @GetMapping(value = "/log/getLoggedUsers")
     ArrayList<UserDTO> getLoggedUsers();

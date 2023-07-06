@@ -38,6 +38,8 @@ public class ChatService {
 
     @Autowired
     private WebClient.Builder webClientBuilder;
+
+    @Autowired
     private ElementalServiceA elementalServiceA;
     private ArrayList<UserDTO> loggedUsers;
 //    public ArrayList<UserDTO> getUsersSession() {

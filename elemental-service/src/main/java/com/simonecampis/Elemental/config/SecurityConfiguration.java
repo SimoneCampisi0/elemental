@@ -42,14 +42,14 @@ public class SecurityConfiguration {
                         .requestMatchers("/user/recuperaPassword").permitAll()
                         .requestMatchers("/foto/insertFoto").permitAll()
 
-//                        .requestMatchers("/log/getLoggedUsers").permitAll()
-                        .requestMatchers(request -> {
-                            String method = request.getMethod();
-                            String path = request.getServletPath();
-                            boolean isGetLoggedUsers = HttpMethod.GET.matches(method) && "/log/getLoggedUsers".equals(path);
-                            boolean isElementalChat = "elemental-chat".equals(request.getHeader("x-service-name"));
-                            return isGetLoggedUsers && isElementalChat;
-                        }).permitAll()
+                        .requestMatchers("/log/getLoggedUsers").permitAll()
+//                        .requestMatchers(request -> {
+//                            String method = request.getMethod();
+//                            String path = request.getServletPath();
+//                            boolean isGetLoggedUsers = HttpMethod.GET.matches(method) && "/log/getLoggedUsers".equals(path);
+//                            boolean isElementalChat = "elemental-chat".equals(request.getHeader("x-service-name"));
+//                            return isGetLoggedUsers && isElementalChat;
+//                        }).permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sessionManagement -> sessionManagement

@@ -53,10 +53,10 @@ public class MessageController extends AbstractController<MessageDTO> {
         return chatService.findChatByNome(nome);
     }
 
-//    @GetMapping(value="/getLogUsers")
-//    public ArrayList<UserDTO> getLogUsers() {
-//        return chatService.getUsersSession();
-//    }
+    @GetMapping(value="/getLogUsers")
+    public ArrayList<UserDTO> getLogUsers() {
+        return chatService.getUsersSession();
+    }
 
 
     @MessageMapping("/chat/{to}") //to = nome canale
