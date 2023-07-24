@@ -40,7 +40,8 @@ public class ChatService {
     private ArrayList<UserDTO> loggedUsers;
     public ArrayList<UserDTO> getUsersSession() {
         return loggedUsers =  webClientBuilder.build().get()
-                .uri("http://elemental-app/log/getLoggedUsers")
+//                .uri("http://elemental-app/log/getLoggedUsers")
+                    .uri("http://localhost:8081/log/getLoggedUsers")
                 .header("x-service-name", "elemental-chat")
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<ArrayList<UserDTO>>() {})
