@@ -34,15 +34,15 @@ public class SecurityConfiguration {
                 .and()
                 .csrf(csrf -> csrf.disable())
                 .authorizeRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/auth/register").permitAll()
-                        .requestMatchers("/auth/authenticate").permitAll()
-                        .requestMatchers("/anag/**").permitAll()
-                        .requestMatchers("/user/findUserByEmail").permitAll()
-                        .requestMatchers("/user/update").permitAll()
-                        .requestMatchers("/user/recuperaPassword").permitAll()
-                        .requestMatchers("/foto/insertFoto").permitAll()
+                        .requestMatchers("/elemental/auth/register").permitAll()
+                        .requestMatchers("/elemental/auth/authenticate").permitAll()
+                        .requestMatchers("/elemental/anag/**").permitAll()
+                        .requestMatchers("/elemental/user/findUserByEmail").permitAll()
+                        .requestMatchers("/elemental/user/update").permitAll()
+                        .requestMatchers("/elemental/user/recuperaPassword").permitAll()
+                        .requestMatchers("/elemental/foto/insertFoto").permitAll()
 
-                        .requestMatchers("/log/getLoggedUsers").permitAll()
+                        .requestMatchers("/elemental/log/getLoggedUsers").permitAll()
 //                        .requestMatchers(request -> {
 //                            String method = request.getMethod();
 //                            String path = request.getServletPath();
