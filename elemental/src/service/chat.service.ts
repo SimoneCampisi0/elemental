@@ -31,22 +31,22 @@ export class ChatService {
   }
 
   getAllMessagesByChat(dto: ChatDTO): Observable<MessageDTO[]> {
-    return this.http.post<MessageDTO[]>('http://localhost:8082/getAllMessagesByChat', dto);
+    return this.http.post<MessageDTO[]>('http://localhost:8082/message/getAllMessagesByChat', dto);
   }
 
   findChatByNome(nome: string): Observable<ChatDTO> {
-    return this.http.get<ChatDTO>('http://localhost:8082/findChatByNome?nome='+nome)
+    return this.http.get<ChatDTO>('http://localhost:8082/message/findChatByNome?nome='+nome)
   }
 
   checkChatExist(to: string): Observable<ChatDTO> {
-    return this.http.get<ChatDTO>('http://localhost:8082/checkChatExist?to='+to)
+    return this.http.get<ChatDTO>('http://localhost:8082/message/checkChatExist?to='+to)
   }
 
   findPagesByChat(idChat: number, page: number): Observable<MessageResponseDTO> {
-    return this.http.get<MessageResponseDTO>('http://localhost:8082/findPagesByChat?idChat='+idChat+'&page='+page)
+    return this.http.get<MessageResponseDTO>('http://localhost:8082/message/findPagesByChat?idChat='+idChat+'&page='+page)
   }
 
   findNumberPages(idChat: number): Observable<number>{
-    return this.http.get<number>('http://localhost:8082/findNumberPages?idChat='+idChat)
+    return this.http.get<number>('http://localhost:8082/message/findNumberPages?idChat='+idChat)
   }
 }

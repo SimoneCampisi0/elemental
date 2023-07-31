@@ -17,7 +17,7 @@ export class FotoService extends AbstractService<FotoDTO>{
 
   constructor(http: HttpClient) {
     super(http);
-    this.type = 'foto';
+    this.type = 'elemental/foto';
   }
   insertFoto(dto: FotoRequestDTO): Observable<FotoDTO> {
     return this.http.post<FotoDTO>(environment.APIEndpoint + this.type + '/insertFoto', dto);

@@ -14,7 +14,7 @@ export class AnagService extends AbstractService<AnagDTO>{
 
   constructor(http: HttpClient) {
     super(http);
-    this.type = 'anag';
+    this.type = 'elemental/anag';
   }
   findAnagByEmail(email: String): Observable<AnagDTO> {
     return this.http.get<AnagDTO>(environment.APIEndpoint + this.type + '/findAnagByEmail?email='+email)

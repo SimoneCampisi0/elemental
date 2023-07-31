@@ -14,7 +14,7 @@ export class LogService {
   type: string ='';
   port: string = '8080';
   constructor(protected http: HttpClient) {
-    this.type = 'log';
+    this.type = 'elemental/log';
   }
   getLoggedUsers(): Observable<UserDTO[]> {
     return this.http.get<UserDTO[]>(environment.APIEndpoint + this.type + '/getLoggedUsers');

@@ -14,7 +14,7 @@ import {InterazioneDTO} from "../dto/InterazioneDTO";
 export class InterazioneService extends AbstractService<InterazioneDTO>{
   constructor(http: HttpClient) {
     super(http);
-    this.type = 'interazione';
+    this.type = 'elemental/interazione';
   }
   // findByIdUser(id: number): Observable<IterazioneDTO> {
   //   return this.http.get<IterazioneDTO>(environment.APIEndpoint + this.type + '/findByIdUser?id='+id)

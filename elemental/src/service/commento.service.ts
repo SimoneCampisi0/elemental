@@ -16,7 +16,7 @@ import {CommentoDTO} from "../dto/commentodto";
 export class CommentoService extends AbstractService<CommentoDTO>{
   constructor(http: HttpClient) {
     super(http);
-    this.type = 'commento';
+    this.type = 'elemental/commento';
   }
   getAllByPostIdPost(idPost: number): Observable<CommentoDTO[]> {
     return this.http.get<CommentoDTO[]>(environment.APIEndpoint + this.type + '/getAllByPostIdPost?idPost=' + idPost);

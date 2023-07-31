@@ -18,7 +18,7 @@ export class PostService extends AbstractService<PostDTO>{
 
   constructor(http: HttpClient) {
     super(http);
-    this.type = 'post';
+    this.type = 'elemental/post';
   }
 
   setFilterPost(filterPost: PostDTO[]): void {
