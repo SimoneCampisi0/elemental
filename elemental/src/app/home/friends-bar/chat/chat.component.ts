@@ -67,7 +67,7 @@ export class ChatComponent {
 
   ngOnInit(){
     this.stompClient = new Client({
-      webSocketFactory: () => new SockJS('http://localhost:8082/chat'),
+      webSocketFactory: () => new SockJS('http://localhost:8082/message/chat'),
       onConnect: () => {
 
         console.log('Connected to WebSocket');
