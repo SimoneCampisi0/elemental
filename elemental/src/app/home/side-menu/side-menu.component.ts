@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserDTO} from "../../../dto/userdto";
 import {AnagService} from "../../../service/anag.service";
@@ -12,6 +12,10 @@ import {LogService} from "../../../service/logservice";
   styleUrls: ['./side-menu.component.css']
 })
 export class SideMenuComponent {
+  width = 0
+
+  height = 0
+
   posUrl = 0
   // @ts-ignore
   nomeUser: string
@@ -51,6 +55,14 @@ export class SideMenuComponent {
 
     }
   }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.width = (event.target as Window).innerWidth;
+    this.height = (event.target as Window).innerHeight;
+    console.log("width: "+this.width)
+  }
+
   goHome () {
     this.router.navigate(['/home'])
   }
