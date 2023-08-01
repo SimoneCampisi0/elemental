@@ -44,7 +44,9 @@ public class FotoService extends AbstractService<Foto, FotoDTO> {
     public FotoDTO insertFoto(String image64, UserDTO dto) throws IOException {
         try {
 //            String outputPath = "src/main/java/com/simonecampis/Elemental/assets/";
-            String outputPath = "elemental-service/src/main/java/com/simonecampis/Elemental/assets/";
+//            String outputPath = "elemental-service/src/main/java/com/simonecampis/Elemental/assets/";
+            String outputPath = "src/main/resources/static/assets";
+
             int count = 1;
             String filename = count + ".jpg";
             File outputFile = new File(outputPath + filename);
