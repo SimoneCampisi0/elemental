@@ -5,7 +5,8 @@
     <img src="./assets/el4-white.png" class="imgLogo" alt="" height="155" width="500">
   </a>
   <hr>
-  <ul class="nav nav-pills flex-column mb-auto">
+
+  <ul class="nav nav-pills flex-column mb-auto desktop">
     <li class="nav-item" *ngIf="posUrl==1; else homeNotActive">
       <a (click)="goHome()" class="nav-link active cursorLink" aria-current="page">
         <svg class="bi me-2" width="10" height="16"></svg>
@@ -42,64 +43,11 @@
       </li>
     </ng-template>
 
-
-<!--    <li class="nav-item mt-2">-->
-<!--      <a (click)="goHome()" class="nav-link cursorLink text-white">-->
-<!--        <svg class="bi me-1" width="12" height="16"></svg>-->
-<!--        <img src="./assets/menu/settings.png" class="imgSettings" alt="" srcset="">-->
-<!--        <div class="text" style="padding-left: 5px">IMPOSTAZIONI</div>-->
-<!--      </a>-->
-<!--    </li>-->
-
-<!--    <li class="nav-item mt-2">-->
-<!--      <a (click)="goHome()" class="nav-link cursorLink text-white">-->
-<!--        <svg class="bi me-2" width="10" height="16"></svg>-->
-<!--        <img src="./assets/menu/search.png" class="imgMenu" alt="" srcset="">-->
-<!--        <div class="text">CERCA</div>-->
-<!--      </a>-->
-<!--    </li>-->
-<!--    <li>-->
-
-<!--      <a href="#" class="nav-link text-white">-->
-<!--        <svg class="bi me-2" width="10" height="16"></svg>-->
-<!--        Cerca-->
-<!--      </a>-->
-<!--    </li>-->
-<!--    <li>-->
-<!--      <a href="#" class="nav-link text-white">-->
-<!--        <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>-->
-<!--        Orders-->
-<!--      </a>-->
-<!--    </li>-->
-<!--    <li>-->
-<!--      <a href="#" class="nav-link text-white">-->
-<!--        <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>-->
-<!--        Products-->
-<!--      </a>-->
-<!--    </li>-->
-<!--    <li>-->
-<!--      <a href="#" class="nav-link text-white">-->
-<!--        <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>-->
-<!--        Customers-->
-<!--      </a>-->
-<!--    </li>-->
   </ul>
 
 
   <hr>
-<!--  <div class="dropdown">-->
-<!--    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">-->
-<!--      <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">-->
-<!--      <strong>mdo</strong>-->
-<!--    </a>-->
-<!--    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">-->
-<!--      <li><a class="dropdown-item" href="#">New project...</a></li>-->
-<!--      <li><a class="dropdown-item" href="#">Settings</a></li>-->
-<!--      <li><a class="dropdown-item" href="#">Profile</a></li>-->
-<!--      <li><hr class="dropdown-divider"></li>-->
-<!--      <li><a class="dropdown-item" href="#">Sign out</a></li>-->
-<!--    </ul>-->
-<!--  </div>-->
+
 
 
   <div class="dropdown">
