@@ -5,6 +5,7 @@
 
   font-family: Satoshi-Regular, sans-serif;
 }
+
 .imgLogo {
   width: 250px;
   height: 60px;
@@ -68,11 +69,26 @@
 }
 
 
-.mobile {
-  display:none;
-}
 @media only screen and (max-width: 800px) {
   .all {
     width: 100px;
+  }
+  .desktopMobile {
+    display: flex;
+  }
+  .txtMenu {
+    display: none;
+  }
+  .borderDesktop {
+    display: none;
+  }
+  .cursorLink {
+    text-align: center;
+  }
+  .nomeUser {
+    display: none;
+  }
+  .userImg {
+    right: 0%;
   }
 }
