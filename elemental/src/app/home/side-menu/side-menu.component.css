@@ -1,6 +1,6 @@
 .all {
   width: 280px;
-  height: 100vh;
+  height: -webkit-fill-available;
   position: fixed;
 
   font-family: Satoshi-Regular, sans-serif;
