@@ -3,10 +3,12 @@
 
     <div class="row height d-flex align-items-center mt-2" >
 
-      <app-search-bar style="width: 80%;"></app-search-bar>
-      <button (click)="showNewPostAlert()" class="col-3 addBtn btn btn-secondary">+</button>
+      <app-search-bar class="searchBar"></app-search-bar>
+      <button (click)="showNewPostAlert()" class="addBtn btn btn-secondary">+</button>
     </div>
   </div>
 
-  <app-elenco-post style="padding-left: 0px"></app-elenco-post>
+  <div class="row">
+    <app-elenco-post style="padding-left: 0px"></app-elenco-post>
+  </div>
 </div>

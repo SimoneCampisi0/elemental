@@ -1,6 +1,21 @@
+.searchBar {
+  width: 80%;
+}
+
 .addBtn {
   width: 5em;
   position: relative;
-  right: 8em;
+  right: 5em;
   font-family: Satoshi-Regular, sans-serif;
+}
+
+@media only screen and (max-width: 1300px) {
+  .searchBar {
+    width: 70%;
+    border-left: 1em;
+  }
+  .addBtn {
+    width: 3em;
+    right: 4em
+  }
 }
