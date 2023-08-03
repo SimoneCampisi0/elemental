@@ -154,7 +154,7 @@ input[type="submit"]:hover {
   font-size: 16px;
   transition: background-color 0.3s ease;
   position: relative;
-  left: 59%;
+  left: 57.5%;
 }
 
 .autore {
@@ -204,4 +204,22 @@ input[type="submit"]:hover {
 
 .dettaglioAutore {
   cursor: pointer;
+}
+
+@media only screen and (max-width: 1350px) {
+  .inviaCommento {
+    left: 30%;
+  }
+}
+
+@media only screen and (max-width: 1500px) {
+  .inviaCommento {
+    left: 55%;
+  }
+}
+
+@media only screen and (max-width: 970px) {
+  .inviaCommento {
+    left: 40%;
+  }
 }
