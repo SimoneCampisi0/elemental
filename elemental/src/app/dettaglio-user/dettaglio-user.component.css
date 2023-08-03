@@ -50,10 +50,22 @@
   border-radius: 10px;
 }
 
-
 .about {
   z-index: 1;
 
   /*background-color: #eeeeee;*/
   border-radius: 10px;
+}
+
+@media only screen and (max-width: 1300px) {
+  .all {
+    left: 8em;
+    width: 70em;
+  }
+  .modificaMail {
+    left: 72%;
+  }
+  .modificaDescr {
+    left: 85.5%;
+  }
 }

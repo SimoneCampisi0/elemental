@@ -75,43 +75,6 @@
               </div>
             </div>
 
-
-
-            <!--            <div class="mb-5">-->
-            <!--              <p class="ps-2 lead fw-normal mb-1" style="display: inline-block; font-size: 2.5em;">About</p>-->
-            <!--              <div (click)="modificaDescr()" class="lead fw-normal mb-1 modificaDescr cursorLink"><i class="fas fa-edit"></i></div>-->
-
-            <!--              <div class="p-4" style="background-color: #f8f9fa;">-->
-            <!--                <div class="h5">Chi sono</div>-->
-            <!--                <div class="descr">{{this.anag.descrizione}}</div>-->
-            <!--              </div>-->
-            <!--            </div>-->
-
-
-            <!--            <div class="d-flex justify-content-between align-items-center mb-4">-->
-            <!--              <p class="lead fw-normal mb-0">Recent photos</p>-->
-            <!--              <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>-->
-            <!--            </div>-->
-            <!--            <div class="row g-2">-->
-            <!--              <div class="col mb-2">-->
-            <!--                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"-->
-            <!--                     alt="image 1" class="w-100 rounded-3">-->
-            <!--              </div>-->
-            <!--              <div class="col mb-2">-->
-            <!--                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"-->
-            <!--                     alt="image 1" class="w-100 rounded-3">-->
-            <!--              </div>-->
-            <!--            </div>-->
-            <!--            <div class="row g-2">-->
-            <!--              <div class="col">-->
-            <!--                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"-->
-            <!--                     alt="image 1" class="w-100 rounded-3">-->
-            <!--              </div>-->
-            <!--              <div class="col">-->
-            <!--                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"-->
-            <!--                     alt="image 1" class="w-100 rounded-3">-->
-            <!--              </div>-->
-            <!--            </div>-->
           </div>
         </div>
       </div>
@@ -127,21 +90,12 @@
           <div class="card">
             <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
               <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-<!--                <div class="lead modificaFoto">-->
-<!--                  <label for="file-input" class="cursorLink">-->
-<!--                    <i class="fas fa-edit"></i>-->
-<!--                  </label>-->
-<!--                  <input id="file-input" type="file" (change)="modificaFoto($event)" style="display:none;"/>-->
-<!--                </div>-->
 
 
                 <img [src]="base64Img"
                      alt="Generic placeholder image" class="img-thumbnail mt-2 mb-2 imgProfilo"
                 >
-<!--                <button type="button" (click)="modificaDati()" class="btn btn-outline-dark" data-mdb-ripple-color="dark"-->
-<!--                        style="z-index: 1; margin-top: 1em;">-->
-<!--                  Modifica dati-->
-<!--                </button>-->
+
               </div>
               <div class="ms-3" style="margin-top: 105px;">
                 <h2 style="margin-bottom: 0px">{{this.anag?.nome}} {{this.anag?.cognome}}</h2>
@@ -160,30 +114,11 @@
                   <p class="mb-1 h5">{{this.numAmici}}</p>
                   <p class="small text-muted mb-0">Amici</p>
                 </div>
-                <!--              <div>-->
-                <!--                <p class="mb-1 h5">478</p>-->
-                <!--                <p class="small text-muted mb-0">Following</p>-->
-                <!--              </div>-->
+
               </div>
             </div>
             <div class="card-body p-4 text-black">
 
-<!--              <div class="mb-5">-->
-<!--                <p class="ps-2 lead fw-normal mb-1" style="display: inline-block; font-size: 2.5em;">Dati personali</p>-->
-<!--                <div (click)="modificaDatiPersonali()" class="lead fw-normal mb-1 modificaMail cursorLink"><i class="fas fa-edit"></i></div>-->
-
-<!--                <div class="p-4" style="background-color: #f8f9fa;">-->
-<!--                  <div class="email" style="display:inline-block;">-->
-<!--                    <div class="h5">Email: </div>-->
-<!--                    <div class="descr">{{this.user?.email}}</div>-->
-<!--                  </div>-->
-
-<!--                  <div class="pass" style="display:inline-block; margin-left: 35em;">-->
-<!--                    <div class="h5">Password: </div>-->
-<!--                    <div class="descr">******</div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
 
               <div class="mb-5">
                 <p class="ps-2 lead fw-normal mb-1" style="display: inline-block; font-size: 2.5em;">About</p>
@@ -195,43 +130,6 @@
                 </div>
               </div>
 
-
-
-              <!--            <div class="mb-5">-->
-              <!--              <p class="ps-2 lead fw-normal mb-1" style="display: inline-block; font-size: 2.5em;">About</p>-->
-              <!--              <div (click)="modificaDescr()" class="lead fw-normal mb-1 modificaDescr cursorLink"><i class="fas fa-edit"></i></div>-->
-
-              <!--              <div class="p-4" style="background-color: #f8f9fa;">-->
-              <!--                <div class="h5">Chi sono</div>-->
-              <!--                <div class="descr">{{this.anag.descrizione}}</div>-->
-              <!--              </div>-->
-              <!--            </div>-->
-
-
-              <!--            <div class="d-flex justify-content-between align-items-center mb-4">-->
-              <!--              <p class="lead fw-normal mb-0">Recent photos</p>-->
-              <!--              <p class="mb-0"><a href="#!" class="text-muted">Show all</a></p>-->
-              <!--            </div>-->
-              <!--            <div class="row g-2">-->
-              <!--              <div class="col mb-2">-->
-              <!--                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"-->
-              <!--                     alt="image 1" class="w-100 rounded-3">-->
-              <!--              </div>-->
-              <!--              <div class="col mb-2">-->
-              <!--                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"-->
-              <!--                     alt="image 1" class="w-100 rounded-3">-->
-              <!--              </div>-->
-              <!--            </div>-->
-              <!--            <div class="row g-2">-->
-              <!--              <div class="col">-->
-              <!--                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"-->
-              <!--                     alt="image 1" class="w-100 rounded-3">-->
-              <!--              </div>-->
-              <!--              <div class="col">-->
-              <!--                <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"-->
-              <!--                     alt="image 1" class="w-100 rounded-3">-->
-              <!--              </div>-->
-              <!--            </div>-->
             </div>
           </div>
         </div>
