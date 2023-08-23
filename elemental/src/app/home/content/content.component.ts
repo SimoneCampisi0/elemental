@@ -32,6 +32,9 @@ export class ContentComponent {
         '<h2 style="margin: 0px; margin-bottom: 1em;">Pubblica il nuovo post: </h2>'+
         '<textarea id="input-content" name="content" cols="40" rows="5" style="padding: 1em;"></textarea>\n',
       focusConfirm: false,
+      showCancelButton: true,
+      cancelButtonText: 'Annulla',
+      confirmButtonColor: '#5394F6',
       preConfirm: () => {
 
         // @ts-ignore
