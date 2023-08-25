@@ -9,9 +9,7 @@ The user can:
 
 -Like it
 
--Chat in real time
-
- with other users (WebSocket)
+-Chat in real time with other users (WebSocket)
  
 -Edit profile
 
