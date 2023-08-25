@@ -4,13 +4,19 @@ An elementary social network.
 
 The user can:
 -Register/login
+
 -Publish posts/comments
+
 -Like it
+
 -Chat in real time
+
  with other users (WebSocket)
+ 
 -Edit profile
 
 The project was implemented with Spring Boot 3.1 (Java version 17) + Angular 16.
+
 Login page
 ![login](https://github.com/SimoneCampisi0/elemental/assets/126571480/c2b3dc55-86c6-40f0-ad08-a24f5d39923c)
 
