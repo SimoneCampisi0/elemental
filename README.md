@@ -3,6 +3,7 @@ Elemental
 An elementary social network.
 
 The user can:
+
 -Register/login
 
 -Publish posts/comments
