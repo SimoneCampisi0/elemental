@@ -6,7 +6,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: elemental
     ports:
-      - "3306:3306"
+      - "3326:3306"
     container_name: mysql
 
   elemental-service:
