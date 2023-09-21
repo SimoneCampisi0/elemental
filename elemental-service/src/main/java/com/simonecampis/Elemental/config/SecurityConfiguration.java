@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -30,35 +31,39 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors().configurationSource(corsConfigurationSource())
-                .and()
-                .csrf(csrf -> csrf.disable())
-                .authorizeRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/auth/register").permitAll()
-                        .requestMatchers("/auth/authenticate").permitAll()
-                        .requestMatchers("/anag/**").permitAll()
-                        .requestMatchers("/user/findUserByEmail").permitAll()
-                        .requestMatchers("/user/update").permitAll()
-                        .requestMatchers("/user/recuperaPassword").permitAll()
-                        .requestMatchers("/foto/insertFoto").permitAll()
+                .cors(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
+                                                                                         //DEPRECATO
+                                                                    //                .cors().configurationSource(corsConfigurationSource())
+                                                                    //                .and()
+                                                                    //                .csrf(csrf -> csrf.disable())
+                                                                    //                .authorizeRequests(authorizeRequests -> authorizeRequests
+//                        .requestMatchers("/auth/register").permitAll()
+//                        .requestMatchers("/auth/authenticate").permitAll()
+//                        .requestMatchers("/anag/**").permitAll()
+//                        .requestMatchers("/user/findUserByEmail").permitAll()
+//                        .requestMatchers("/user/update").permitAll()
+//                        .requestMatchers("/user/recuperaPassword").permitAll()
+//                        .requestMatchers("/foto/insertFoto").permitAll()
+//
+//                        .requestMatchers("/log/getLoggedUsers").permitAll()
+//
+//                        .requestMatchers(
+//                                "/api/v1/auth/**",
+//                                "/v2/api-docs",
+//                                "/elemental/v3/api-docs",
+//                                "/elemental/v2/api-docs/**",
+//                                "/elemental/swagger-resources",
+//                                "/elemental/swagger-resources/**",
+//                                "/elemental/configuration/ui",
+//                                "/elemental/configuration/security",
+//                                "/elemental/swagger-ui/**",
+//                                "/elemental/webjars/**",
+//                                "/elemental/swagger-ui.html"
+//                        ).permitAll()
 
-                        .requestMatchers("/log/getLoggedUsers").permitAll()
-
-                        .requestMatchers(
-                                "/api/v1/auth/**",
-                                "/v2/api-docs",
-                                "/v3/api-docs",
-                                "/v2/api-docs/**",
-                                "/swagger-resources",
-                                "/swagger-resources/**",
-                                "/configuration/ui",
-                                "/configuration/security",
-                                "/swagger-ui/**",
-                                "/webjars/**",
-                                "/swagger-ui.html"
-                        ).permitAll()
-
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
