@@ -19,7 +19,6 @@ export abstract class AbstractService<DTO> implements Service<DTO> {
 
     constructor(protected http: HttpClient) {
     }
-
     getAll(): Observable<DTO[]> {
         return this.http.get<DTO[]>(environment.APIEndpoint + this.type + '/getAll');
     }

@@ -11,19 +11,14 @@ import { Observable } from 'rxjs';
 export class ElencoPostComponent implements OnInit {
   // @ts-ignore
   elencoPost$: Observable<PostDTO[]>;
-  filterPost: PostDTO[] = []; // Inizializza l'array filterPost
 
   constructor(private postService: PostService) {}
 
   ngOnInit() {
     this.postService.filterPost$.subscribe(filterPost => {
-        if(filterPost.length !== 0) {
-          this.elencoPost$ = this.postService.filterPost$ // Aggiorna l'array filterPost ogni volta che viene modificato nel servizio
-        } else {
-          if(!this.postService.ricercaAvviata) {
-            this.elencoPost$ = this.postService.getAll();
-          }
-        }
+      if (filterPost.length === 0 && !this.postService.ricercaAvviata) {
+        this.elencoPost$ = this.postService.getAll();
+      }
     });
   }
 }

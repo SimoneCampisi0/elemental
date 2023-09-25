@@ -3,6 +3,12 @@
 <!--    <app-post [dto]="post" [email]="post.user.email" [date]="post.dataPost" [content]="post.contenuto" ></app-post>-->
 <!--  </ng-template>-->
 <!--</ng-container>-->
-<ng-container *ngIf="elencoPost$ | async as elencoPost">
-  <app-post *ngFor="let post of elencoPost" [dto]="post" [email]="post.user.email" [date]="post.dataPost" [content]="post.contenuto"></app-post>
+<ng-container *ngIf="(elencoPost$ | async)?.length !== 0 else elencoVuoto">
+  <app-post *ngFor="let post of elencoPost$ | async" [dto]="post" [email]="post.user.email" [date]="post.dataPost" [content]="post.contenuto"></app-post>
 </ng-container>
+
+<ng-template #elencoVuoto>
+  <div class="elencoVuoto">
+    Al momento non ci sono nuovi post.
+  </div>
+</ng-template>
