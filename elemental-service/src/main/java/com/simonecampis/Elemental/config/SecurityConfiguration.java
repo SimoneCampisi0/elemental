@@ -1,6 +1,5 @@
 package com.simonecampis.Elemental.config;
 
-import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,15 +10,10 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.http.HttpMethod;
-
 import java.util.Arrays;
-import java.util.List;
-
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -34,35 +28,14 @@ public class SecurityConfiguration {
                 .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                                                                                         //DEPRECATO
-                                                                    //                .cors().configurationSource(corsConfigurationSource())
-                                                                    //                .and()
-                                                                    //                .csrf(csrf -> csrf.disable())
-                                                                    //                .authorizeRequests(authorizeRequests -> authorizeRequests
-//                        .requestMatchers("/auth/register").permitAll()
-//                        .requestMatchers("/auth/authenticate").permitAll()
-//                        .requestMatchers("/anag/**").permitAll()
-//                        .requestMatchers("/user/findUserByEmail").permitAll()
-//                        .requestMatchers("/user/update").permitAll()
-//                        .requestMatchers("/user/recuperaPassword").permitAll()
-//                        .requestMatchers("/foto/insertFoto").permitAll()
-//
-//                        .requestMatchers("/log/getLoggedUsers").permitAll()
-//
-//                        .requestMatchers(
-//                                "/api/v1/auth/**",
-//                                "/v2/api-docs",
-//                                "/elemental/v3/api-docs",
-//                                "/elemental/v2/api-docs/**",
-//                                "/elemental/swagger-resources",
-//                                "/elemental/swagger-resources/**",
-//                                "/elemental/configuration/ui",
-//                                "/elemental/configuration/security",
-//                                "/elemental/swagger-ui/**",
-//                                "/elemental/webjars/**",
-//                                "/elemental/swagger-ui.html"
-//                        ).permitAll()
-
+                        .requestMatchers("/auth/register").permitAll()
+                        .requestMatchers("/auth/authenticate").permitAll()
+                        .requestMatchers("/anag/**").permitAll()
+                        .requestMatchers("/user/findUserByEmail").permitAll()
+                        .requestMatchers("/user/update").permitAll()
+                        .requestMatchers("/user/recuperaPassword").permitAll()
+                        .requestMatchers("/foto/insertFoto").permitAll()
+                        .requestMatchers("/log/getLoggedUsers").permitAll()
                         .anyRequest().permitAll()
                 )
                 .sessionManagement(sessionManagement -> sessionManagement

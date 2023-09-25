@@ -12,9 +12,7 @@ public class InterazioneController extends AbstractController<InterazioneDTO> {
     @Autowired
     private InterazioneService service;
     @GetMapping(value = "/findByUserIdAndPostIdPost")
-    public InterazioneDTO findByUserIdAndPostIdPost(@RequestParam Long id, @RequestParam Long idPost) {
-        return service.findByUserIdAndPostIdPost(id, idPost);
-    }
+    public InterazioneDTO findByUserIdAndPostIdPost(@RequestParam Long id, @RequestParam Long idPost) {return service.findByUserIdAndPostIdPost(id, idPost);}
 
     @GetMapping(value = "/setLike")
     public InterazioneDTO setLike(@RequestParam Long id, @RequestParam Long idPost) { return service.setLike(id, idPost); }

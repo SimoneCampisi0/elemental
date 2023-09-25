@@ -9,15 +9,19 @@ import com.simonecampis.ElementalChat.dto.ChatDTO;
 import com.simonecampis.ElementalChat.dto.MessageDTO;
 import com.simonecampis.ElementalChat.dto.UserDTO;
 import com.simonecampis.ElementalChat.model.Chat;
+import com.simonecampis.ElementalChat.model.Message;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.http.HttpHeaders;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Transactional
@@ -41,15 +45,53 @@ public class ChatService {
 
     @Autowired
     private ElementalServiceA elementalServiceA;
+
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
     private ArrayList<UserDTO> loggedUsers;
-//    public ArrayList<UserDTO> getUsersSession() {
-//        return loggedUsers =  webClientBuilder.build().get()
-//                .uri("http://elemental-app/log/getLoggedUsers")
-//                .header("x-service-name", "elemental-chat")
-//                .retrieve()
-//                .bodyToMono(new ParameterizedTypeReference<ArrayList<UserDTO>>() {})
-//                .block();
-//    }
+
+
+
+    public void sendMessage (String to, Message message){
+        Date date = new Date();
+        System.out.println("handling send message: " + message + " to: " + to);
+
+        message.setChat(chatConverter.toEntity(checkChatExist(to)));
+        message.setDate(date);
+        message = repo.save(message);
+        simpMessagingTemplate.convertAndSend("/topic/messages/" + to, message);
+    }
+
+    public ChatDTO checkChatExist (String to) {
+        ChatDTO c = chatConverter.toDTO(chatRepo.findByNomeChat(to));
+        if(Objects.isNull(c)) {
+            ChatDTO dto = new ChatDTO(0L, to);
+            return chatConverter.toDTO(chatRepo.save(chatConverter.toEntity(dto)));
+        }
+        return c;
+    }
+
+    public Map<String, Object> findPagesByChat (Long idChat, Integer page) {
+        List<MessageDTO> messages = new ArrayList<MessageDTO>();
+        Pageable pageable = PageRequest.of(page, 15); //primo valore è la pagina corrente, il secondo è quanti messaggi vedrà per pagina.
+        Page<MessageDTO> messPages = converter.toDTOPages(repo.findByChat_IdChatOrderByDateAsc(idChat, pageable));
+        messages = messPages.getContent();
+        Map<String, Object> response = new HashMap<>();
+        response.put("messages", messages);
+        response.put("currentPage", messPages.getNumber());
+        response.put("totalPages", messPages.getTotalPages());
+        response.put("totalMessages", messPages.getTotalElements());
+
+        return response;
+    }
+
+    public Integer findNumberPages(Long idChat) {
+        Pageable pageable = PageRequest.of(0, 15); //primo valore è la pagina corrente, il secondo è quanti messaggi vedrà per pagina.
+        Page<MessageDTO> messPages = converter.toDTOPages(repo.findByChat_IdChatOrderByDateAsc(idChat, pageable));
+        Integer numPages = messPages.getTotalPages();
+
+        return numPages;
+    }
 
     public ArrayList<UserDTO> getUsersSession() {
         System.out.println("loggedUsers: "+ elementalServiceA.getLoggedUsers());
