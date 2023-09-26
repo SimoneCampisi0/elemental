@@ -72,7 +72,7 @@
   display: none;
 }
 
-@media only screen and (max-width: 1300px) {
+@media screen and (max-width: 1300px) {
   .all {
     width: 100px;
   }

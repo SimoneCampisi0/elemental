@@ -1,5 +1,13 @@
+.burgerMenuFriendsBar {
+  display: none;
+}
+
 @media (max-width: 1300px) {
   .viewFriendsBar {
     display: none;
   }
+  .burgerMenuFriendsBar {
+    display: block;
+  }
 }
+
