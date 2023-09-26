@@ -27,6 +27,7 @@ import { FriendsBarComponent } from './home/friends-bar/friends-bar.component';
 import { ChatComponent } from './home/friends-bar/chat/chat.component';
 import {TrackScrollDirective} from "./home/friends-bar/chat/scroll.directive";
 import {NgIdleModule} from "@ng-idle/core";
+import { BurgerMenuComponent } from './home/burger-menu/burger-menu.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import {NgIdleModule} from "@ng-idle/core";
     DettaglioUserComponent,
     FriendsBarComponent,
     ChatComponent,
-    TrackScrollDirective // Aggiungi la direttiva all'array delle dichiarazioni qui
+    TrackScrollDirective,
+    BurgerMenuComponent
 
   ],
     imports: [
