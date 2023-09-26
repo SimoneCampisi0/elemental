@@ -1,10 +1,6 @@
-.burgerMenuFriendsBar {
-  display: none;
+.menuBurger {
+  margin-top: 4.5vh;
+  position: relative;
+  right: 20%;
+  width: 15px;
 }
-
-@media (max-width: 1300px) {
-  .viewFriendsBar {
-    display: none;
-  }
-}
-

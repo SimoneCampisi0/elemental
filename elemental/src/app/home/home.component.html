@@ -6,8 +6,17 @@
     <div class="col-7 flex-grow-1">
       <app-content></app-content>
     </div>
-    <div class="col-3 viewFriendsBar">
+
+    <div class="col-3 viewFriendsBar" *ngIf="screenWidth > 1300; else burgerMenu">
       <app-friends-bar></app-friends-bar>
     </div>
+
+    <ng-template #burgerMenu>
+      <div class="menuBurger">
+        <app-burger-menu></app-burger-menu>
+      </div>
+    </ng-template>
+
+
   </div>
 </div>
