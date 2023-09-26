@@ -9,6 +9,10 @@
   font-family: Satoshi-Regular, sans-serif;
 }
 
+.burgerMenu {
+  display: none;
+}
+
 @media only screen and (max-width: 1300px) {
   .searchBar {
     width: 70%;
@@ -17,5 +21,9 @@
   .addBtn {
     width: 3em;
     right: 4em
+  }
+
+  .burgerMenu {
+    display: contents;
   }
 }

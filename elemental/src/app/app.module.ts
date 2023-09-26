@@ -67,7 +67,7 @@ import { BurgerMenuComponent } from './home/burger-menu/burger-menu.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
-      multi: true
+      multi: true,
     }
   ],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ChatService } from 'src/service/chat.service';
 
 @Component({
   selector: 'app-burger-menu',
@@ -6,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./burger-menu.component.css']
 })
 export class BurgerMenuComponent {
+  constructor() {
+
+  }
+
+  displayFriendChatMenu() {
+    console.log("clickMenu");
+
+  }
 
 }
