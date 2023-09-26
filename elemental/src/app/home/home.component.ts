@@ -30,11 +30,6 @@ export class HomeComponent {
     } else {
       this.screenUpResolution = true
     }
-
-    console.log("this.screenWidth:",this.screenWidth);
-    console.log(this.screenUpResolution);
-
-
   }
 
 
