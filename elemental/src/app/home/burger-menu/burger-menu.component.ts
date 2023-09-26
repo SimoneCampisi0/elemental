@@ -13,7 +13,6 @@ export class BurgerMenuComponent {
 
   displayFriendChatMenu() {
     console.log("clickMenu");
-
   }
 
 }

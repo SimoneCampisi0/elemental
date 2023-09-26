@@ -9,12 +9,15 @@ import { ChatService } from 'src/service/chat.service';
 export class HomeComponent {
   public screenWidth: any
   public screenHeight: any
+  //@ts-ignore
+  public screenUpResolution: boolean;
 
   constructor (public chatService: ChatService) {}
 
   ngOnInit() {
     console.log("JWT: "+localStorage.getItem('token'))
     console.log("USER: "+localStorage.getItem('currentUser'))
+    this.screenUpResolution = true;
   }
 
   @HostListener('window:resize', ['$event'])
@@ -22,7 +25,16 @@ export class HomeComponent {
     this.screenWidth = window.innerWidth
     this.screenHeight = window.innerHeight
 
+    if(this.screenWidth < 1300) {
+      this.screenUpResolution = false
+    } else {
+      this.screenUpResolution = true
+    }
+
     console.log("this.screenWidth:",this.screenWidth);
+    console.log(this.screenUpResolution);
+
+
   }
 
 
