@@ -117,23 +117,6 @@ export class ChatComponent {
 
             })
 
-            // let nPage = ;
-            // this.chatService.findPagesByChat(x.idChat, 0).subscribe(response => {
-            //
-            //
-            //   this.listaMessaggi = response.messages
-            //
-            //
-            //   this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
-            //     // Aggiungi il nuovo messaggio alla lista dei messaggi
-            //     console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
-            //     this.listaMessaggi.push(JSON.parse(message.body));
-            //
-            //
-            //   });
-            // })
-
-
           } else { //se la chat non esiste, la vado a creare
 
             let nomeChat = ''
@@ -214,28 +197,7 @@ export class ChatComponent {
     }, 100);
   }
 
-  onScroll(event: Event): void { //RIVEDERE. La scroll bar non deve raggiungere la posizione top, ma deve rimanere dov'è
-    // let target = event.target as HTMLElement
-    // console.log("posizione scroll y: "+target.scrollTop)
-    //
-    // if(target.scrollTop == 0) {
-    //   if (this.currentPage >= 0) {
-    //     if(this.messRestantiInPage != 0) { //se esistono ancora dei messaggi restanti dal primo caricamento
-    //       console.log("messRestantiInPage: "+this.messRestantiInPage)
-    //
-    //       let tempArray = new Array<MessageDTO>()
-    //       this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
-    //         for (let i = this.messRestantiInPage; i>= 0; i--) { //trovo i messaggi restanti e li carico
-    //           tempArray[i] = response.messages[i]
-    //         }
-    //
-    //         this.listaMessaggi = [...tempArray, ...this.listaMessaggi]
-    //       })
-    //     } else { //caricamento dei messaggi dopo il primo caricamento. Quindi se ci sono altre pagine
-    //
-    //     }
-    //   }
-    // }
+  onScroll(event: Event): void {
 
     let target = event.target as HTMLElement
     // console.log("posizione scroll y: "+target.scrollTop)
