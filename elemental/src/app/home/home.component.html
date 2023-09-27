@@ -7,7 +7,7 @@
       <app-content></app-content>
     </div>
 
-    <div class="col-3 viewFriendsBar" *ngIf="screenUpResolution else burgerMenu">
+    <div class="col-3 viewFriendsBar" *ngIf="chatService.mostraFriendsBar else burgerMenu">
       <app-friends-bar></app-friends-bar>
     </div>
 

@@ -10,9 +10,6 @@ export class HomeComponent {
   public screenWidth: any
   public screenHeight: any
   //@ts-ignore
-  public screenUpResolution: boolean;
-
-  //@ts-ignore
   public clickMenu: boolean;
 
   constructor (public chatService: ChatService) {}
@@ -20,12 +17,13 @@ export class HomeComponent {
   ngOnInit() {
     console.log("JWT: "+localStorage.getItem('token'))
     console.log("USER: "+localStorage.getItem('currentUser'))
-    this.screenUpResolution = true;
     this.clickMenu = false;
 
     this.screenWidth = window.innerWidth
     if(this.screenWidth < 1300) {
-      this.screenUpResolution = false;
+      this.chatService.mostraFriendsBar = false;
+    } else {
+      this.chatService.mostraFriendsBar = true
     }
   }
 
@@ -35,10 +33,10 @@ export class HomeComponent {
     this.screenHeight = window.innerHeight
 
     if(this.screenWidth < 1300 && this.clickMenu == false) {
-      this.screenUpResolution = false
+      this.chatService.mostraFriendsBar = false
     }
     if (this.screenWidth >= 1300){
-      this.screenUpResolution = true
+      this.chatService.mostraFriendsBar = true
     }
   }
 
@@ -57,11 +55,11 @@ export class HomeComponent {
     this.setClick()
     switch (this.clickMenu) {
       case true:
-        this.screenUpResolution = true
+        this.chatService.mostraFriendsBar = true
         break;
 
       case false:
-        this.screenUpResolution = false;
+        this.chatService.mostraFriendsBar = false;
         break;
     }
   }

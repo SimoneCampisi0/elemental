@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import {forkJoin, map, Observable, timer} from "rxjs";
 import { LogService } from "../../../service/logservice";
 import { switchMap, filter } from "rxjs/operators";
@@ -24,7 +24,11 @@ export class FriendsBarComponent {
   currentAnag: AnagDTO
   //@ts-ignore
   listaAmici$: Observable<AnagDTO[]>
+
   amiciOnline: boolean = false
+
+  //@ts-ignore
+  windowSize: number
 
   constructor(public chatService: ChatService, private router: Router, private logService: LogService, private anagService: AnagService, private userService: UserService) {}
 
@@ -51,6 +55,17 @@ export class FriendsBarComponent {
       }),
       map(anagrafiche => anagrafiche.filter(anagrafica => anagrafica.nome !== this.currentAnag.nome && anagrafica.cognome !== this.currentAnag.cognome))
     );
+
+    this.windowSize = window.innerWidth;
+  }
+
+  @HostListener('window:resize', ['$event'])
+  changeWindowSize() {
+    this.windowSize = window.innerWidth;
+  }
+
+  comeBack() {
+    this.chatService.mostraFriendsBar = false;
   }
 
   vediProfilo(anag: AnagDTO) {
@@ -71,6 +86,6 @@ export class FriendsBarComponent {
 
   cambiaSchermata(anag: AnagDTO) {
     this.setProfiloRicevitore(anag)
-    this.chatService.mostaChat = true;
+    this.chatService.mostraChat = true;
   }
 }

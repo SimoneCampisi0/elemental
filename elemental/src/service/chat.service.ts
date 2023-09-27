@@ -19,9 +19,13 @@ export class ChatService {
   type: string ='';
   port: string = '8080';
 
+  // @ts-ignore
+  public mostraFriendsBar: boolean;
+
 
   // @ts-ignore
-  public mostaChat: boolean;
+  public mostraChat: boolean;
+
 
   // @ts-ignore
   public userRicevitore: UserDTO;

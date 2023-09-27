@@ -187,7 +187,7 @@ export class ChatComponent {
 
 
   goBack() {
-    this.chatService.mostaChat = false;
+    this.chatService.mostraChat = false;
   }
 
 
