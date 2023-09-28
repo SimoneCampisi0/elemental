@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {UserService} from "../../service/user.service";
 import {AnagService} from "../../service/anag.service";
 import {UserDTO} from "../../dto/userdto";
@@ -19,6 +19,9 @@ import {FotoRequestDTO} from "../../dto/fotorequestdto";
   styleUrls: ['./dettaglio-user.component.css']
 })
 export class DettaglioUserComponent {
+  // @ts-ignore
+  resizeWindow: boolean
+
   ifDettUser: boolean = false;
 
   selectFile: boolean = false;
@@ -42,6 +45,8 @@ export class DettaglioUserComponent {
     this.user = JSON.parse(localStorage.getItem('currentUser'))
   }
   ngOnInit() {
+    this.resizeWindowCheck()
+
     // @ts-ignore
     if(localStorage.getItem('dettUser') === null || JSON.parse(localStorage.getItem('currentUser')).email ===  JSON.parse(localStorage.getItem('dettUser')).email ) {
       this.anagService.findAnagByEmail(this.user.email).subscribe(x => {
@@ -279,5 +284,20 @@ export class DettaglioUserComponent {
 
   refreshPage() {
     window.location.reload();
+  }
+
+
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.resizeWindowCheck()
+  }
+
+  resizeWindowCheck() {
+    if(window.innerWidth < 1300) {
+      this.resizeWindow = true
+    } else {
+      this.resizeWindow = false
+    }
   }
 }

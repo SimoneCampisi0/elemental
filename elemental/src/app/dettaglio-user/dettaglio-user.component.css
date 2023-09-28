@@ -24,6 +24,11 @@
   color: #0b5ed7;
 }
 
+.passwordStyle {
+  display:inline-block;
+  margin-left: 35em;
+}
+
 .cursorLink {
   cursor: pointer;
 }
@@ -56,15 +61,42 @@
   /*background-color: #eeeeee;*/
   border-radius: 10px;
 }
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1300px) and (min-width: 900px) {
   .all {
     left: 8em;
-    width: 70em;
+    width: 100em;
   }
+
   .modificaMail {
     left: 72%;
   }
+
   .modificaDescr {
     left: 85.5%;
+  }
+
+  .modificaMail {
+    display: inline-block;
+    position: relative;
+    left: 50%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .all {
+    left: 7em;
+    width: 60em;
+  }
+
+  .passwordStyle {
+    margin-left: 25em;
+  }
+
+  .modificaMail {
+    left: 50%;
+  }
+
+  .modificaDescr {
+    left: 70%;
   }
 }
