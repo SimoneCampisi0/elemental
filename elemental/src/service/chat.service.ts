@@ -1,13 +1,9 @@
 import {Injectable} from "@angular/core";
-import {AbstractService} from "./abstractservice";
-import {CommentoDTO} from "../dto/commentodto";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {environment} from "../environments/environment";
 import {UserDTO} from "../dto/userdto";
 import {AnagDTO} from "../dto/anagdto";
 import {ChatDTO} from "../dto/chatdto";
-import {PostDTO} from "../dto/postdto";
 import {MessageDTO} from "../dto/messagedto";
 import {MessageResponseDTO} from "../dto/messageresponsedto";
 
@@ -48,11 +44,11 @@ export class ChatService {
     return this.http.get<ChatDTO>('http://localhost:8082/message/checkChatExist?to='+to)
   }
 
-  findPagesByChat(idChat: number, page: number): Observable<MessageResponseDTO> {
-    return this.http.get<MessageResponseDTO>('http://localhost:8082/message/findPagesByChat?idChat='+idChat+'&page='+page)
+  findPagesByChat(nomeChat: string, page: number): Observable<MessageResponseDTO> {
+    return this.http.get<MessageResponseDTO>('http://localhost:8082/message/findPagesByChat?nomeChat='+nomeChat+'&page='+page)
   }
 
-  findNumberPages(idChat: number): Observable<number>{
-    return this.http.get<number>('http://localhost:8082/message/findNumberPages?idChat='+idChat)
+  findNumberPages(nomeChat: String): Observable<number>{
+    return this.http.get<number>('http://localhost:8082/message/findNumberPages?nomeChat='+nomeChat)
   }
 }

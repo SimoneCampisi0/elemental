@@ -1,35 +1,38 @@
-import {UserDTO} from "./userdto";
-import {ChatDTO} from "./chatdto";
-
 export class MessageDTO {
-  id: number
+
+  private _id: string | undefined
 
   text: string
 
   date: Date
 
-  user1: UserDTO
+  idUser1: number
 
-  user2: UserDTO
+  idUser2: number
 
-  chat: ChatDTO
+  nomeChat: string
 
-  constructor(id: number,
-
-  text: string,
+  constructor(text: string,
 
   date: Date,
 
-  user1: UserDTO,
+  idUser1: number,
 
-  user2: UserDTO,
+  idUser2: number,
 
-  chat: ChatDTO) {
-    this.id = id
+  nomeChat: string) {
     this.text = text
     this.date = date
-    this.user1 = user1
-    this.user2 = user2
-    this.chat = chat
+    this.idUser1 = idUser1
+    this.idUser2 = idUser2
+    this.nomeChat = nomeChat
+  }
+
+  set id(value: string) {
+    this._id = value;
+  }
+
+  get id(): string {
+    return <string>this._id;
   }
 }

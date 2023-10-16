@@ -5,12 +5,10 @@ import {AnagDTO} from "../../../../dto/anagdto";
 import * as Stomp from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client'
 import {FormControl} from "@angular/forms";
-import {Observable, of} from "rxjs";
 import {MessageDTO} from "../../../../dto/messagedto";
 import {HttpClient} from "@angular/common/http";
 import {Client} from "@stomp/stompjs";
 import {ChatDTO} from "../../../../dto/chatdto";
-import {DatePipe} from "@angular/common";
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -76,7 +74,6 @@ export class ChatComponent {
         this.user1 = JSON.parse(localStorage.getItem('currentUser'))
         this.user2 = this.chatService.userRicevitore;
         this.anagTemp = this.chatService.anagRicevitore;
-        // console.log("emailUsetTemp: "+this.user2.email)
 
         if (this.user1.id < this.user2.id) {
           this.channelName = this.user1.id + "e" +this.user2.id
@@ -90,17 +87,24 @@ export class ChatComponent {
             // console.log("chatTrovata: "+x.idChat)
 
 
-            this.chatService.findNumberPages(x.idChat).subscribe(numPagTot => {
+            this.chatService.findNumberPages(x.nomeChat).subscribe(numPagTot => {
               this.nTotPage = numPagTot
-              this.currentPage = this.nTotPage - 1
-              this.chatService.findPagesByChat(x.idChat, this.currentPage).subscribe(response => {
 
+              if(this.nTotPage > 0) {
+                this.currentPage = this.nTotPage - 1
+              } else {
+                this.currentPage = this.nTotPage
+              }
+              this.chatService.findPagesByChat(x.nomeChat, this.currentPage).subscribe(response => {
 
                 this.listaMessaggi = response.messages
 
                 if (this.listaMessaggi.length < 15) {
-                  this.currentPage = this.currentPage - 1
-                  this.loadMoreMessages();
+                  if (this.currentPage > 0) {
+                    this.currentPage = this.currentPage - 1
+                    this.loadMoreMessages();
+                  }
+
                 }
 
 
@@ -180,12 +184,11 @@ export class ChatComponent {
       text = this.newMessage.value;
     }
     const message = new MessageDTO(
-      0,
       text,
       new Date(),
-      this.user1,
-      this.user2,
-      this.chatTemp
+      this.user1.id,
+      this.user2.id,
+      this.chatTemp.nomeChat
     )
 
     this.newMessage.setValue('')
@@ -207,7 +210,7 @@ export class ChatComponent {
         if(this.messRestantiInPage != 0) {
           let tempArr = new Array<MessageDTO>()
           // console.log("Messaggi restati dopo lo scroll: "+this.messRestantiInPage)
-          this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
+          this.chatService.findPagesByChat(this.chatTemp.nomeChat, this.currentPage).subscribe(response => {
 
             let tMessRim = this.messRestantiInPage
 
@@ -227,7 +230,7 @@ export class ChatComponent {
           if (this.currentPage != 0) {
             // console.log("pagina attuale: "+this.currentPage)
             this.currentPage--
-            this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
+            this.chatService.findPagesByChat(this.chatTemp.nomeChat, this.currentPage).subscribe(response => {
               this.listaMessaggi = [...response.messages, ...this.listaMessaggi]
 
               target.scrollTop = 2
@@ -247,9 +250,9 @@ export class ChatComponent {
     let tempArray: MessageDTO[] = new Array<MessageDTO>()
     let k = 0;
 
-    this.chatService.findPagesByChat(this.chatTemp.idChat, this.currentPage).subscribe(response => {
-
+    this.chatService.findPagesByChat(this.chatTemp.nomeChat, this.currentPage).subscribe(response => {
       let differenzaMess = response.messages.length-1 - this.messRestanti
+      console.log(differenzaMess)
 
       // console.log("lunghezza dell'array response: "+response.messages.length+" lunghezza dei messaggi restanti che mancano: "+this.messRestanti)
 
@@ -258,6 +261,7 @@ export class ChatComponent {
       // for(let i = response.messages.length-1; i >= this.messRestanti; i--) {
         tempArray[k] = response.messages[i]
         k++
+        // console.log("i: "+i+"diffMess: "+differenzaMess)
         // console.log("responseMessages["+i+"]: "+response.messages[i].text)
       }
       tempArray.reverse()
