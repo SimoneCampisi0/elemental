@@ -11,14 +11,10 @@ import com.simonecampis.ElementalChat.model.Chat;
 import com.simonecampis.ElementalChat.model.Message;
 import com.simonecampis.ElementalChat.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -28,18 +24,6 @@ import java.util.*;
 public class MessageController extends AbstractController<MessageDTO> {
     @Autowired
     private ChatService chatService;
-
-    @Autowired
-    private ChatRepo chatRepo;
-
-    @Autowired
-    private MessageRepo messageRepo;
-
-    @Autowired
-    private ChatConverter chatConverter;
-
-    @Autowired
-    private MessageConverter messageConverter;
 
 
     @GetMapping(value="findChatByNome")
@@ -79,7 +63,6 @@ public class MessageController extends AbstractController<MessageDTO> {
 
     @GetMapping(value="findNumberPages")
     public ResponseEntity<Integer> findNumberPages (@RequestParam String nomeChat) {
-        List<MessageDTO> messages = new ArrayList<MessageDTO>();
         try {
             Integer numPages = chatService.findNumberPages(nomeChat);
             return new ResponseEntity<>(numPages, HttpStatus.OK);

@@ -2,7 +2,6 @@ package com.simonecampis.ElementalChat.converter;
 
 import com.simonecampis.ElementalChat.dto.MessageDTO;
 import com.simonecampis.ElementalChat.model.Message;
-import jakarta.persistence.Converter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;

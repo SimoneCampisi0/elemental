@@ -1,7 +1,5 @@
 package com.simonecampis.ElementalChat.dto;
 
-import com.simonecampis.ElementalChat.model.Chat;
-import com.simonecampis.ElementalChat.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,6 +1,5 @@
 package com.simonecampis.ElementalChat.dao;
 
-import com.simonecampis.ElementalChat.model.Chat;
 import com.simonecampis.ElementalChat.model.Message;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
