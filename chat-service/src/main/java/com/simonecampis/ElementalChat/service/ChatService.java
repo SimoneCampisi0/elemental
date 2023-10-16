@@ -51,12 +51,16 @@ public class ChatService {
     private ArrayList<UserDTO> loggedUsers;
 
 
-
+    /**
+     * Prende in input due param, setta il message e lo inoltra all'URI che si occupa di inviarlo.
+     * @param to Destinatario
+     * @param message Messaggio
+     */
     public void sendMessage (String to, Message message){
         Date date = new Date();
         System.out.println("handling send message: " + message + " to: " + to);
 
-        message.setChat(chatConverter.toEntity(checkChatExist(to)));
+        message.setNomeChat(chatConverter.toEntity(checkChatExist(to)).getNomeChat());
         message.setDate(date);
         message = repo.save(message);
         simpMessagingTemplate.convertAndSend("/topic/messages/" + to, message);
@@ -65,16 +69,17 @@ public class ChatService {
     public ChatDTO checkChatExist (String to) {
         ChatDTO c = chatConverter.toDTO(chatRepo.findByNomeChat(to));
         if(Objects.isNull(c)) {
-            ChatDTO dto = new ChatDTO(0L, to);
+            ChatDTO dto = new ChatDTO();
+            dto.setNomeChat(to);
             return chatConverter.toDTO(chatRepo.save(chatConverter.toEntity(dto)));
         }
         return c;
     }
 
-    public Map<String, Object> findPagesByChat (Long idChat, Integer page) {
+    public Map<String, Object> findPagesByChat (String nomeChat, Integer page) {
         List<MessageDTO> messages = new ArrayList<MessageDTO>();
         Pageable pageable = PageRequest.of(page, 15); //primo valore è la pagina corrente, il secondo è quanti messaggi vedrà per pagina.
-        Page<MessageDTO> messPages = converter.toDTOPages(repo.findByChat_IdChatOrderByDateAsc(idChat, pageable));
+        Page<MessageDTO> messPages = converter.toDTOPages(repo.findByNomeChatOrderByDateAsc(nomeChat, pageable));
         messages = messPages.getContent();
         Map<String, Object> response = new HashMap<>();
         response.put("messages", messages);
@@ -85,9 +90,9 @@ public class ChatService {
         return response;
     }
 
-    public Integer findNumberPages(Long idChat) {
+    public Integer findNumberPages(String nomeChat) {
         Pageable pageable = PageRequest.of(0, 15); //primo valore è la pagina corrente, il secondo è quanti messaggi vedrà per pagina.
-        Page<MessageDTO> messPages = converter.toDTOPages(repo.findByChat_IdChatOrderByDateAsc(idChat, pageable));
+        Page<MessageDTO> messPages = converter.toDTOPages(repo.findByNomeChatOrderByDateAsc(nomeChat, pageable));
         Integer numPages = messPages.getTotalPages();
 
         return numPages;
@@ -98,7 +103,7 @@ public class ChatService {
         return loggedUsers = elementalServiceA.getLoggedUsers();
     }
     public List<MessageDTO> getAllMessagesByChat(Chat chat) {
-        return converter.toDTOList(repo.findByChat(chat));
+        return converter.toDTOList(repo.findAllByNomeChat(chat.getNomeChat()));
     }
 
     public ChatDTO findChatByNome(String nome) {

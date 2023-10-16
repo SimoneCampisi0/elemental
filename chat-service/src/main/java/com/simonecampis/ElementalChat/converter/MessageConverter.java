@@ -16,7 +16,14 @@ public class MessageConverter extends AbstractConverter<Message, MessageDTO> {
     public Message toEntity(MessageDTO dto) {
         Message m = null;
         if(dto != null) {
-            m = new Message(dto.getId(),dto.getText(),dto.getDate(), dto.getUser1(),dto.getUser2(), dto.getChat());
+            m = Message.builder()
+                    .id(dto.getId())
+                    .nomeChat(dto.getNomeChat())
+                    .date(dto.getDate())
+                    .idUser1(dto.getIdUser1())
+                    .idUser2(dto.getIdUser2())
+                    .text(dto.getText())
+                    .build();
         }
         return m;
     }
@@ -25,7 +32,14 @@ public class MessageConverter extends AbstractConverter<Message, MessageDTO> {
     public MessageDTO toDTO(Message m) {
         MessageDTO dto = null;
         if(m != null) {
-            dto = new MessageDTO(m.getId(),m.getText(),m.getDate(),m.getUser1(),m.getUser2(), m.getChat());
+            dto = MessageDTO.builder()
+                    .id(m.getId())
+                    .nomeChat(m.getNomeChat())
+                    .date(m.getDate())
+                    .idUser1(m.getIdUser1())
+                    .idUser2(m.getIdUser2())
+                    .text(m.getText())
+                    .build();
         }
         return dto;
     }

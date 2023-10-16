@@ -44,7 +44,6 @@ public class MessageController extends AbstractController<MessageDTO> {
 
     @GetMapping(value="findChatByNome")
     public ChatDTO findChatByNome(@RequestParam String nome) {
-
         return chatService.findChatByNome(nome);
     }
 
@@ -70,19 +69,19 @@ public class MessageController extends AbstractController<MessageDTO> {
     }
 
     @GetMapping(value="findPagesByChat")
-    public ResponseEntity<Map<String, Object>> findPagesByChat (@RequestParam Long idChat, @RequestParam(defaultValue = "0") Integer page) {
+    public ResponseEntity<Map<String, Object>> findPagesByChat (@RequestParam String nomeChat, @RequestParam(defaultValue = "0") Integer page) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(chatService.findPagesByChat(idChat,page));
+            return ResponseEntity.status(HttpStatus.OK).body(chatService.findPagesByChat(nomeChat,page));
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping(value="findNumberPages")
-    public ResponseEntity<Integer> findNumberPages (@RequestParam Long idChat) {
+    public ResponseEntity<Integer> findNumberPages (@RequestParam String nomeChat) {
         List<MessageDTO> messages = new ArrayList<MessageDTO>();
         try {
-            Integer numPages = chatService.findNumberPages(idChat);
+            Integer numPages = chatService.findNumberPages(nomeChat);
             return new ResponseEntity<>(numPages, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

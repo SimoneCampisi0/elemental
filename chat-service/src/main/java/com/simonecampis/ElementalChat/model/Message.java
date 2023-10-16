@@ -2,35 +2,33 @@ package com.simonecampis.ElementalChat.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Entity
+//@Entity
+@Document(collection = "message")
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Message {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private String text;
 
     private Date date;
 
+    //sender
+    private Long idUser1;
 
-    @ManyToOne
-    @JoinColumn(name = "user1") //sender
-    private User user1;
+    //receiver
+    private Long idUser2;
 
-    @ManyToOne
-    @JoinColumn(name = "user2") //receiver
-    private User user2;
-
-    @ManyToOne
-    @JoinColumn(name = "chat") //receiver
-    private Chat chat;
+    private String nomeChat;
 
 }

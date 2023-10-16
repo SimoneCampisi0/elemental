@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatDTO {
-    private Long idChat;
+    private String idChat;
 
     private String nomeChat;
 }

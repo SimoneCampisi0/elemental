@@ -7,16 +7,16 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+//@Entity
+@Document(collection = "chat")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Chat {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idChat;
+    private String idChat;
 
     private String nomeChat;
-
 }
