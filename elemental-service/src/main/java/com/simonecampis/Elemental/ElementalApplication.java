@@ -2,8 +2,10 @@ package com.simonecampis.Elemental;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+
 @SpringBootApplication
-//@EnableDiscoveryClient non è più richiesto
+@EnableCaching
 public class ElementalApplication {
 
 	public static void main(String[] args) {

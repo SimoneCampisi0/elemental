@@ -9,10 +9,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class LogService {
+    private String token;
+
     private final ArrayList<UserDTO> loggedUsers = new ArrayList<>();
     public ArrayList<UserDTO> getLoggedUsers() {
         return loggedUsers;
     }
+
 
     public void addLoggedUser(UserDTO dto) {
         loggedUsers.add(dto);
@@ -20,5 +23,14 @@ public class LogService {
 
     public void logout(UserDTO dto) {
         loggedUsers.remove(dto);
+    }
+
+    public void saveCurrentJWT(String token) {
+        this.token = token;
+        System.out.println("token: "+token);
+    }
+
+    public String getCurrentJWT() { //TODO Context o map<IdToken, token>
+        return token;
     }
 }

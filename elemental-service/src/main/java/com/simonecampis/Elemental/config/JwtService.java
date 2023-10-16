@@ -1,7 +1,11 @@
 package com.simonecampis.Elemental.config;
+import com.simonecampis.Elemental.service.LogService;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,9 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
+
+    @Autowired
+    private LogService logService;
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
@@ -30,7 +37,9 @@ public class JwtService {
     }
 
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        String token = generateToken(new HashMap<>(), userDetails);
+        logService.saveCurrentJWT(token);
+        return token;
     }
 
     public String generateToken (
