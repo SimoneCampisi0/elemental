@@ -12,7 +12,10 @@ export class HomeComponent {
   //@ts-ignore
   public clickMenu: boolean;
 
+
+
   constructor (public chatService: ChatService) {}
+
 
   ngOnInit() {
     console.log("JWT: "+localStorage.getItem('token'))

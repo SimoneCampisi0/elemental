@@ -27,6 +27,7 @@
     "@stomp/stompjs": "^7.0.0",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.2.3",
+    "ngx-cron-jobs": "^15.2.2",
     "rxjs": "~7.8.0",
     "sockjs-client": "^1.6.1",
     "sweetalert2": "^11.4.8",
