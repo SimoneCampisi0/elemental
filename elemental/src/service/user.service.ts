@@ -3,7 +3,6 @@ import { AbstractService } from './abstractservice';
 import { UserDTO} from "../dto/userdto";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from './../environments/environment';
 import {LoginDTO} from "../dto/logindto";
 import {RegisterRequestDTO} from "../dto/registerrequestdto";
 import {RegisterResponseDTO} from "../dto/registeresponsedto";
@@ -30,7 +29,6 @@ export class UserService extends AbstractService<UserDTO>{
     let headers = new HttpHeaders({
       'Access-Control-Allow-Origin': '*'});
     let options = { headers: headers };
-    console.log(environment.APIEndpoint + 'elemental/auth/authenticate')
     return this.http.post<any>('http://localhost:8081/elemental/auth/authenticate', loginDTO, options)
     // return this.http.post<any>(environment.APIEndpoint + 'elemental/auth/authenticate', loginDTO, options)
   }

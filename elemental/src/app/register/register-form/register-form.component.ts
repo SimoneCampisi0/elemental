@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 import {AnagDTO} from "../../../dto/anagdto";
 import {AnagService} from "../../../service/anag.service";
 import {Router} from "@angular/router";
-import {HttpClient} from '@angular/common/http';
 import {FotoRequestDTO} from "../../../dto/fotorequestdto";
 import {FotoService} from "../../../service/foto.service";
 import {RegisterRequestDTO} from "../../../dto/registerrequestdto";
@@ -105,7 +104,6 @@ export class RegisterFormComponent {
        const reader = new FileReader();
        reader.onload = () => {
          this.base64Image = reader.result as string;
-         console.log("base64Image: " + this.base64Image);
        };
 
        this.selectFile = true;
@@ -113,7 +111,6 @@ export class RegisterFormComponent {
      } else {
        // Nessun file selezionato
        // Esegui le azioni desiderate o mostra un messaggio di errore
-       console.log("Nessun file selezionato");
      }
    }
 
@@ -121,7 +118,6 @@ export class RegisterFormComponent {
 
    uploadFile(userDef: UserDTO) {
      let dto = new FotoRequestDTO(this.base64Image, userDef)
-     console.log("DTO Foto: "+dto)
      this.fotoService.insertFoto(dto).subscribe()
    }
    terminiAlert() {

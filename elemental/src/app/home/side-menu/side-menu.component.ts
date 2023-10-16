@@ -44,12 +44,10 @@ export class SideMenuComponent {
     let url = this.router.url
     switch (url) {
       case "/home":
-        console.log("home");
         this.posUrl = 1;
         break;
 
       case "/dettaglio-user":
-        console.log("dettaglio-user");
         this.posUrl = 2;
         break;
 
@@ -60,7 +58,6 @@ export class SideMenuComponent {
   onResize(event: Event) {
     this.width = (event.target as Window).innerWidth;
     this.height = (event.target as Window).innerHeight;
-    console.log("width: "+this.width)
   }
 
   goHome () {

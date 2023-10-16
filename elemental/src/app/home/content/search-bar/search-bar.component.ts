@@ -33,6 +33,5 @@ export class SearchBarComponent {
 
     this.postService.ricercaAvviata = true
     this.postService.setFilterPost(this.filterPost)
-    console.log(this.filterPost)
   }
 }

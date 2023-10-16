@@ -68,8 +68,6 @@ export class ChatComponent {
       webSocketFactory: () => new SockJS('http://localhost:8082/message/chat'),
       onConnect: () => {
 
-        console.log('Connected to WebSocket');
-
         // @ts-ignore
         this.user1 = JSON.parse(localStorage.getItem('currentUser'))
         this.user2 = this.chatService.userRicevitore;
@@ -84,8 +82,6 @@ export class ChatComponent {
         this.chatService.findChatByNome(this.channelName).subscribe(x => {
           if (x!== null) {
             this.chatTemp = x
-            // console.log("chatTrovata: "+x.idChat)
-
 
             this.chatService.findNumberPages(x.nomeChat).subscribe(numPagTot => {
               this.nTotPage = numPagTot
@@ -107,12 +103,8 @@ export class ChatComponent {
 
                 }
 
-
-                // console.log("pagina attuale in seguito ngOnInit(): "+this.currentPage) //CANCELLARE
-
                 this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
                   // Aggiungi il nuovo messaggio alla lista dei messaggi
-                  // console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
                   this.listaMessaggi.push(JSON.parse(message.body));
 
 
@@ -139,7 +131,6 @@ export class ChatComponent {
 
                 this.stompClient.subscribe('/topic/messages/' + this.channelName, (message) => {
                   // Aggiungi il nuovo messaggio alla lista dei messaggi
-                  // console.log("Messaggio in arrivo: "+JSON.parse(message.body).text)
                   this.listaMessaggi.push(JSON.parse(message.body));
 
                 });
@@ -164,10 +155,8 @@ export class ChatComponent {
 
 
   ngAfterViewInit() {
-    console.log("ngAfterViewInit")
     setTimeout(() => {
       this.allCardDiv.nativeElement.scrollTop = this.allCardDiv.nativeElement.scrollHeight;
-      // console.log("setScroll")
     }, 100);
   }
 
@@ -196,39 +185,31 @@ export class ChatComponent {
 
     setTimeout(() => {
       this.allCardDiv.nativeElement.scrollTop = this.allCardDiv.nativeElement.scrollHeight;
-      // console.log("setScroll")
     }, 100);
   }
 
   onScroll(event: Event): void {
 
     let target = event.target as HTMLElement
-    // console.log("posizione scroll y: "+target.scrollTop)
-
     if(target.scrollTop == 0) {
       if (this.currentPage >= 0) {
         if(this.messRestantiInPage != 0) {
           let tempArr = new Array<MessageDTO>()
-          // console.log("Messaggi restati dopo lo scroll: "+this.messRestantiInPage)
           this.chatService.findPagesByChat(this.chatTemp.nomeChat, this.currentPage).subscribe(response => {
 
             let tMessRim = this.messRestantiInPage
 
             for (let i = this.messRestantiInPage - 1; i>=0; i--) {
-              // console.log("msg: "+response.messages[i].text)
               tempArr[i] = response.messages[i]
               tMessRim--
             }
             this.listaMessaggi = [ ...tempArr, ...this.listaMessaggi]
             this.messRestantiInPage = tMessRim
-            console.log("currentPage: "+this.currentPage + " messRimasti: "+this.messRestantiInPage)
-
             target.scrollTop = 2
           })
 
         } else { //caso in cui venga caricata tutta la pagina, composta da 15 messaggi
           if (this.currentPage != 0) {
-            // console.log("pagina attuale: "+this.currentPage)
             this.currentPage--
             this.chatService.findPagesByChat(this.chatTemp.nomeChat, this.currentPage).subscribe(response => {
               this.listaMessaggi = [...response.messages, ...this.listaMessaggi]
@@ -252,23 +233,17 @@ export class ChatComponent {
 
     this.chatService.findPagesByChat(this.chatTemp.nomeChat, this.currentPage).subscribe(response => {
       let differenzaMess = response.messages.length-1 - this.messRestanti
-      console.log(differenzaMess)
 
-      // console.log("lunghezza dell'array response: "+response.messages.length+" lunghezza dei messaggi restanti che mancano: "+this.messRestanti)
 
 
       for(let i = response.messages.length-1; i >= differenzaMess; i--) {
-      // for(let i = response.messages.length-1; i >= this.messRestanti; i--) {
         tempArray[k] = response.messages[i]
         k++
-        // console.log("i: "+i+"diffMess: "+differenzaMess)
-        // console.log("responseMessages["+i+"]: "+response.messages[i].text)
-      }
+        }
       tempArray.reverse()
       this.listaMessaggi = [...tempArray, ...this.listaMessaggi]
 
       this.messRestantiInPage = 15 - k
-      // console.log("messRestantiInPage"+this.messRestantiInPage)
     })
   }
 }

@@ -6,9 +6,7 @@ import {AnagDTO} from "../../dto/anagdto";
 import {FotoService} from "../../service/foto.service";
 import {PostService} from "../../service/post.service";
 import Swal from "sweetalert2";
-import {PostDTO} from "../../dto/postdto";
 import {Genere} from "../../dto/genere";
-import {LoginDTO} from "../../dto/logindto";
 import * as bcrypt from 'bcryptjs';
 import {FotoRequestDTO} from "../../dto/fotorequestdto";
 
@@ -215,7 +213,6 @@ export class DettaglioUserComponent {
         } else {
 
           if(pass1 !== pass2) {
-          console.log("Le password non corrispondono.")
           Swal.showValidationMessage(`Le password non corrispondono.`)
           return false; // Blocca l'azione di conferma
         } else {return {email, pass1, pass2}}
@@ -233,7 +230,6 @@ export class DettaglioUserComponent {
         this.user.email = email;
         bcrypt.hash(passw1, 10).then((hashedPassword)=> {
           this.user.password = hashedPassword;
-          console.log("hashPassword: "+hashedPassword)
           this.userService.update(this.user).subscribe(x => {
             localStorage.setItem('currentUser',JSON.stringify(this.user))
           })
@@ -253,7 +249,6 @@ export class DettaglioUserComponent {
       reader.onload = () => {
         this.base64Image = reader.result as string;
         this.uploadFile()
-        console.log("base64Image: " + this.base64Image);
       };
 
       this.selectFile = true;
@@ -262,12 +257,10 @@ export class DettaglioUserComponent {
     } else {
       // Nessun file selezionato
       // Esegui le azioni desiderate o mostra un messaggio di errore
-      console.log("Nessun file selezionato");
     }
   }
 
   uploadFile() {
-    console.log("base64Image in upload: "+this.base64Image)
     let dto = new FotoRequestDTO(this.base64Image, this.user)
     this.fotoService.uploadFoto(dto).subscribe(()=> {
       this.refreshPage()

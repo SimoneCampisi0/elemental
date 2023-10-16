@@ -35,7 +35,5 @@ export class TrackScrollDirective {
   @HostListener('scroll', ['$event'])
   track($event: Event) {
     const target = $event.target as HTMLElement;
-    console.log('Scroll Top:', target.scrollTop);
-    // console.debug('Scroll Left:', target.scrollLeft);
   }
 }

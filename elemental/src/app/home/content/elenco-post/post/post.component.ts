@@ -98,33 +98,11 @@ export class PostComponent {
         this.fotoService.readFoto(this.commenti[i].user.id).subscribe(a => {
           this.userImgMap.set(this.commenti[i].user.id, 'data:image/jpeg;base64,'+a);
 
-          // Iterazione sui valori della mappa
-          // this.userImgMap.forEach((value) => {
-          //   console.log("Valore: " + value);
-          // });
         });
       }
     });
-
-
-// Iterazione sui valori della mappa
-
   }
 
-  // findAutore(userInput: UserDTO): string {
-  //   let nomeAutore = ''
-  //   this.anagService.findAnagByEmail(userInput.email).subscribe(x => {
-  //     nomeAutore = x.nome + x.cognome;
-  //   })
-  //   return nomeAutore
-  // }
-
-  // findAutore(userInput: UserDTO) {
-  //   this.anagService.findAnagByEmail(userInput.email).subscribe(x => {
-  //     this.nomeAutore = x.nome + " "+ x.cognome;
-  //     console.log("nome autore: "+this.nomeAutore)
-  //   });
-  // }
 
 
   setLike() {
@@ -196,7 +174,6 @@ export class PostComponent {
           switchMap((array) => {
             if (array.length === 0) { //se non esistono interazioni
               // Array vuoto, esegui azione specifica
-              console.log("Array vuoto");
               this.postService.removeLike(this.dto.idPost).subscribe(y => {
                 this.commentoService.deleteAllByPostIdPost(this.dto.idPost).subscribe(z =>  {
                   if(z===1) {
@@ -221,7 +198,6 @@ export class PostComponent {
             return EMPTY; // Aggiungiamo questa riga per assicurarci che il flusso restituisca un valore in tutti i casi
           })
         ).subscribe((item) => {
-          console.log("item.id: " + item.post.idPost + "dto.id: "+this.dto.idPost)
           if (item.post.idPost == this.dto.idPost) { //se esiste un'interazione in relazione con il post in questione
             this.itService.delete(item.id).subscribe(x => {
               this.postService.removeLike(this.dto.idPost).subscribe(y => {

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import {UserService} from "../../../service/user.service";
 import {LoginDTO} from "../../../dto/logindto";
-import {UserDTO} from "../../../dto/userdto";
 import Swal from 'sweetalert2';
 import {Router} from "@angular/router";
 import {AnagService} from "../../../service/anag.service";
@@ -33,7 +32,6 @@ export class LoginFormComponent {
     let password = this.loginForm.get('password')?.value;
     if (email !== '' && password !== '') {
       let loginDTO = new LoginDTO(email, password)
-      console.log("loginDTO: "+loginDTO.email+ " " + loginDTO.password);
 
       this.userService.login(loginDTO).subscribe((response) => {
          if(response != null) {

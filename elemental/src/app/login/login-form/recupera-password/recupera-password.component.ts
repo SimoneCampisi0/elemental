@@ -29,8 +29,6 @@ export class RecuperaPasswordComponent {
     let password1 = this.recuperaForm.get('password1')?.value
     let password2 = this.recuperaForm.get('password2')?.value
 
-    console.log("EMAIL: "+email)
-
     if (password1 === password2 && password1 !== '' && email !== '') {
       this.userService.findUserByEmail(email).subscribe(user => {
         user.password = password1
