@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import {PostDTO} from "../../../dto/postdto";
 import {UserDTO} from "../../../dto/userdto";
 import {PostService} from "../../../service/post.service";
+import {LogService} from "../../../service/logservice";
 
 @Component({
   selector: 'app-content',
@@ -15,12 +16,17 @@ export class ContentComponent {
   user: UserDTO
 
 
-  constructor(private postService: PostService) {
+  constructor(private postService: PostService, private logManager: LogService) {
   }
 
   ngOnInit() {
     // @ts-ignore
     this.user = JSON.parse(localStorage.getItem('currentUser'))
+
+    this.logManager.getLoggedUsers().subscribe(usersList => {
+      console.log(usersList)
+    })
+
   }
 
 

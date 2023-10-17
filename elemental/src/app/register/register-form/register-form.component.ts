@@ -75,12 +75,12 @@ export class RegisterFormComponent {
             localStorage.setItem("currentAnag", JSON.stringify(x))
             this.uploadFile(userInsert)
 
-            this.logService.addLoggedUser(userInsert).subscribe(()=> {
+            // this.logService.addLoggedUser(userInsert).subscribe(()=> {
               this.router.navigate(['/home'])
                 .then(() => {
                   window.location.reload();
                 });
-            })
+            // })
           })
         })
       })

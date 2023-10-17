@@ -33,22 +33,22 @@ export class ChatService {
   }
 
   getAllMessagesByChat(dto: ChatDTO): Observable<MessageDTO[]> {
-    return this.http.post<MessageDTO[]>('http://localhost:8082/message/getAllMessagesByChat', dto);
+    return this.http.post<MessageDTO[]>('http://localhost:8080/message/getAllMessagesByChat', dto);
   }
 
   findChatByNome(nome: string): Observable<ChatDTO> {
-    return this.http.get<ChatDTO>('http://localhost:8082/message/findChatByNome?nome='+nome)
+    return this.http.get<ChatDTO>('http://localhost:8080/message/findChatByNome?nome='+nome)
   }
 
   checkChatExist(to: string): Observable<ChatDTO> {
-    return this.http.get<ChatDTO>('http://localhost:8082/message/checkChatExist?to='+to)
+    return this.http.get<ChatDTO>('http://localhost:8080/message/checkChatExist?to='+to)
   }
 
   findPagesByChat(nomeChat: string, page: number): Observable<MessageResponseDTO> {
-    return this.http.get<MessageResponseDTO>('http://localhost:8082/message/findPagesByChat?nomeChat='+nomeChat+'&page='+page)
+    return this.http.get<MessageResponseDTO>('http://localhost:8080/message/findPagesByChat?nomeChat='+nomeChat+'&page='+page)
   }
 
   findNumberPages(nomeChat: String): Observable<number>{
-    return this.http.get<number>('http://localhost:8082/message/findNumberPages?nomeChat='+nomeChat)
+    return this.http.get<number>('http://localhost:8080/message/findNumberPages?nomeChat='+nomeChat)
   }
 }

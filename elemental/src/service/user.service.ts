@@ -18,7 +18,7 @@ export class UserService extends AbstractService<UserDTO>{
   }
   register (registerRequestDTO: RegisterRequestDTO): Observable<RegisterResponseDTO> {
     // return this.http.post<any>(environment.APIEndpoint + 'elemental/auth/register', registerRequestDTO)
-    return this.http.post<any>('http://localhost:8081/elemental/auth/register', registerRequestDTO)
+    return this.http.post<any>('http://localhost:8080/elemental/auth/register', registerRequestDTO)
 
   }
   // login(loginDTO: LoginDTO): Observable<UserDTO> {
@@ -26,19 +26,21 @@ export class UserService extends AbstractService<UserDTO>{
   // }
 
   login(loginDTO: LoginDTO): Observable<RegisterResponseDTO> {
-    let headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': '*'});
-    let options = { headers: headers };
-    return this.http.post<any>('http://localhost:8081/elemental/auth/authenticate', loginDTO, options)
+    // let headers = new HttpHeaders({
+    //   'Access-Control-Allow-Origin': '*'});
+    // let options = { headers: headers };
+    // return this.http.post<any>('http://localhost:8080/elemental/auth/authenticate', loginDTO, options)
     // return this.http.post<any>(environment.APIEndpoint + 'elemental/auth/authenticate', loginDTO, options)
+
+    return this.http.post<any>('http://localhost:8080/elemental/auth/authenticate', loginDTO)
   }
 
   recuperaPassword(user: UserDTO): Observable<UserDTO> {
-    return this.http.post<any>('http://localhost:8081/elemental/user/recuperaPassword', user)
+    return this.http.post<any>('http://localhost:8080/elemental/user/recuperaPassword', user)
   }
 
   findUserByEmail(email: string): Observable<UserDTO> {
-    return this.http.get<UserDTO>('http://localhost:8081/elemental/user/findUserByEmail?email='+email)
+    return this.http.get<UserDTO>('http://localhost:8080/elemental/user/findUserByEmail?email='+email)
   }
 
 }

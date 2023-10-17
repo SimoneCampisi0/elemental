@@ -42,12 +42,12 @@ export class LoginFormComponent {
              this.anagService.findAnagByEmail(userResponse.email).subscribe(x => {
                localStorage.setItem('currentAnag',JSON.stringify(x))
 
-               this.logService.addLoggedUser(userResponse).subscribe(()=> {
+               // this.logService.addLoggedUser(userResponse).subscribe(()=> {
                  this.router.navigate(['/home'])
                    .then(() => {
                      window.location.reload();
                    });
-               })
+               // })
 
 
              })
