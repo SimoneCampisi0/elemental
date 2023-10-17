@@ -1,6 +1,5 @@
 package com.simonecampis.Elemental.controller;
 
-import com.simonecampis.Elemental.dto.AmiciziaDTO;
 import com.simonecampis.Elemental.dto.PostDTO;
 import com.simonecampis.Elemental.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;

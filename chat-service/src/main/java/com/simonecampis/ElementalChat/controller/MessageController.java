@@ -1,9 +1,5 @@
 package com.simonecampis.ElementalChat.controller;
 
-import com.simonecampis.ElementalChat.converter.ChatConverter;
-import com.simonecampis.ElementalChat.converter.MessageConverter;
-import com.simonecampis.ElementalChat.dao.ChatRepo;
-import com.simonecampis.ElementalChat.dao.MessageRepo;
 import com.simonecampis.ElementalChat.dto.ChatDTO;
 import com.simonecampis.ElementalChat.dto.MessageDTO;
 import com.simonecampis.ElementalChat.dto.UserDTO;

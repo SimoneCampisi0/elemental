@@ -1,10 +1,8 @@
 package com.simonecampis.Elemental.config;
 import com.simonecampis.Elemental.model.User;
-import com.simonecampis.Elemental.utils.LogManager;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 

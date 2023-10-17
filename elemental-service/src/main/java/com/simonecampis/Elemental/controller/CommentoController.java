@@ -1,9 +1,7 @@
 package com.simonecampis.Elemental.controller;
 
 import com.simonecampis.Elemental.dto.CommentoDTO;
-import com.simonecampis.Elemental.dto.InterazioneDTO;
 import com.simonecampis.Elemental.service.CommentoService;
-import com.simonecampis.Elemental.service.InterazioneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

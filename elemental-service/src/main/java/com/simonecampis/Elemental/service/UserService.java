@@ -5,7 +5,6 @@ import com.simonecampis.Elemental.dao.UserRepo;
 import com.simonecampis.Elemental.dto.LoginDTO;
 import com.simonecampis.Elemental.dto.UserDTO;
 import com.simonecampis.Elemental.model.User;
-import com.simonecampis.Elemental.utils.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
