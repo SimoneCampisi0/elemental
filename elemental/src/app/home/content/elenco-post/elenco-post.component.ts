@@ -18,6 +18,9 @@ export class ElencoPostComponent implements OnInit {
     this.postService.filterPost$.subscribe(filterPost => {
       if (filterPost.length === 0 && !this.postService.ricercaAvviata) {
         this.elencoPost$ = this.postService.getAll();
+      } else {
+        // Aggiorna elencoPost$ con i post filtrati da filterPost
+        this.elencoPost$ = this.postService.filterPost$;
       }
     });
   }

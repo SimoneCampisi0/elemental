@@ -13,7 +13,9 @@ import {UserDTO} from "../dto/userdto";
 export class PostService extends AbstractService<PostDTO>{
 
   private filterPostSubject: BehaviorSubject<PostDTO[]> = new BehaviorSubject<PostDTO[]>([]);
+
   filterPost$ = this.filterPostSubject.asObservable();
+
   ricercaAvviata: boolean = false;
 
   constructor(http: HttpClient) {
