@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/commento")
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class CommentoController extends AbstractController<CommentoDTO> {
     @Autowired
     private CommentoService service;

@@ -3,6 +3,7 @@ package com.simonecampis.Elemental.config;
 import com.simonecampis.Elemental.dao.UserRepo;
 import com.simonecampis.Elemental.model.Role;
 import com.simonecampis.Elemental.model.User;
+import com.simonecampis.Elemental.utils.LogManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +18,8 @@ public class AuthService {
     @Autowired
     private UserRepo repo;
 
+    private final LogManager logManager;
+
     private final PasswordEncoder passwordEncoder;
 
     private final JwtService jwtService;
@@ -30,6 +33,9 @@ public class AuthService {
                 .build();
         repo.save(user);
         var jwtToken = jwtService.generateToken(user);
+
+        logManager.addLoggedUser(user.getEmail(), jwtToken); //TODO Controllare
+
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
@@ -44,6 +50,9 @@ public class AuthService {
         );
         var user = repo.findByEmail(request.getEmail());
         var jwtToken = jwtService.generateToken(user);
+
+        logManager.addLoggedUser(user.getEmail(), jwtToken);
+
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
