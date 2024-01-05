@@ -58,9 +58,9 @@ export class ContentComponent {
         );
 
         this.postService.insert(newPost).subscribe(
-          (dto) =>  {},
+          () =>  {},
 
-          (error) => {},
+          () => {},
 
           () => {
             this.refreshPage()
