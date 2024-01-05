@@ -57,8 +57,16 @@ export class ContentComponent {
           this.user
         );
 
-        this.postService.insert(newPost).subscribe()
-        this.refreshPage()
+        this.postService.insert(newPost).subscribe(
+          (dto) =>  {},
+
+          (error) => {},
+
+          () => {
+            this.refreshPage()
+          }
+        )
+
       }
     });
   }
